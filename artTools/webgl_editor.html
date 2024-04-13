@@ -1,0 +1,447 @@
+<html>
+    <head>
+        <script> let App = {}; App.Art = {}; </script>
+        <script src="../bin/resources/webgl/scene1/scene1.js" type="text/javascript"> </script>
+        <script src="../src/art/webgl/engine.js" type="text/javascript"> </script>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background-color: #E6E6FA;
+            }
+            
+            #glcanvas {
+                float: left;
+                background-color: #000000;
+            }
+
+            .horizontal{
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                border: 2px solid red;
+                width:fit-content;
+                height: 40px;
+            }
+            .forms{
+                flex: 1;
+                margin: 0px;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+            }
+
+            .slider {
+                -webkit-appearance: none;
+                flex: auto;
+                height: 25px;
+                width: 120px;
+                margin: 0px;
+                background: #d3d3d3;
+                outline: none;
+                opacity: 0.7;
+            }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                width: 25px;
+                height: 25px;
+                background: rgb(8, 77, 156);
+                cursor: pointer;
+            }
+
+            .output{
+                width: 35px;
+            }
+
+            .textbox{
+                width: 120px;
+                padding: 0px;
+            }
+
+            .label{
+                width: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="glcanvas" width="600px" height="750px"></canvas>
+
+        <p>Display</p>
+        <div class="horizontal">
+            <label style="width: 50px;">Fps</label>
+            <output class="output" id="fps"></output>
+        </div>
+        <div class="horizontal">
+            <label style="width: 60px;">rWidth</label>
+            <input class="textbox" type="text" id="rwidth" onchange="sceneParams.settings.rwidth = parseInt(this.value);">
+            <output class="output"></output>
+            <label style="width: 60px;">rHeight</label>
+            <input class="textbox" type="text" id="rheight" onchange="sceneParams.settings.rheight = parseInt(this.value);">
+            <output class="output"></output>
+        </div>
+
+        <div class="horizontal">
+            <label style="width: 75px;">Normals</label>
+            <input type="checkbox" id="normals" onchange="sceneParams.settings.normals = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">Ambient</label>
+            <input type="checkbox" id="ambient" onchange="sceneParams.settings.ambient = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">Diffuse</label>
+            <input type="checkbox" id="diffuse" onchange="sceneParams.settings.diffuse = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">Specular</label>
+            <input type="checkbox" id="specular" onchange="sceneParams.settings.specular = this.checked;">
+            <output class="output"></output>
+       </div>
+       <div class="horizontal">
+            <label style="width: 75px;">Normal</label>
+            <input type="checkbox" id="normal" onchange="sceneParams.settings.normal = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">Emission</label>
+            <input type="checkbox" id="emission" onchange="sceneParams.settings.emission = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">Alpha</label>
+            <input type="checkbox" id="alpha" onchange="sceneParams.settings.alpha = this.checked;">
+            <output class="output"></output>
+            <label style="width: 75px;">BackG</label>
+            <input type="checkbox" id="background" onchange="sceneParams.background.visible = this.checked;">
+            <output class="output"></output>
+        </div>
+
+        <p>Tonemapping</p>
+        <div class="horizontal">
+            <label style="width: 75px;">Rein</label>
+            <input class="textbox" type="text" id="whiteM" onchange="sceneParams.settings.whiteM = parseFloat(this.value);">
+            <input type="checkbox" id="reinhard" onchange="sceneParams.settings.reinhard = this.checked;">
+            <label style="width: 75px;">Gamma</label>
+            <input class="textbox" type="text" id="gammaY" onchange="sceneParams.settings.gammaY = parseFloat(this.value);">
+            <input type="checkbox" id="gamma" onchange="sceneParams.settings.gamma = this.checked;">
+        </div>
+
+        <p>Camera</p>
+        <div class="horizontal">
+            <label class="label">X</label>
+            <input class="textbox" type="text" id="cam_x" onchange="sceneParams.camera.x = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Y</label>
+            <input class="textbox" type="text" id="cam_y" onchange="sceneParams.camera.y = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Z</label>
+            <input class="textbox" type="text" id="cam_z" onchange="sceneParams.camera.z = parseFloat(this.value);">
+            <output class="output"></output>
+        </div>
+        <div class="horizontal">
+            <form class="forms">
+                <label class="label">XR</label>
+                <input class="slider" type="range" id="cam_xr" min="-180" max="180" oninput="cam_xr_out.value = cam_xr.value; sceneParams.camera.xr = parseFloat(this.value);">
+                <output class="output" id="cam_xr_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">YR</label>
+                <input class="slider" type="range" id="cam_yr" min="-180" max="180" oninput="cam_yr_out.value = cam_yr.value; sceneParams.camera.yr = parseFloat(this.value);">
+                <output class="output" id="cam_yr_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">ZR</label>
+                <input class="slider" type="range" id="cam_zr" min="-180" max="180" oninput="cam_zr_out.value = cam_zr.value; sceneParams.camera.zr = parseFloat(this.value);">
+                <output class="output" id="cam_zr_out"></output>
+            </form>
+        </div>
+        <div class="horizontal">
+            <label class="label">Fnear</label>
+            <input class="textbox" type="text" id="cam_fnear" onchange="sceneParams.camera.fnear = this.value">
+            <output class="output"></output>
+            <label class="label">Ffar</label>
+            <input class="textbox" type="text" id="cam_ffar" onchange="sceneParams.camera.ffar = this.value">
+            <output class="output"></output>
+            <form class="forms">
+                <label class="label">FOV</label>
+                <input class="slider" type="range" id="cam_fov" min="1" max="180" oninput="cam_fov_out.value = cam_fov.value; sceneParams.camera.fov = parseFloat(this.value);">
+                <output class="output" id="cam_fov_out"></output>
+            </form>
+        </div>
+
+        <p>DirectionalLight</p>
+        <div class="horizontal">
+            <form class="forms">
+                <label class="label">XR</label>
+                <input class="slider" type="range" id="light_xr" min="-90" max="90" oninput="light_xr_out.value = light_xr.value; sceneParams.directionalLights[0].xr = parseFloat(this.value);">
+                <output class="output" id="light_xr_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">YR</label>
+                <input class="slider" type="range" id="light_yr" min="-90" max="90" oninput="light_yr_out.value = light_yr.value; sceneParams.directionalLights[0].yr = parseFloat(this.value);">
+                <output class="output" id="light_yr_out"></output>
+            </form>
+        </div>
+        <div class="horizontal">
+            <form class="forms">
+                <label class="label">Int</label>
+                <input class="slider" type="range" id="light_int" min="0" max="3" step="0.05" oninput="light_int_out.value = light_int.value; sceneParams.directionalLights[0].intensity = parseFloat(this.value);">
+                <output class="output" id="light_int_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">Amb</label>
+                <input class="slider" type="range" id="light_amb" min="0" max="1" step="0.01" oninput="light_amb_out.value = light_amb.value; sceneParams.directionalLights[0].ambient = parseFloat(this.value);">
+                <output class="output" id="light_amb_out"></output>
+            </form>
+            <label class="label">Color</label>
+            <input class="textbox" type="color" id="light_color" onchange="sceneParams.directionalLights[0].color = hexToRgb(this.value)">
+            <output class="output"></output>
+        </div>
+
+        <p>PointLight</p>
+        <div class="horizontal">
+            <label class="label">X</label>
+            <input class="textbox" type="text" id="point_light_x" onchange="sceneParams.pointLights[0].x = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Y</label>
+            <input class="textbox" type="text" id="point_light_y" onchange="sceneParams.pointLights[0].y = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Z</label>
+            <input class="textbox" type="text" id="point_light_z" onchange="sceneParams.pointLights[0].z = parseFloat(this.value);">
+            <output class="output"></output>
+        </div>
+        <div class="horizontal">
+            <form class="forms">
+                <label class="label">Int</label>
+                <input class="slider" type="range" id="point_light_int" min="0" max="3" step="0.05" oninput="point_light_int_out.value = point_light_int.value; sceneParams.pointLights[0].intensity = parseFloat(this.value);">
+                <output class="output" id="point_light_int_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">Amb</label>
+                <input class="slider" type="range" id="point_light_amb" min="0" max="1" step="0.01" oninput="point_light_amb_out.value = point_light_amb.value; sceneParams.pointLights[0].ambient = parseFloat(this.value);">
+                <output class="output" id="point_light_amb_out"></output>
+            </form>
+            <label class="label">Color</label>
+            <input class="textbox" type="color" id="point_light_color" onchange="sceneParams.pointLights[0].color = hexToRgb(this.value)">
+            <output class="output"></output>
+        </div>
+
+        <p>Object</p>
+        <div class="horizontal">
+            <label class="label">X</label>
+            <input class="textbox" type="text" id="obj_x" onchange="sceneParams.models[0].transform.x = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Y</label>
+            <input class="textbox" type="text" id="obj_y" onchange="sceneParams.models[0].transform.y = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Z</label>
+            <input class="textbox" type="text" id="obj_z" onchange="sceneParams.models[0].transform.z = parseFloat(this.value);">
+            <output class="output"></output>
+            <label class="label">Scale</label>
+            <input class="textbox" type="text" id="obj_scale" onchange="sceneParams.models[0].transform.scale = parseFloat(this.value);">
+            <output class="output"></output>
+        </div>
+        <div class="horizontal">
+            <form class="forms">
+                <label class="label">XR</label>
+                <input class="slider" type="range" id="obj_xr" min="-180" max="180" oninput="obj_xr_out.value = obj_xr.value; sceneParams.transform.xr = parseFloat(this.value);">
+                <output class="output" id="obj_xr_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">YR</label>
+                <input class="slider" type="range" id="obj_yr" min="-180" max="180" oninput="obj_yr_out.value = obj_yr.value; sceneParams.transform.yr = parseFloat(this.value);">
+                <output class="output" id="obj_yr_out"></output>
+            </form>
+            <form class="forms">
+                <label class="label">ZR</label>
+                <input class="slider" type="range" id="obj_zr" min="-180" max="180" oninput="obj_zr_out.value = obj_zr.value; sceneParams.transform.zr = parseFloat(this.value);">
+                <output class="output" id="obj_zr_out"></output>
+            </form>
+        </div>
+        <p>Morphs</p>
+        <div id="morphs">
+        </div>
+
+        <script>
+            'use strict';
+            
+            function rgbToHex(r, g, b) {
+                return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            }
+
+            function hexToRgb(hex) {
+                hex = hex.replace('#','');
+                let r = parseInt(hex.substring(0,2), 16);
+                let g = parseInt(hex.substring(2,4), 16);
+                let b = parseInt(hex.substring(4,6), 16);
+                return [r/255,g/255,b/255];
+            }
+
+            function updateElements() {
+                document.getElementById('rwidth').value = sceneParams.settings.rwidth;
+                document.getElementById('rheight').value = sceneParams.settings.rheight;
+
+                document.getElementById("fps").value = 0;
+                document.getElementById("normals").checked = sceneParams.settings.normals;
+                document.getElementById("ambient").checked = sceneParams.settings.ambient;
+                document.getElementById("diffuse").checked = sceneParams.settings.diffuse;
+                document.getElementById("specular").checked = sceneParams.settings.specular;
+                document.getElementById("emission").checked = sceneParams.settings.emission;
+                document.getElementById("normal").checked = sceneParams.settings.normal;
+                document.getElementById("alpha").checked = sceneParams.settings.alpha;
+                document.getElementById("background").value = sceneParams.background.visible;
+
+                document.getElementById("gamma").checked = sceneParams.settings.gamma;
+                document.getElementById("gammaY").value = sceneParams.settings.gammaY;
+                document.getElementById("reinhard").checked = sceneParams.settings.reinhard;
+                document.getElementById("whiteM").value = sceneParams.settings.whiteM;
+
+                document.getElementById("cam_x").value = sceneParams.camera.x;
+                document.getElementById("cam_y").value = sceneParams.camera.y;
+                document.getElementById("cam_z").value = sceneParams.camera.z;
+                document.getElementById("cam_xr").value = sceneParams.camera.xr;
+                document.getElementById("cam_xr_out").value = sceneParams.camera.xr;
+                document.getElementById("cam_yr").value = sceneParams.camera.yr;
+                document.getElementById("cam_yr_out").value = sceneParams.camera.yr;
+                document.getElementById("cam_zr").value = sceneParams.camera.zr;
+                document.getElementById("cam_zr_out").value = sceneParams.camera.zr;
+                document.getElementById("cam_fnear").value = sceneParams.camera.fnear;
+                document.getElementById("cam_ffar").value = sceneParams.camera.ffar;
+                document.getElementById("cam_fov").value = sceneParams.camera.fov;
+                document.getElementById("cam_fov_out").value = sceneParams.camera.fov;
+                document.getElementById("light_xr").value = sceneParams.directionalLights[0].xr;
+                document.getElementById("light_xr_out").value = sceneParams.directionalLights[0].xr;
+                document.getElementById("light_yr").value = sceneParams.directionalLights[0].yr;
+                document.getElementById("light_yr_out").value = sceneParams.directionalLights[0].yr;
+                document.getElementById("light_int").value = sceneParams.directionalLights[0].intensity;
+                document.getElementById("light_int_out").value = sceneParams.directionalLights[0].intensity;
+                document.getElementById("light_amb").value = sceneParams.directionalLights[0].ambient;
+                document.getElementById("light_amb_out").value = sceneParams.directionalLights[0].ambient;
+                document.getElementById("light_color").value = rgbToHex(sceneParams.directionalLights[0].color[0]*255, sceneParams.directionalLights[0].color[1]*255, sceneParams.directionalLights[0].color[2]*255);
+                document.getElementById("point_light_x").value = sceneParams.pointLights[0].x;
+                document.getElementById("point_light_y").value = sceneParams.pointLights[0].y;
+                document.getElementById("point_light_z").value = sceneParams.pointLights[0].z;
+                document.getElementById("point_light_int").value = sceneParams.pointLights[0].intensity;
+                document.getElementById("point_light_int_out").value = sceneParams.pointLights[0].intensity;
+                document.getElementById("point_light_amb").value = sceneParams.pointLights[0].ambient;
+                document.getElementById("point_light_amb_out").value = sceneParams.pointLights[0].ambient;
+                document.getElementById("point_light_color").value = rgbToHex(sceneParams.pointLights[0].color[0]*255, sceneParams.pointLights[0].color[1]*255, sceneParams.pointLights[0].color[2]*255);
+                document.getElementById("obj_x").value = sceneParams.models[0].transform.x;
+                document.getElementById("obj_y").value = sceneParams.models[0].transform.y;
+                document.getElementById("obj_z").value = sceneParams.models[0].transform.z;
+                document.getElementById("obj_scale").value = sceneParams.models[0].transform.scale;
+                document.getElementById("obj_xr").value = sceneParams.models[0].transform.xr;
+                document.getElementById("obj_xr_out").value = sceneParams.models[0].transform.xr;
+                document.getElementById("obj_yr").value = sceneParams.models[0].transform.yr;
+                document.getElementById("obj_yr_out").value = sceneParams.models[0].transform.yr;
+                document.getElementById("obj_zr").value = sceneParams.models[0].transform.zr;
+                document.getElementById("obj_zr_out").value = sceneParams.models[0].transform.zr;
+            }
+
+            function createMorphElements(){
+                let horizontal;
+
+                for (let i=0; i < sceneParams.models[0].morphs.length; i++) {
+                    if ( i % 7 == 0) {
+                        horizontal = document.createElement("label");
+                        horizontal.setAttribute("class", "horizontal");
+                        document.getElementById("morphs").appendChild(horizontal);
+                    }
+
+                    let label = document.createElement("label");
+                    label.setAttribute("style", "width: 150px;");
+                    let name = sceneParams.models[0].morphs[i].morphId;
+                    let textnode = document.createTextNode(name);
+                    label.appendChild(textnode);
+                    horizontal.appendChild(label);
+                    let textbox = document.createElement("input");
+                    textbox.setAttribute("style", "width: 30px;");
+                    textbox.setAttribute("type", "text");
+                    textbox.setAttribute("id", "morph_" + name);
+                    textbox.setAttribute("onchange", "sceneParams.models[0].morphs["+i+"].value = parseFloat(this.value);");
+                    textbox.value  = sceneParams.models[0].morphs[i].value;
+                    horizontal.appendChild(textbox);
+                    let output = document.createElement("output");
+                    output.setAttribute("class", "output");
+                    horizontal.appendChild(output);
+                }
+            }
+        
+            const avg = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+
+            function update(){
+                let t0 = performance.now();
+                engine.render(sceneParams, canvas);
+                requestAnimationFrame(update);
+                let t1  = performance.now();
+                fps.push((t1 - t0));
+                
+                document.getElementById("fps").value = parseFloat(1/avg(fps)*1000).toFixed(0);
+                if (fps.length > 30) {
+                    fps.shift();
+                }
+            }
+
+            // init
+            let fps = [];
+            let canvas = document.getElementById('glcanvas');
+
+            let sceneParams = App.Art.sceneGetParams();
+            let sceneData = App.Art.sceneGetData();
+
+            console.log(sceneParams);
+
+           let isDraggingCanvas = false;
+
+            canvas.onmousemove= function(e){
+                if(!isDraggingCanvas){return;}
+                e.preventDefault();
+                e.stopPropagation();
+
+                sceneParams.models[0].transform.y = sceneParams.models[0].transform.y - e.movementY/10;
+                sceneParams.models[0].transform.yr = sceneParams.models[0].transform.yr + e.movementX*5;
+                engine.render(sceneParams, canvas);
+            }
+
+            canvas.onmousedown= function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                isDraggingCanvas=true;
+            }
+
+            canvas.onmouseup= function(e){
+                if(!isDraggingCanvas){return;}
+                e.preventDefault();
+                e.stopPropagation();
+                isDraggingCanvas=false;
+            }
+
+            canvas.onmouseout = function(e){
+                if(!isDraggingCanvas){return;}
+                e.preventDefault();
+                e.stopPropagation();
+                isDraggingCanvas=false;
+            }
+
+            canvas.onmousewheel = function(e){
+                sceneParams.camera.fov = sceneParams.camera.fov + e.deltaY/10;
+
+                if (sceneParams.camera.fov < 1)
+                    sceneParams.camera.fov = 1;
+                if (sceneParams.camera.fov > 179)
+                    sceneParams.camera.fov = 179;
+
+                engine.render(sceneParams, canvas);
+                return false;
+            }
+
+            createMorphElements();
+            updateElements();
+
+            let engine = new App.Art.Engine();
+            engine.bind(sceneData, sceneParams, "../bin/");
+
+            // loop
+            update();
+        </script>
+    </body>
+</html>

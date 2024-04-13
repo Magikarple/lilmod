@@ -1,0 +1,83 @@
+table.facility-stats {
+	width: fit-content;
+	border: 2px solid white
+}
+
+.facility-stats td,
+.facility-stats th {
+	padding: 0 10px;
+}
+
+.facility-stats tr:first-child th {
+	padding-top: 10px;
+}
+
+.facility-stats tr:last-child td {
+	padding-bottom: 10px;
+}
+
+.facility-stats td:last-child,
+.facility-stats th:last-child {
+	border-left: 1px solid white
+}
+
+.facility-stats td:nth-last-child(2),
+.facility-stats th:nth-last-child(2) {
+	border-left: 1px dashed white
+}
+
+.facility-stats thead tr:last-child td {
+	padding-bottom: 5px;
+}
+
+.facility-stats tbody tr:first-child th {
+	border-top: 1px solid white;
+	padding-top: 5px;
+}
+
+.facility-stats tbody tr:last-child td {
+	padding-bottom: 5px;
+}
+
+.facility-stats tbody tr:nth-child(2n) td {
+	background: var(--background-light);
+}
+
+.facility-stats tbody tr:not(:first-child) th:nth-last-child(4),
+.facility-stats tbody td:nth-last-child(4) {
+	border-left: 1px dashed white;
+}
+
+.facility-stats tbody tr:not(:first-child) th {
+	border-bottom: 1px dashed white;
+}
+
+.facility-stats tbody tr:not(:first-child) {
+	font-size: 14px;
+}
+
+.facility-stats tfoot tr:first-child td {
+	border-top: 1px solid white;
+	padding-top: 5px;
+}
+
+.facility-stats tfoot tr:last-child {
+	font-weight: bold;
+}
+
+.facility-stats tfoot tr:last-child .value {
+	border-top: 3px double white;
+}
+
+.facility-stats th:not(:first-child) {
+	text-align: right;
+}
+
+.facility-stats .value {
+	text-align: right;
+	font-family: monospace;
+}
+
+.facility-stats .decimalZero {
+	opacity: 0.3;
+}

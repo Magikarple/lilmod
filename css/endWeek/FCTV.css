@@ -1,0 +1,25 @@
+.fctv-remote {
+	text-align: center;
+	justify-items: center;
+	display: grid;
+	float: left;
+	width: min-content;
+	padding: 0.5em;
+	border: 3px white solid;
+	margin: 0 1em;
+}
+
+.fctv-remote-numbers {
+	display: grid;
+	grid-gap: 0.5em;
+	grid-template-columns: repeat(3, min-content);
+	justify-items: center;
+}
+
+.fctv-remote-button {
+	margin-top: 0.5em;
+}
+
+.fctv-remote-selected {
+	font-weight: bold;
+}

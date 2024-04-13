@@ -1,0 +1,7 @@
+#use-slave-container {
+	overflow: scroll;
+	max-height: 32em;
+	margin: 1em 0;
+	display: flex;
+	flex-direction: column-reverse;
+}

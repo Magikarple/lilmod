@@ -1,0 +1,5 @@
+.profile-events {
+	display: grid;
+	grid-template-columns: max-content max-content max-content auto;
+	grid-column-gap: 1em;
+}

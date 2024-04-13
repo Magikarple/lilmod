@@ -1,0 +1,185 @@
+.building {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.building.basement {
+	border-top: solid 1px #333333;
+	margin-top: -1px;
+	background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #333333 20px, #333333 30px);
+}
+
+.building .row {
+	display: flex;
+	flex-direction: row;
+	width: 95%;
+	margin: 0 auto;
+	justify-content: center;
+}
+
+@media only screen and (min-width: 1600px) {
+	.building .row {
+		width: 70%;
+	}
+}
+
+.building .outerCell {
+	/* fill cell fully, part 1: trick to fill the full height even if content is smaller */
+	display: flex;
+	flex-direction: row;
+}
+
+.building .innerCell {
+	margin: 3px;
+	border: 5px solid;
+	padding: 2px;
+	text-align: center;
+	/* fill cell fully, part 2: full width */
+	width: 100%;
+	/* overwriting with the default background color to hide the basement indicator */
+	background-color: #111;
+}
+
+.building .decorative {
+	outline: white solid 5px;
+	outline-offset: -8px;
+	height: 2em;
+}
+
+/* introduction special formatting */
+/* makes all links unusable */
+.intro .building a {
+	color: white;
+	pointer-events: none;
+	cursor: default;
+}
+
+.intro .building .hotkey {
+	display: none;
+}
+
+/* penthouse formatting */
+.building .gridWrapper {
+	display: grid;
+}
+
+.building .gridWrapper.grid1 {
+	grid-template-columns: 100%;
+}
+
+.building .gridWrapper.grid2 {
+	grid-template-columns: repeat(2, 50%);
+}
+
+.building .gridWrapper.grid3 {
+	grid-template-columns: repeat(3, 33.3%);
+}
+
+.building .gridWrapper div {
+	display: inline flow-root;
+	line-height: 1.1;
+	padding-bottom: 0.3em;
+}
+
+.building .collapsed {
+	display: inline flow-root;
+	margin: 0 0.2em;
+}
+
+/* border color for each cell */
+.building .row .apartments {
+	border-color: limegreen;
+}
+
+.building .row .arcade {
+	border-color: deeppink;
+}
+
+.building .row .brothel {
+	border-color: violet;
+}
+
+.building .row .barracks {
+	border-color: olivedrab;
+}
+
+.building .row .club {
+	border-color: orchid;
+}
+
+.building .row .corporateMarket {
+	border-color: purple;
+}
+
+.building .row .dairy {
+	border-color: white;
+}
+
+.building .row .denseApartments {
+	border-color: seagreen;
+}
+
+.building .row .empty {
+	border-color: lightgray;
+}
+
+.building .row .farmyard {
+	border-color: brown;
+}
+
+.building .row .fsShops {
+	border-color: mediumpurple;
+}
+
+.building .row .manufacturing {
+	border-color: slategray;
+}
+
+.building .row .markets {
+	border-color: mediumorchid;
+}
+
+.building .row .nursery {
+	border-color: deepskyblue;
+}
+
+.building .row .luxuryApartments {
+	border-color: palegreen;
+}
+
+.building .row .pens {
+	border-color: goldenrod;
+}
+
+.building .row .penthouse {
+	border-color: teal;
+}
+
+.building .row .pit {
+	border-color: orangered;
+}
+
+.building .row .private {
+	border-color: red;
+}
+
+.building .row .shops {
+	border-color: thistle;
+}
+
+.building .row .sweatshops {
+	border-color: gray;
+}
+
+.building .row .transport-hub {
+	border-color: magenta;
+}
+
+.building .row .weaponsManufacturing {
+	border-color: springgreen;
+}
+
+#arcology-building-container {
+	margin-bottom: 2em;
+}

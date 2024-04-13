@@ -1,0 +1,99 @@
+button.quick-button {
+	width: auto;
+	margin-left: 10px;
+}
+
+.quick-list {
+	text-align: center;
+}
+
+.quick-list button {
+	margin: 10px;
+	border: 2px solid var(--button-border-color);
+	background-color: var(--button-color);
+}
+
+.quick-list button:hover {
+	background-color: var(--button-hover-color);
+}
+
+.quick-list.devotion .mindbroken {
+	background-color: red;
+}
+
+.quick-list.devotion .very-hateful {
+	background-color: darkviolet;
+}
+
+.quick-list.devotion .hateful {
+	background-color: darkviolet;
+}
+
+.quick-list.devotion .resistant {
+	background-color: mediumorchid;
+}
+
+.quick-list.devotion .ambivalent {
+	background-color: yellow;
+	color: #111;
+}
+
+.quick-list.devotion .accepting {
+	background-color: hotpink;
+}
+
+.quick-list.devotion .devoted {
+	background-color: deeppink;
+}
+
+.quick-list.devotion .worshipful {
+	background-color: magenta;
+}
+
+.quick-list.trust .mindbroken {
+	background-color: red;
+}
+
+.quick-list.trust .extremely-terrified {
+	background-color: darkgoldenrod;
+}
+
+.quick-list.trust .terrified {
+	background-color: goldenrod;
+	color: #111;
+}
+
+.quick-list.trust .frightened {
+	background-color: gold;
+	color: #111;
+}
+
+.quick-list.trust .fearful {
+	background-color: yellow;
+	color: #111;
+}
+
+.quick-list.trust .hate-careful {
+	background-color: orange;
+}
+
+.quick-list.trust .careful {
+	background-color: mediumaquamarine;
+	color: #111;
+}
+
+.quick-list.trust .bold {
+	background-color: orangered;
+}
+
+.quick-list.trust .trusting {
+	background-color: mediumseagreen;
+}
+
+.quick-list.trust .defiant {
+	background-color: darkred;
+}
+
+.quick-list.trust .profoundly-trusting {
+	background-color: seagreen;
+}

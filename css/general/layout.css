@@ -1,0 +1,162 @@
+/* Styles that mainly affect where text is, but not how it looks */
+
+h1, h2, h3, h4 {
+	margin-bottom: 0;
+	margin-top: 0.25em;
+}
+
+h1 + p, h2 + p, h3 + p, h4 + p {
+	margin-top: 0;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+div.flex-container {
+	display: flex;
+}
+
+/* makes the first line indented */
+div.indent, p.indent {
+	text-indent: 2em;
+}
+
+div.double-indent, p.double-indent {
+	text-indent: 4em;
+}
+
+/* makes every line indented */
+.choices, .choices {
+	margin-left: 2em;
+}
+
+.double-choices, .double-choices {
+	margin-left: 4em;
+}
+
+div.grid-2columns-auto {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+	div.grid-2columns-auto {
+		grid-template-columns: max-content auto;
+	}
+}
+
+div.grid-3columns-auto {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-column-gap: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+	div.grid-3columns-auto {
+		grid-template-columns: max-content max-content auto;
+	}
+}
+
+div.grid-all-columns {
+	grid-column: 1 / -1;
+}
+
+.border-bottom {
+	border-bottom: 1px solid;
+}
+
+.margin-top {
+	margin-top: 1em;
+}
+
+.margin-bottom {
+	margin-bottom: 1em;
+}
+
+.margin-left {
+	margin-left: 2em;
+}
+
+.margin-right {
+	margin-right: 2em;
+}
+
+.margin-x {
+	margin-left: 2em;
+	margin-right: 2em;
+}
+
+.margin-y {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+.margin-full {
+	margin: 1em;
+}
+
+.padding-left {
+	padding-left: 2em;
+}
+
+.padding-right {
+	padding-right: 2em;
+}
+
+.padding-x {
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.padding-y {
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+.padding-full {
+	padding: 1em;
+}
+
+.padded-columns {
+	border-collapse: separate;
+	border-spacing: 1em 0;
+}
+
+.padded-columns td,
+.padded-columns th {
+	padding: 0 1em;
+}
+
+.padded-rows {
+	border-collapse: separate;
+	border-spacing: 0 1em;
+}
+
+.padded-rows td {
+	padding: 1em 0;
+}
+
+.space-evenly {
+	justify-content: space-evenly;
+}
+
+.absolute {
+	position: absolute;
+}
+
+/* puts a div in the right upper corner while not influencing the layout of the rest of the page */
+div.cheat-menu {
+	font-style: italic;
+	position: absolute;
+	right: 50px;
+	top: 40px;
+}
+
+input[type="text"].number {
+	min-width: 6em;
+	max-width: 6em;
+}

@@ -1,0 +1,5 @@
+*.pyc
+__pycache__
+/lzstring.egg-info
+/build/
+/dist/

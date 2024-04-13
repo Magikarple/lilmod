@@ -1,0 +1,44 @@
+body {
+	color: var(--text-color);
+	background-color: var(--background-color);
+}
+
+a {
+	color: var(--link-color);
+}
+
+a:hover {
+	color: var(--link-hover-color);
+}
+
+button {
+	color: var(--text-color);
+	background-color: var(--button-color);
+	border: 1px solid var(--button-border-color);
+}
+
+button:hover {
+	background-color: var(--button-hover-color);
+	border-color: var(--button-border-color);
+}
+
+button:disabled {
+	background-color: var(--button-disabled-color);
+	border: 1px solid var(--button-border-color);
+}
+
+input, select, textarea {
+	color: #333;
+	background-color: transparent;
+	border: 1px solid var(--button-border-color);
+}
+
+input:not(:disabled):focus, select:not(:disabled):focus, textarea:not(:disabled):focus,
+input:not(:disabled):hover, select:not(:disabled):hover, textarea:not(:disabled):hover {
+	background-color: #e5d9f2;
+	border-color: var(--button-selected-color);
+}
+
+hr {
+	border-top: 1px solid var(--divider-color);
+}

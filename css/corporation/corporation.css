@@ -1,0 +1,39 @@
+.founding {
+	font-size: 0.8em;
+	margin-top: -0.8em;
+	margin-left: 0.5em;
+	font-style: italic;
+}
+
+table.corporate {
+	border: 3px darkgreen double;
+	border-collapse: collapse;
+	min-width: 33%;
+}
+
+table.corporate tbody tr:nth-child(even) {
+	background-color: rgb(0, 30, 0);
+}
+
+table.corporate tbody tr:nth-child(odd) {
+	background-color: rgb(15, 40, 15);
+}
+
+table.corporate td {
+	vertical-align: top;
+}
+
+table.corporate tbody th, table.corporate thead th {
+	background-color: black;
+	font-weight: bold;
+}
+
+.minor-note {
+	font-size: 0.75em;
+	font-style: italic;
+}
+
+.majorText {
+	margin-top: 0.5em;
+	margin-bottom: 1.5em;
+}

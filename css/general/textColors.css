@@ -1,0 +1,207 @@
+/* Colors are made as css classes, to allow them to be changed for a light color scheme (for example). */
+/* a version is for this case: <span class="..."><a>text</a></span> */
+
+/* TODO: remove all color class names (e.g. ".cyan") once all instances are removed in code */
+
+/* link color */
+.link, .link a {
+	color: var(--link-color)
+}
+
+.aquamarine, .aquamarine a, .skill, .skill a {
+	color: aquamarine
+}
+
+.coral, .coral a, .fetish.loss, .fetish.loss a {
+	color: coral
+}
+
+/* used for aphrodisiac & neighbor arcs */
+.cyan, .cyan a, .hotkey {
+	color: cyan
+}
+
+.darkgoldenrod, .darkgoldenrod a, .trust.extremely-terrified, .trust.extremely-terrified a {
+	color: darkgoldenrod
+}
+
+.darkred, .darkred a, .defiant.full, .defiant.full a {
+	color: darkred
+}
+
+.darkviolet, .darkviolet a, .devotion.hateful, .devotion.hateful a {
+	color: darkviolet
+}
+
+/* used for devotion once & agent */
+.deeppink, .deeppink a, .devotion.devoted, .devotion.devoted a {
+	color: deeppink
+}
+
+.steelblue, .steelblue a {
+	color: steelblue
+}
+
+.deepskyblue, .deepskyblue a, .intelligent, .intelligent a {
+	color: deepskyblue
+}
+
+.dodgerblue, .dodgerblue a {
+	color: dodgerblue
+}
+
+.blue, .blue a {
+	color: blue
+}
+
+.gold, .gold a, .trust.dec, .trust.dec a, .trust.frightened, .trust.frightened a {
+	color: gold
+}
+
+.goldenrod, .goldenrod a, .trust.terrified, .trust.terrified a {
+	color: goldenrod
+}
+
+.gray, .gray a {
+	color: gray
+}
+
+.green, .green a, .reputation.inc, .reputation.inc a, .improvement, .improvement a, .flaw.break, .flaw.break a,
+.skill.inc, .skill.inc a, .fuckdoll, .fuckdoll a, .positive, .positive a, .health.inc, .health.inc a, .prestigious,
+.prosperity.inc {
+	color: green
+}
+
+.hotpink, .hotpink a, .devotion.inc, .devotion.inc a, .devotion.accept, .devotion.accept a {
+	color: hotpink
+}
+
+.lawngreen, .lawngreen a {
+	color: lawngreen
+}
+
+.lightblue, .lightblue a {
+	color: lightblue
+}
+
+/* compare pink for fetish */
+.lightcoral, .lightcoral a, .fetish.gain, .fetish.gain a {
+	color: lightcoral
+}
+
+.lightgreen, .lightgreen a, .relationship, .relationship a, .rivalry.dec, .rivalry.dec a {
+	color: lightgreen
+}
+
+.lightpink, .lightpink a {
+	color: lightpink
+}
+
+.lightsalmon, .lightsalmon a, .fetish.inc, .fetish.inc a, .rivalry.inc, .rivalry.inc a,
+.relationship.dec, .relationship.dec a {
+	color: lightsalmon
+}
+
+/* tight orifices, breast changes, take virginity, not sure on good aliases */
+.lime, .lime a, .change.positive, .change.positive a, .virginity.loss, .virginity.loss a, .puberty, .puberty a,
+.pregnant, .pregnant a {
+	color: lime
+}
+
+/* multiple questionable uses */
+.limegreen, .limegreen a {
+	color: limegreen
+}
+
+.magenta, .magenta a, .devotion.worship, .devotion.worship a {
+	color: magenta
+}
+
+.mediumaquamarine, .mediumaquamarine a, .trust.inc, .trust.inc a, .trust.careful, .trust.careful a {
+	color: mediumaquamarine
+}
+
+.mediumorchid, .mediumorchid a, .devotion.dec, .devotion.dec a, .devotion.resistant, .devotion.resistant a {
+	color: mediumorchid
+}
+
+.mediumseagreen, .mediumseagreen a, .trust.trusting, .trust.trusting a {
+	color: mediumseagreen
+}
+
+/* generally between red and green, and a lot of other places */
+.orange, .orange a, .stupid, .stupid a, .change.negative, .change.negative a, .defiant.careful, .defiant.careful a,
+.ncs, .ncs a, .miscarriage, .miscarriage a, .hindrance.mid, .intro.question {
+	color: orange
+}
+
+.orangered, .orangered a, .defiant.inc, .defiant.inc a, .defiant.bold, .defiant.bold a, .education.neg a, .unintelligent, .hindrance.high {
+	color: orangered
+}
+
+/* also fetish start ??? , and a lot of other stuff */
+.pink, .pink a, .slave.name.simple {
+	color: pink
+}
+
+/* generally bad stuff */
+/* note: .error is for unexpected behavior, .warning for player feedback */
+.red, .red a, .health.dec, .health.dec a, .cash.dec, .cash.dec a, .food.dec, .food.dec a, .stat.drop, .stat.drop a, .flaw, .flaw a, .flaw.gain, .flaw.gain a,
+.mindbreak, .mindbreak a, .error, .error a, .elites.loss, .elites.loss a, .reputation.dec, .reputation.dec a, .immobile, .hindrance.max,
+.warning, .warning a, .prosperity.dec {
+	color: red
+}
+
+.seagreen, .seagreen a, .trust.prof-trusting, .trust.prof-trusting a {
+	color: seagreen
+}
+
+.springgreen, .springgreen a, .skill.player, .skill.player a {
+	color: springgreen
+}
+
+/* some ethnicity */
+.tan, .tan a {
+	color: tan
+}
+
+.chocolate, .chocolate a, .food {
+	color: chocolate
+}
+
+.saddlebrown, .saddlebrown a {
+	color: saddlebrown
+}
+
+.teal, .teal a {
+	color: teal
+}
+
+.yellow, .yellow a, .noteworthy, .noteworthy a, .paraphilia.gain, .paraphilia.gain a, .hindrance.low,
+.devotion.ambivalent, .devotion.ambivalent a, .trust.fearful, .trust.fearful a, .job.change {
+	color: yellow
+}
+
+.yellowgreen, .yellowgreen a, .cash.inc, .cash.inc a, .cash, .cash a {
+	color: yellowgreen
+}
+
+.cash.note {
+	color: seagreen;
+}
+
+.white a {
+	color: white
+}
+
+.violet, .libido.inc {
+	color: violet
+}
+
+.khaki, .libido.dec {
+	color: khaki
+}
+
+.race, .nationality {
+	color: tan
+}

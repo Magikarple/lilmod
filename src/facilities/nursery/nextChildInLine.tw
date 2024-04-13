@@ -1,0 +1,23 @@
+:: Next Child In Line
+
+<<silently>>
+
+<<set $i = $cribs.findIndex(function(c) { return c.ID === $activeChild.ID; })>>
+<<set $cribs[$i] = $activeChild>> /* save changes before switching */
+<<if $i == $cribs.length - 1>>
+	<<set $activeChild = $cribs[0]>>
+	<<if $activeChild.actualAge < 3>>
+		<<goto "Infant Interact">>
+	<<else>>
+		<<goto "Child Interact">>
+	<</if>>
+<<else>>
+	<<set $activeChild = $cribs[$i+1]>>
+	<<if $activeChild.actualAge < 3>>
+		<<goto "Infant Interact">>
+	<<else>>
+		<<goto "Child Interact">>
+	<</if>>
+<</if>>
+
+<</silently>>

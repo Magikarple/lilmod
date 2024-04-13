@@ -1,0 +1,20 @@
+:: Export Child [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Child Interact">>
+
+//Copy the following block of code for importing//
+
+<br><br>
+
+<<if (ndef $activeChild.currentRules) || ($activeChild.currentRules.length < 1)>>
+	<<set _currentRules = "[]">>
+<<else>>
+	<<set _currentRules = "$activeChild.currentRules">>
+<</if>>
+
+/* <br><br><br> __Direct JSON export method__: <br><br> */
+
+<div class="output">
+	<<set _jsonText = toJson($activeChild)>>
+	_jsonText
+</div>

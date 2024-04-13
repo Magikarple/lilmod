@@ -1,0 +1,79 @@
+workflow:
+  rules:
+    # only run when on the main repo
+    - if: '$CI_PROJECT_ID == "3528"'
+      when: always
+
+.official-releases:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /\A\d+\.\d+\.\d+/
+
+stages:
+  - build
+  - upload
+  - release
+
+variables:
+  FC_PREGMOD_ARCHIVE: "FC_pregmod_${CI_COMMIT_TAG}.zip"
+  # precompiled / assets
+  # the URLs are the same as inside the game, change both if updating
+  WEBGL_NAME: "WebGL art assets"
+  WEBGL_URL: "https://mega.nz/folder/CgRiQaxS#Cjok57jXZwQt-jP7zkRh2Q"
+  RENDER_NAME: "Rendered imagepack (outdated)"
+  RENDER_URL: "https://mega.nz/file/upoAlBaZ#EbZ5wCixxZxBhMN_ireJTXt0SIPOywO2JW9XzTIPhe0"
+
+build:
+  stage: build
+  image: ggcr.io/pregmodfan/fc-pregmod/build
+  cache:
+    paths:
+      - node_modules/
+  rules:
+    # official release
+    - if: $CI_COMMIT_TAG =~ /\A\d+\.\d+\.\d+/
+    # latest
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - npm update --no-audit --no-fund --omit=dev
+  script:
+    - npx gulp html --minify --release --ci
+  artifacts:
+    paths:
+      - bin/FC_pregmod.html
+
+upload:
+  stage: upload
+  image: ggcr.io/pregmodfan/fc-pregmod:megacmd
+  extends: .official-releases
+  script:
+    - mega-login $MEGA_MAIL $MEGA_PWD
+    - zip bin/$FC_PREGMOD_ARCHIVE bin/FC_pregmod.html
+    - mega-put bin/$FC_PREGMOD_ARCHIVE /
+    - echo "MEGA_URL=$(mega-export -a /$FC_PREGMOD_ARCHIVE | grep -o https.*)" >> variables.env
+  artifacts:
+    # carry MEGA_URL over to the release job
+    reports:
+      dotenv: variables.env
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  extends: .official-releases
+  script:
+    # extract changes from changelog
+    # get line of version header + 1
+    - START=$(awk 'match($1,"##") && match($2,v){print NR+1; exit}' v="0.10.7.1-$CI_COMMIT_TAG" CHANGELOG.md)
+    # drop everything above the release including the release header
+    - tail -n +$START CHANGELOG.md > tmp
+    # get line of next version header - 1
+    - END=$(awk 'match($1,"##") && match($2,v){print NR-1; exit}' v="0.10.7.1" tmp)
+    # drop everything after current release
+    - DESCRIPTION=$(head -n $END tmp)
+    # create release
+    # assets are displayed in inverse order to how they are defined here
+    - |
+      release-cli create --name "$CI_COMMIT_TAG" --description "$DESCRIPTION" \
+        --tag-name "$CI_COMMIT_TAG" \
+        --assets-link "{\"name\":\"${RENDER_NAME}\",\"url\":\"${RENDER_URL}\"}" \
+        --assets-link "{\"name\":\"${WEBGL_NAME}\",\"url\":\"${WEBGL_URL}\"}" \
+        --assets-link "{\"name\":\"${FC_PREGMOD_ARCHIVE}\",\"url\":\"${MEGA_URL}\"}"

@@ -1,0 +1,33 @@
+:: Import Child [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Child Interact">>
+
+//Paste the code into the text box and click Apply//
+
+<br><br>
+
+<span id="import">
+</span>
+<<set $tempChild = "">>
+<<textbox "$tempChild" $tempChild>>
+<<link "Apply">>
+	<<if (def $tempChild) && ($tempChild !== "")>>
+		<<set $tempChild = eval('({' + $tempChild + '})')>>
+		<<set $tempChild.ID = generateSlaveID()>>
+		<<run newChild($tempChild)>>
+		<<replace #import>>
+			''Child imported successfully!''
+			<br><br>
+		<</replace>>
+		<<unset $tempChild>>
+	<<else>>
+		<<replace #import>>
+			''Child not imported.''
+			<br><br>
+		<</replace>>
+	<</if>>
+<</link>>
+<br><br>
+<<link "Continue">>
+	<<goto "Child Interact">>
+<</link>>

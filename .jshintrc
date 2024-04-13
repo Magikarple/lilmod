@@ -1,0 +1,26 @@
+{
+	"browser": true,
+	"devel": true,
+	"jquery": true,
+	"esversion": 8,
+	"eqeqeq": true,
+	"nocomma": true,
+	"undef": false,
+	"maxerr": 250,
+	"unused": true,
+	"globals": {
+		"SugarCube": false,
+		"Config": false,
+		"State": false,
+		"Story": false,
+		"settings": false,
+		"setup": false,
+		"prehistory": true,
+		"predisplay": true,
+		"prerender": true,
+		"postrender": true,
+		"postdisplay": true
+	},
+	"-W008": false,
+	"-W014": false
+}

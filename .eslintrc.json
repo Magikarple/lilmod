@@ -1,0 +1,176 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jquery": true
+	},
+	"extends": ["eslint:recommended"],
+	"plugins": [
+		"jsdoc",
+		"sonarjs"
+	],
+	"globals": {
+		"SugarCube": false,
+		"Config": false,
+		"State": false,
+		"Story": false,
+		"settings": false,
+		"setup": false,
+		"App": false,
+		"prehistory": true,
+		"predisplay": true,
+		"prerender": true,
+		"postrender": true,
+		"postdisplay": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2021,
+		"sourceType": "script",
+		"ecmaFeatures": {
+			"impliedStrict": true
+		}
+	},
+	"overrides": [
+		{
+			// overrides for helper scripts that are written
+			// using imports and/or exports
+			"files": ["gulpfile.js", "devTools/scripts/**/*.js"],
+			"parserOptions": {
+				"sourceType": "module",
+				"ecmaVersion": 2022
+			}
+		}
+	],
+	"settings": {
+		"jsdoc": {
+			"mode": "typescript"
+		}
+	},
+	"rules": {
+		"no-prototype-builtins": "off",
+		"semi": ["warn", "always"],
+		"semi-spacing": "warn",
+		"semi-style": "warn",
+		"block-spacing": ["warn", "always"],
+		"curly": ["warn", "all"],
+		"eqeqeq": ["warn", "smart"],
+		"space-before-function-paren": ["warn", {
+			"anonymous": "never",
+			"named": "never",
+			"asyncArrow": "always"
+		}],
+		"template-curly-spacing": ["warn", "never"],
+		"no-trailing-spaces": "warn",
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"],
+		"no-unneeded-ternary": "warn",
+		"camelcase": "warn",
+		"padded-blocks": ["warn", "never"],
+		"comma-spacing": "warn",
+		"comma-style": "warn",
+		"object-curly-newline": ["warn",
+			{
+				"ObjectExpression":{
+					"minProperties": 4,
+					"consistent": true
+				},
+				"ImportDeclaration": {
+					"minProperties": 4,
+					"consistent": true
+				},
+				"ExportDeclaration": {
+					"minProperties": 4,
+					"consistent": true
+				},
+				"ObjectPattern": {
+					"minProperties": 8,
+					"consistent": true
+				}
+			}
+		],
+		"object-curly-spacing": "warn",
+		"no-var": "warn",
+		"spaced-comment": "warn",
+		"no-undef": "off",
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
+		"no-unused-vars": ["error", {"args": "none"}],
+		"no-unused-expressions": "error",
+		"block-scoped-var": "error",
+		"dot-notation": "warn",
+		"eol-last": "warn",
+		"unicode-bom": [
+			"error",
+			"never"
+		],
+		"brace-style": [
+			"warn",
+			"1tbs",
+			{
+				"allowSingleLine": true
+			}
+		],
+		"no-sequences": "warn",
+		"no-unreachable-loop": "warn",
+		"generator-star-spacing": [
+			"warn",
+			{
+				"before": false,
+				"after": true,
+				"anonymous": "neither"
+			}
+		],
+		"one-var": ["warn", "never"],
+		"keyword-spacing": "warn",
+		"no-template-curly-in-string": "error",
+		"operator-linebreak": ["warn", "after", { "overrides": { "?": "before", ":": "before" }}],
+		"jsdoc/check-alignment": 1,
+		"jsdoc/check-examples": 0, // interferes with SugarCube examples
+		"jsdoc/check-indentation": 0,
+		"jsdoc/check-param-names": 1,
+		"jsdoc/check-property-names": 1,
+		"jsdoc/check-syntax": 1,
+		"jsdoc/check-tag-names": 1,
+		"jsdoc/check-types": 1,
+		"jsdoc/implements-on-classes": 1,
+		"jsdoc/match-description": 0, // rejects SugarCube syntax
+		"jsdoc/newline-after-description": 0,
+		"jsdoc/no-types": 0,
+		"jsdoc/no-undefined-types": 0,
+		"jsdoc/require-jsdoc": [
+			"warn",
+			{
+				"enableFixer": false,
+				"require": {
+					"ArrowFunctionExpression": false,
+					"ClassDeclaration": false,
+					"ClassExpression": false,
+					"FunctionDeclaration": true,
+					"FunctionExpression": true,
+					"MethodDefinition": false
+				},
+				"exemptEmptyFunctions": true,
+				"checkGetters": false,
+				"checkSetters": false
+			}
+		],
+		"jsdoc/require-param": ["warn"],
+		"jsdoc/require-param-description": 0,
+		"jsdoc/require-param-name": 1,
+		"jsdoc/require-param-type": 1,
+		"jsdoc/require-returns": ["off"],
+		"jsdoc/require-returns-check": 1,
+		"jsdoc/require-returns-description": 0,
+		"jsdoc/require-returns-type": 1,
+		"jsdoc/valid-types": 1,
+		"sonarjs/no-all-duplicated-branches": "error",
+		"sonarjs/no-element-overwrite": "error",
+		"sonarjs/no-extra-arguments": "error",
+		"sonarjs/no-identical-conditions": "error",
+		"sonarjs/no-identical-expressions": "error",
+		"sonarjs/no-one-iteration-loop": "error",
+		"sonarjs/no-use-of-empty-return-value": "error",
+		"sonarjs/no-collection-size-mischeck": "warn",
+		"sonarjs/no-same-line-conditional": "warn",
+		"sonarjs/no-unused-collection": "warn"
+	}
+}

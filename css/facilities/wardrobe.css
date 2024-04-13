@@ -1,0 +1,12 @@
+.wardrobe-shopping-block {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.wardrobe-shopping-cell {
+	display: inline-block;
+	width: 20em;
+	border: 1px solid var(--button-border-color);
+}
+
+.wardrobe-shopping-cell:hover { background: var(--button-hover-color) }

@@ -1,0 +1,10 @@
+/* Saves dialog styling. */
+#ui-dialog-body.saves > *:not(:first-child) {
+	border-top-color: var(--divider-color);
+}
+#ui-dialog-body.saves tr:not(:first-child) {
+	border-top-color: var(--divider-color);
+}
+#ui-dialog-body.saves .empty {
+	color: var(--text-color);
+}

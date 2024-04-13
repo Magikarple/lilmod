@@ -1,0 +1,61 @@
+:: Infant Interact [nobr]
+
+<<if $cheatMode>>
+	<center>//[[Cheat Edit Child Alternative|MOD_Edit Child Cheat New][$cheater = 1]]//</center>
+<</if>>
+
+<<set _i = App.Facilities.Nursery.childIndexForID($activeChild.ID)>>
+
+<<set $nextButton = "Confirm changes", $nextLink = "AC Dump", $returnTo = "Nursery", _SL = $slaves.length, _CL = $cribs.length, $cribs[_i] = $activeChild>>
+<<run App.Utils.setLocalPronouns($activeChild)>>
+/* TODO: the encyclopedia will need to be updated for children as well */
+<<set $encyclopedia = "Nursery">>
+
+<center>
+@@.cyan;[←,Q] @@
+<span id="prev-child">
+	<b>
+	<<link "Prev" "Previous Child In Line">><</link>>
+	</b>
+</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class='slave-name'>$activeChild.slaveName</span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="next-child">
+	<b>
+	<<link "Next" "Next Child In Line">><</link>>
+	</b>
+</span>
+@@.cyan; [E,→]@@
+</center>
+<br>
+
+<<if $seeDetails>>
+	<span id="LCD">
+		<<= App.Facilities.Nursery.LongInfantDescription($activeChild)>>
+	</span>
+	<br><br>
+	<i>
+	[[Options][$nextLink = passage()]] |
+	[[Hide descriptions|Infant Interact][$seeDetails = 0]] |
+	[[Customize|Customize Infant]] |
+	<b>
+	<<link "Update">>
+		<<replace "#LCD">>
+		<<= App.Facilities.Nursery.LongInfantDescription($activeChild)>>
+		<</replace>>
+	<</link>>
+	</b>
+	</i>
+<<else>>
+	//[[Show descriptions|Infant Interact][$seeDetails = 1]]//
+<</if>>
+
+<br><br>
+Target destination: <b><span id="targetLocation">$activeChild.targetLocation.</span></b>
+<<link "Slavery">>
+	<<set $activeChild.targetLocation = "slavery">>
+	<<replace "#targetLocation">>$activeChild.targetLocation<</replace>>
+<</link>> |
+<<link "Freedom">>
+	<<set $activeChild.targetLocation = "freedom">>
+	<<replace "#targetLocation">>$activeChild.targetLocation<</replace>>
+<</link>>

@@ -1,0 +1,205 @@
+:: Customize Infant [nobr]
+
+<<set $nextButton = "Continue">>
+
+/* TODO: all of this */
+You may enter custom descriptors for your child's hair color, hair style, tattoos, or anything else here. After typing, press enter to commit your change. These custom descriptors will appear in descriptions of your child, but will have no gameplay effect. Changing them is free.
+<br><br>
+
+<<if (def $activeChild.custom) && ($activeChild.custom.title != "")>>
+	You have instructed $him to always refer to you as $activeChild.custom.title, which, should $he lisp, comes out as $activeChild.custom.titleLisp.
+<<else>>
+	You expect $him to refer to you as all the other <<if $nurseryChildren > 1>>children and <</if>>slaves do.
+<</if>>
+<br>
+<span id="result">
+<<if def $activeChild.custom>>
+	<<if $activeChild.custom.title == "">>
+		<<link "Set a custom title for $him to address you as">>
+			<<replace "#result">>
+				Custom title: <<textbox "$activeChild.custom.title" $activeChild.custom.title>>
+				<<link "Apply">>
+					<<replace "#result">>
+						$He'll try $his best to call you $activeChild.custom.title.
+						<<set $activeChild.custom.titleLisp = lispReplace($activeChild.custom.title)>>
+					<</replace>>
+				<</link>>
+			<</replace>>
+		<</link>>
+	<<else>>
+		$He's trying $his best to call you <<textbox "$activeChild.custom.title" $activeChild.custom.title>>
+		<br>
+		<<link "Apply">>
+			<<replace "#result">>
+				$He'll try $his best to call you $activeChild.custom.title.
+				<<set $activeChild.custom.titleLisp = lispReplace($activeChild.custom.title)>>
+			<</replace>>
+		<</link>> |
+		<<link "Stop using a custom title">>
+			<<replace "#result">>
+				$He will no longer refer to you with a special title.
+				<<set $activeChild.custom.title = "">>
+				<<set $activeChild.custom.titleLisp = "">>
+			<</replace>>
+		<</link>>
+	<</if>>
+<</if>>
+</span>
+<br><br>
+
+Change $his given name: <<textbox "$activeChild.slaveName" $activeChild.slaveName>>
+/*
+<<link "Restore $his birth name">><<set $activeChild.slaveName = $activeChild.birthName>><</link>>
+<<if $arcologies[0].FSPastoralist != null>>
+	<<if $activeChild.lactation > 0>>
+		| <<link "Give $him a random cow given name" "Rename">><<set $activeChild.slaveName = setup.cowSlaveNames.random()>><</link>>
+	<</if>>
+<</if>>
+<<if child.race == "catgirl">>
+	| <<link "Give $him a random cat given name" "Rename">><<set $activeChild.slaveName = setup.catSlaveNames.random()>><</link>>
+<</if>>
+<<if $arcologies[0].FSChattelReligionist != null>>
+	| <<link "Give $him a random devotional given name" "Rename">><<set $activeChild.slaveName = setup.chattelReligionistSlaveNames.random()>><</link>>
+<</if>>
+*/
+<br><br>
+Change $his surname:
+<<if $activeChild.slaveSurname>>
+	<<textbox "$activeChild.slaveSurname" $activeChild.slaveSurname>>
+<<else>>
+	<<textbox "$activeChild.slaveSurname">>
+<</if>>
+/*
+<<link "Restore $his birth surname">><<set $activeChild.slaveSurname = $activeChild.birthSurname>><</link>>
+<<if $activeChild.slaveSurname>>
+	| <<link "Take $his surname away">><<set $activeChild.slaveSurname = 0>><</link>>
+<</if>>
+*/
+/*
+<<if $activeChild.relationship >= 5>>
+	<<for _i = 0; _i < $slaves.length; _i++>>
+		<<if $activeChild.relationshipTarget == $slaves[_i].ID>>
+			<<if $slaves[_i].slaveSurname>>
+				<<if $activeChild.slaveSurname != $slaves[_i].slaveSurname>>
+					| <<link "Give $him $his wife's surname">><<set $activeChild.slaveSurname = $slaves[_i].slaveSurname>><</link>>
+					<<break>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</for>>
+<</if>>
+<<if $activeChild.relationship == -3>>
+	<<if $PC.slaveSurname>>
+		<<if $activeChild.slaveSurname != $PC.slaveSurname>>
+			| <<link "Give $him your surname">><<set $activeChild.slaveSurname = $PC.slaveSurname>><</link>>
+		<</if>>
+	<</if>>
+<</if>>
+*/
+/*
+<<if $arcologies[0].FSRomanRevivalist != null>>
+	| <<link "Give $him a random full Roman name">><<set $activeChild.slaveName = setup.romanSlaveNames.random(), $activeChild.slaveSurname = setup.romanSlaveSurnames.random()>><</link>>
+<<elseif $arcologies[0].FSAztecRevivalist != null>>
+	| <<link "Give $him a random full Aztec name">><<set $activeChild.slaveName = setup.aztecSlaveNames.random(), $activeChild.slaveSurname = 0>><</link>>
+<<elseif $arcologies[0].FSEgyptianRevivalist != null>>
+	| <<link "Give $him a random full ancient Egyptian name">><<set $activeChild.slaveName = setup.ancientEgyptianSlaveNames.random(), $activeChild.slaveSurname = 0>><</link>>
+<<elseif $arcologies[0].FSEdoRevivalist != null>>
+	| <<link "Give $him a random full feudal Japanese name">><<set $activeChild.slaveName = setup.edoSlaveNames.random(), $activeChild.slaveSurname = setup.edoSlaveSurnames.random()>><</link>>
+<</if>>
+<<if $arcologies[0].FSDegradationist != null>>
+	| <<link "Give $him a degrading full name">><<run DegradingName($activeChild)>><</link>>
+<</if>>
+*/
+/*
+<br><br>
+<<switch $activeChild.hStyle>>
+<<case "tails" "dreadlocks" "cornrows">>
+$His hair is in $activeChild.hStyle.
+<<case "ponytail">>
+$His hair is in a $activeChild.hStyle.
+<<default>>
+$His hair is $activeChild.hStyle.
+<</switch>>
+Custom hair description: <<textbox "$activeChild.hStyle" $activeChild.hStyle "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short, uncapitalized and unpunctuated description; for example: 'back in a ponytail'//
+*/
+<br><br>
+$His hair is $activeChild.hColor in color.
+Custom hair color: <<textbox "$activeChild.hColor" $activeChild.hColor "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short, uncapitalized and unpunctuated description; for example: 'black with purple highlights'//
+
+<br><br>
+<<if $activeChild.eyeColor != $activeChild.origEye>>
+	$He is wearing $activeChild.eyeColor lenses.
+<<else>>
+	$He has $activeChild.eyeColor eyes.
+<</if>>
+Custom eye color: <<textbox "$activeChild.eyeColor" $activeChild.eyeColor "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short, uncapitalized and unpunctuated description; for example: 'blue'//
+
+/*
+<br><br>
+Change $his origin story: <<textbox "$activeChild.origin" $activeChild.origin "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use complete, capitalized and punctuated sentences; for example: '$He followed you home from the pet store.'//
+*/
+/*
+<br><br>
+Change $his custom description: <<textbox "$activeChild.custom.desc" $activeChild.custom.desc "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use complete, capitalized and punctuated sentences; for example: '$He has a beauty mark above $his left nipple.'//
+
+<br><br>
+Change $his custom label: <<textbox "$activeChild.custom.label" $activeChild.custom.label "Add custom descriptors">>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//For best results, use a short phrase; for example: 'Breeder.'//
+*/
+/*
+<br><br>
+Assign $him a custom image: <input id="customImageValue" type="text">
+<<link "Reset" "Add custom descriptors">><<set $activeChild.custom.image = null>><</link>>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;//File must be in// <tt><select id="customImageFormatSelector" style="border: none;"><option value="png">PNG</option><option value="jpg">JPG</option><option value="gif">GIF</option><option value="webm">WEBM</option></select></tt> //format. Place file in the \resources folder. Enter the filename without the extension. For example, for a file with the path// <tt>\bin\resources\headgirl.<span id="customImageFormatValue">png</span></tt>, //enter //<tt>headgirl</tt>.
+<<script>>
+jQuery(function() {
+	function activeChild() {
+		return State.variables.activeChild;
+	}
+
+	jQuery("#customImageFormatValue").text(activeChild().custom.image === null ? "png" : activeChild().custom.image.format);
+	jQuery("#customImageValue")
+		.val(activeChild().custom.image === null ?
+			"" : activeChild().custom.image.filename)
+		.on("change", function(e) {
+			const c = activeChild().custom;
+			if (this.value.length === 0) {
+				c.image = null;
+			} else {
+				if (c.image === null) {
+					c.image = {
+						filename: this.value,
+						format: jQuery("#customImageFormatSelector").val()
+					};
+				} else {
+					c.image.filename = this.value;
+				}
+			}
+		});
+	jQuery("#customImageFormatSelector")
+		.val(activeChild().custom.image ? activeChild().custom.image.format : "png")
+		.on("change", function(e) {
+			if (activeChild().custom.image !== null) {
+				activeChild().custom.image.format = this.value;
+			}
+			jQuery("#customImageFormatValue").text(this.value);
+		});
+});
+<</script>>
+<<if $seeImages == 1 && $imageChoice == 1>>
+	<br><br>
+	<<if ndef $activeChild.custom.hairVector>><<set $activeChild.custom.hairVector = 0>><</if>>
+	Assign $him a custom hair SVG image:
+	<<if $activeChild.custom.hairVector != 0>>
+		<<textbox "$activeChild.custom.hairVector" $activeChild.custom.hairVector "Add custom descriptors">>
+	<<else>>
+		<<textbox "$activeChild.custom.hairVector" "" "Add custom descriptors">>
+	<</if>>
+	<<link "Reset" "Add custom descriptors">><<set $activeChild.custom.hairVector = 0>><</link>>
+<</if>>
+*/

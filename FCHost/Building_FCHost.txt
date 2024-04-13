@@ -1,0 +1,38 @@
+BUILD REQUIREMENTS
+
+The below requirements must be met to build this project.
+
+ - Chromium Embedded Framework (CEF) 112.0.1 or newer.  The windows build is
+   currently configured to operate with the X64 binary distribution of CEF.
+
+ - CMake version 2.8.12.1 or newer.
+
+ - Linux/MacOS requirements:
+   I haven't tested these platforms, and there is platform-specific code missing.
+   Shouldn't be too hard to add, check the CEF distribution and treat FCHost
+   as a derivative of tests/cefsimple.
+   
+ - Have the environment variable CEF_ROOT set to the root of your CEF distribution.
+ - Have the CMake binary folder added to your path e.g. for Windows C:\Program Files\CMake\bin.
+
+ - Windows requirements:
+   Visual Studio 2019 (the community edition will work fine) or newer with the "Desktop development with C++" workload installed.
+
+BUILD STEPS
+
+If you are running Windows and meet the above requirements then within the root of FCHost/, 
+execute cmake_vs2019.bat which will generate FCHost.sln in the same location.
+Now open FCHost.sln in Visual Studio 2019 
+and build from there via tool bar -> Build -> Build Solution or Ctrl + Shift + B.
+If using Visual Studio 2022, simply use cmake_vs2022.bat instead.
+
+The resulting binary and supporting files will be in
+FCHost/fchost/Debug, or FCHost/fchost/Release depending on the configuration
+selected in Visual Studio via the drop down found under the Build and Debug tool bar headers.  
+
+You should be able to zip up the contents of the 
+Release folder and distribute them to another machine or user if desired.
+Due to space and privacy concerns it is suggested that you remove *.html and fchost.ilk prior to distribution. 
+
+If you are not running Windows or you need something else special, please
+familiarize yourself with CMake and see the detailed information in CMakeLists.txt.

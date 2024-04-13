@@ -1,0 +1,13 @@
+**/mousetrap.js
+**/pako.js
+**/sugarCubeConfig.js
+**/format.js
+**/displayVariables.js
+**/dTree.min.js
+**/optionsMacro.js
+temp.**
+**.temp
+**/001-lib
+/build/**/*
+/devNotes/legacy files/**/*
+bin/*

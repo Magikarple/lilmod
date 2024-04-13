@@ -1,0 +1,89 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Vim stuff
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+*~
+tags
+[._]*.un~
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+.env
+
+# virtualenv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+
+# Start.tw
+src/002-config/start.tw
+
+# eslint
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Visual Studio Code
+.vscode/settings.json
+.vscode/tasks.json
+# .vscode/bookmarks.json is created by the amazing https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks VSCode extension
+.vscode/bookmarks.json
+*.code-workspace
+
+# WebStorm
+.idea
+
+# Gulp
+build/
+
+# backup
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+# misc
+fc-pregmod
+bin/*
+*.outline
+*.todo
+TODO.txt
+temp.*
+*.temp
+src/002-config/fc-version.js.commitHash.js
+devTools/scripts/.package.json.diff
+/settings.json
+.eslintcache
+/sanityCheck.log
+
+# macOS devices
+*.icloud
+
+# legacy
+devNotes/legacy files/*
+/.vs
+
+# mod development
+/mods/dev/
+
+# cSpell
+.cspellcache

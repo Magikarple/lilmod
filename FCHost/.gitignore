@@ -1,0 +1,16 @@
+CMakeCache.txt
+CMakeFiles
+Debug
+Release
+Release.file
+x64
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+libcef_dll_wrapper
+.vs
+cmake_install.cmake
+*.VC.db
+GPUCache
+PreCompiledFCHost.zip

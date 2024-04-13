@@ -1,0 +1,7 @@
+:: Nursery Discard Workaround [nobr]
+
+$activeSlave.slaveName has been given away to another arcology to be raised, never to be seen again.
+
+<br><br>
+
+<<set $returnTo = "Main">>

@@ -1,0 +1,46 @@
+.ra-sum {
+  margin-top: 1.5em;
+  max-height: 90vh;
+  overflow: auto;
+  width: 100%;
+}
+
+.ra-sum table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid grey;
+  empty-cells: hide;
+  margin: 0;
+  table-layout: fixed;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.ra-sum th,
+.ra-sum td {
+  border: 1px solid grey;
+}
+
+.ra-sum tr:nth-child(even) {
+  background-color: #444444;
+}
+
+.ra-sum thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #111;
+}
+
+.ra-sum thead th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+}
+
+.ra-sum tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #111;
+}

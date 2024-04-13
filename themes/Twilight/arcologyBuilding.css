@@ -1,0 +1,38 @@
+div.building.basement {
+	border-top-color: #8F8F8F;
+	background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #8F8F8F 20px, #8F8F8F 30px);
+}
+
+div.building .row .penthouse{
+	border-color: #5daad7;
+}
+
+div.building .row .apartments{
+	border-color: #3eaf3e;
+}
+
+div.building .row .private{
+	border-color: #cb1a1a;
+}
+
+div.building .row .pit{
+	border-color: #d94c18;
+}
+
+div.building div.innerCell {
+	background-color: var(--background-color);
+}
+
+div.building div.decorative {
+	outline-color: black;
+}
+
+/* introduction special formatting */
+/* makes all links unusable */
+.intro div.building a {
+	color: var(--text-color);
+}
+
+div.building div.row div.dairy {
+	border-color: saddlebrown;
+}

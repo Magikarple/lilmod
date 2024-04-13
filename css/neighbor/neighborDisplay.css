@@ -1,0 +1,48 @@
+.neighbor-container {
+	background-color: rgba(17,17,17,1);
+	padding: 5px;
+	max-width: fit-content;
+	margin: 0 auto;
+}
+
+.neighbor-container-grid {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.neighbor-container-list {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+}
+
+.neighbor-item {
+	margin: 3px;
+	border: 5px solid;
+	padding: 10px;
+	text-align: center;
+}
+
+.neighbor-item-selected {
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+.neighbor-item-empty {
+	border-color: rgba(17,17,17,1);
+}
+
+.neighbor-item-self {
+	border-color: white;
+}
+
+.neighbor-item-owned {
+	border-color: steelblue;
+}
+
+.neighbor-item-unowned {
+	border-color: red;
+}
+
+.neighbor-item-rival {
+	border-color: crimson;
+}

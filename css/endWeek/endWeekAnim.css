@@ -1,0 +1,15 @@
+#init-screen > div.endweek-titleblock {
+	display: block;
+	margin-top: 5%;
+}
+
+div.endweek-maintitle {
+	display: block;
+	margin-bottom: 0.5em;
+}
+
+div.endweek-subtitle {
+	display: block;
+	font-size: smaller;
+	font-weight: lighter;
+}

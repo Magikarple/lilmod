@@ -1,0 +1,6 @@
+div.card {
+	/*border: none;*/
+	border-color: #cccccc;
+	background-color: #e6e6e6;
+	box-shadow: 10px 10px 5px #b3b3b3;
+}

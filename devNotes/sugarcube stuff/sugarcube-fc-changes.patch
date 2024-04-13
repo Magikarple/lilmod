@@ -1,0 +1,981 @@
+diff --git a/README.md b/README.md
+index 1203114..645f68b 100644
+--- a/README.md
++++ b/README.md
+@@ -1,3 +1,39 @@
++# SC2 Fork
++
++This is a fork of SC2 containing all changes made to improve the [FC pregmod (nsfw)](https://gitgud.io/pregmodfan/fc-pregmod).
++
++Important branches:
++* `fc`: SC2 with our changes, this is what is used to build FC
++* `master`: Current SC2 version
++
++Warning: When cloning you will be on `master` initially. You want to checkout `fc` first before doing anything else.
++
++Building:
++1. `node build.js -6 -b 2` to build release version
++2. replaces `/devTools/tweeGo/storyFormats/sugarcube-2/format.js` and `devNotes/sugarcube stuff/<current SC2 version>-format.js`
++3. `node build.js -6 -b 2 -u -d` to build debug version
++4. replaces `devNotes/sugarcube stuff/<current SC2 version>-debug-format.js`
++
++If you believe to have found a bug, be sure to check if it was introduced with our changes before reporting them at the SC2 repo.
++
++## Differences to official SC2
++
++* Disable save compression to speed up saving/loading [cafc36bc](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/cafc36bcd41f41da0e16f28ddbd6d5780ea0eeb1)
++* Remember scroll position if passage stays the same [7acec77a](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/7acec77acab7ddcc0db7f1c6447486548b282628)
++* Ignore expired array [2ebd17ab](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/2ebd17ab69bf280c7005e16a4f3e63e8f83fd3e6)
++* Add option to overwrite saves [fcdacefa](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/fcdacefa772e6906b8baa9062929103558771251)
++* Use native JS instead of jQuery to speed up week end [8f030d88](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/8f030d884f9adf20b602f07c69fda74b645d87a8)
++* Add FCHost storage support [87089b02](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/87089b02779cef704d62591398ea3b2d1dbc9fce)
++* Don't generate passage excerpts if they aren't going to be used [d1da3d64](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/d1da3d643af1bd5460d9cad21b2dde168adabfc1)
++* Add stacktrace to set, print, if macros [e527368c](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/e527368c9e9dae423a9f3410f35f63ba40580b92)
++* Speedup passage change by removing unnecessary clone calls [0d953ca0](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/0d953ca037ec8b303c52957164fda634a39af2a9)
++* Split saves object into smaller objects to improve access speed [524fbff4](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/524fbff49a9eef3155f30ccedbca17cb033e3166), [a2cc3311](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/a2cc33118ce38deadfe97ca9178ee2f48cc84f49), [4d96c8df](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/4d96c8dfbe307578f5f6f64fc86f3e0e4ea233a1)
++* Re enable compression for non autosaves [0a1704ec](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/0a1704ec5945e8a0b541c6719016406189bbd97b)
++* Show version information in error messages [4f76dbc4](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/4f76dbc4370c04d6ea42ec120f0ebd5bb499267a)
++* Use render() instead of a local wikifier, making it possible to render DOM directly for certain special passages (storyCaption, ...) [e8af6b2f](https://gitgud.io/Arkerthan/sugarcube-2/-/commit/e8af6b2f60fa88f5111d1812593e0b0e47b2779f)
++
++## SC2 README; most of it stays the same, but be sure to change the url when cloning:
++
+ # SugarCube v2
+ 
+ [SugarCube](http://www.motoslave.net/sugarcube/) is a free (gratis and libre) story format for [Twine/Twee](http://twinery.org/).
+diff --git a/build.js b/build.js
+index cfe166c..78614d5 100644
+--- a/build.js
++++ b/build.js
+@@ -31,6 +31,7 @@ const CONFIG = {
+ 			'src/lib/jquery-plugins.js',
+ 			'src/lib/util.js',
+ 			'src/lib/simplestore/simplestore.js',
++			'src/lib/simplestore/adapters/FCHost.Storage.js',
+ 			'src/lib/simplestore/adapters/webstorage.js',
+ 			'src/lib/simplestore/adapters/cookie.js',
+ 			'src/lib/debugview.js',
+diff --git a/src/lib/helpers.js b/src/lib/helpers.js
+index 25682ee..a1f5600 100644
+--- a/src/lib/helpers.js
++++ b/src/lib/helpers.js
+@@ -289,7 +289,7 @@ var { // eslint-disable-line no-var
+ 
+ 		for (let i = 0, iend = ids.length; i < iend; ++i) {
+ 			if (Story.has(ids[i])) {
+-				new Wikifier(el, Story.get(ids[i]).processText().trim());
++				el.append(Story.get(ids[i]).render());
+ 				return el;
+ 			}
+ 		}
+@@ -308,11 +308,11 @@ var { // eslint-disable-line no-var
+ 	/*
+ 		Appends an error view to the passed DOM element.
+ 	*/
+-	function throwError(place, message, source) {
++	function throwError(place, message, source, stack) {
+ 		const $wrapper = jQuery(document.createElement('div'));
+ 		const $toggle  = jQuery(document.createElement('button'));
+ 		const $source  = jQuery(document.createElement('pre'));
+-		const mesg     = `${L10n.get('errorTitle')}: ${message || 'unknown error'}`;
++		const mesg     = `${L10n.get('errorTitle')}: ${message || 'unknown error'} ${Config.saves.version}`;
+ 
+ 		$toggle
+ 			.addClass('error-toggle')
+@@ -346,6 +346,14 @@ var { // eslint-disable-line no-var
+ 				hidden        : 'hidden'
+ 			})
+ 			.appendTo($wrapper);
++		if (stack) {
++			const lines = stack.split('\n');
++			for (const ll of lines) {
++				const div = document.createElement('div');
++				div.append(ll.replace(/file:.*\//, '<path>/'));
++				$source.append(div);
++			}
++		}
+ 		$wrapper
+ 			.addClass('error-view')
+ 			.appendTo(place);
+diff --git a/src/lib/jquery-plugins.js b/src/lib/jquery-plugins.js
+index 914d9a5..a82d423 100644
+--- a/src/lib/jquery-plugins.js
++++ b/src/lib/jquery-plugins.js
+@@ -43,14 +43,9 @@
+ 		return function () {
+ 			const $this = jQuery(this);
+ 
+-			// Exit if the element is disabled.
+-			//
+-			// NOTE: This should only be necessary for elements which are not disableable
+-			// per the HTML specification as disableable elements should be made inert
+-			// automatically.
+-			if ($this.ariaIsDisabled()) {
+-				return;
+-			}
++			const dataPassage = $this.attr('data-passage');
++			const initialDataPassage = window && window.SugarCube && window.SugarCube.State && window.SugarCube.State.passage;
++			const savedYOffset = window.pageYOffset;
+ 
+ 			// Toggle "aria-pressed" status, if the attribute exists.
+ 			if ($this.is('[aria-pressed]')) {
+@@ -59,6 +54,11 @@
+ 
+ 			// Call the true handler.
+ 			fn.apply(this, arguments);
++
++			const doJump = function(){ window.scrollTo(0, savedYOffset); }
++			if ( dataPassage && (window.lastDataPassageLink === dataPassage || initialDataPassage === dataPassage))
++				doJump();
++			window.lastDataPassageLink = dataPassage;
+ 		};
+ 	}
+ 
+diff --git a/src/lib/simplestore/adapters/FCHost.Storage.js b/src/lib/simplestore/adapters/FCHost.Storage.js
+new file mode 100644
+index 0000000..34581b1
+--- /dev/null
++++ b/src/lib/simplestore/adapters/FCHost.Storage.js
+@@ -0,0 +1,171 @@
++/***********************************************************************************************************************
++
++	lib/simplestore/adapters/FCHost.Storage.js
++
++	Copyright Â© 2013â€“2019 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved.
++	Use of this source code is governed by a BSD 2-clause "Simplified" License, which may be found in the LICENSE file.
++
++***********************************************************************************************************************/
++/* global SimpleStore, Util */
++
++SimpleStore.adapters.push((() => {
++	'use strict';
++
++	// Adapter readiness state.
++	let _ok = false;
++
++
++	/*******************************************************************************************************************
++		_FCHostStorageAdapter Class.
++        Note that FCHost is only intended for a single document, so we ignore both prefixing and storageID
++	*******************************************************************************************************************/
++	class _FCHostStorageAdapter {
++		constructor(persistent) {
++			let engine = null;
++			let name   = null;
++
++			if (persistent) {
++				engine = window.FCHostPersistent;
++				name   = 'FCHostPersistent';
++			}
++			else {
++			    engine = window.FCHostSession;
++				name   = 'FCHostSession';
++			}
++
++			Object.defineProperties(this, {
++				_engine : {
++					value : engine
++				},
++                
++				name : {
++					value : name
++				},
++
++				persistent : {
++					value : !!persistent
++				}
++			});
++		}
++
++		/* legacy */
++		get length() {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.length : Number]`); }
++
++			return this._engine.size();
++		}
++		/* /legacy */
++
++		size() {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.size() : Number]`); }
++
++			return this._engine.size();
++		}
++
++		keys() {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.keys() : String Array]`); }
++
++			return this._engine.keys();
++		}
++
++		has(key) {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.has(key: "${key}") : Boolean]`); }
++
++			if (typeof key !== 'string' || !key) {
++				return false;
++			}
++
++			return this._engine.has(key);
++		}
++
++		get(key) {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.get(key: "${key}") : Any]`); }
++
++			if (typeof key !== 'string' || !key) {
++				return null;
++			}
++
++			const value = this._engine.get(key);
++
++			return value == null ? null : _FCHostStorageAdapter._deserialize(value); // lazy equality for null
++		}
++
++		set(key, value) {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.set(key: "${key}", value: \u2026) : Boolean]`); }
++
++			if (typeof key !== 'string' || !key) {
++				return false;
++			}
++
++			this._engine.set(key, _FCHostStorageAdapter._serialize(value));
++
++			return true;
++		}
++
++		delete(key) {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.delete(key: "${key}") : Boolean]`); }
++
++			if (typeof key !== 'string' || !key) {
++				return false;
++			}
++
++			this._engine.remove(key);
++
++			return true;
++		}
++
++		clear() {
++			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.clear() : Boolean]`); }
++
++			this._engine.clear();
++
++			return true;
++		}
++
++		static _serialize(obj) {
++			return JSON.stringify(obj);
++		}
++
++		static _deserialize(str) {
++			return JSON.parse(str);
++		}
++	}
++
++
++	/*******************************************************************************************************************
++		Adapter Utility Functions.
++	*******************************************************************************************************************/
++	function adapterInit() {
++		// FCHost feature test.
++		function hasFCHostStorage() {
++			try {
++			    if (typeof window.FCHostPersistent !== 'undefined')
++			        return true;
++			}
++			catch (ex) { /* no-op */ }
++
++			return false;
++		}
++
++		_ok = hasFCHostStorage();
++		
++		return _ok;
++	}
++
++	function adapterCreate(storageId, persistent) {
++		if (!_ok) {
++			throw new Error('adapter not initialized');
++		}
++
++		return new _FCHostStorageAdapter(persistent);
++	}
++
++
++	/*******************************************************************************************************************
++		Module Exports.
++	*******************************************************************************************************************/
++	return Object.freeze(Object.defineProperties({}, {
++		init   : { value : adapterInit },
++		create : { value : adapterCreate }
++	}));
++})());
+diff --git a/src/lib/simplestore/adapters/webstorage.js b/src/lib/simplestore/adapters/webstorage.js
+index 27d3801..4c689bc 100644
+--- a/src/lib/simplestore/adapters/webstorage.js
++++ b/src/lib/simplestore/adapters/webstorage.js
+@@ -125,7 +125,7 @@ SimpleStore.adapters.push((() => {
+ 			return value == null ? null : _WebStorageAdapter._deserialize(value); // lazy equality for null
+ 		}
+ 
+-		set(key, value) {
++		set(key, value, compression = true) {
+ 			if (DEBUG) { console.log(`[<SimpleStore:${this.name}>.set(key: "${key}", value: \u2026) : Boolean]`); }
+ 
+ 			if (typeof key !== 'string' || !key) {
+@@ -133,7 +133,8 @@ SimpleStore.adapters.push((() => {
+ 			}
+ 
+ 			try {
+-				this._engine.setItem(this._prefix + key, _WebStorageAdapter._serialize(value));
++				this._engine.setItem(this._prefix + key,
++					_WebStorageAdapter._serialize(value, this.persistent && compression));
+ 			}
+ 			catch (ex) {
+ 				/*
+@@ -188,12 +189,15 @@ SimpleStore.adapters.push((() => {
+ 			return true;
+ 		}
+ 
+-		static _serialize(obj) {
+-			return LZString.compressToUTF16(JSON.stringify(obj));
++		static _serialize(obj, compression) {
++			if (compression) {
++				return LZString.compressToUTF16(JSON.stringify(obj));
++			}
++			return JSON.stringify(obj);
+ 		}
+ 
+ 		static _deserialize(str) {
+-			return JSON.parse(LZString.decompressFromUTF16(str));
++			return JSON.parse((!str || str[0] == "{") ? str : LZString.decompressFromUTF16(str));
+ 		}
+ 	}
+ 
+diff --git a/src/macros/macrocontext.js b/src/macros/macrocontext.js
+index df25bb4..9272ede 100644
+--- a/src/macros/macrocontext.js
++++ b/src/macros/macrocontext.js
+@@ -277,8 +277,8 @@ var MacroContext = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			this._debugViewEnabled = false;
+ 		}
+ 
+-		error(message, source) {
+-			return throwError(this._output, `<<${this.displayName}>>: ${message}`, source ? source : this.source);
++		error(message, source, stack) {
++			return throwError(this._output, `<<${this.displayName}>>: ${message}`, source ? source : this.source, stack);
+ 		}
+ 	}
+ 
+diff --git a/src/macros/macrolib.js b/src/macros/macrolib.js
+index 3d2ea94..8f4dd7a 100644
+--- a/src/macros/macrolib.js
++++ b/src/macros/macrolib.js
+@@ -90,7 +90,7 @@
+ 				Scripting.evalJavaScript(this.args.full);
+ 			}
+ 			catch (ex) {
+-				return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
++				return this.error(`bad evaluation: ${typeof ex === 'object' ? `${ex.name}: ${ex.message}` : ex}`, null, ex.stack);
+ 			}
+ 
+ 			// Custom debug view setup.
+@@ -351,7 +351,7 @@
+ 				}
+ 			}
+ 			catch (ex) {
+-				return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
++				return this.error(`bad evaluation: ${typeof ex === 'object' ? `${ex.name}: ${ex.message}` : ex}`, null, ex.stack);
+ 			}
+ 		}
+ 	});
+@@ -815,7 +815,7 @@
+ 				}
+ 			}
+ 			catch (ex) {
+-				return this.error(`bad conditional expression in <<${i === 0 ? 'if' : 'elseif'}>> clause${i > 0 ? ' (#' + i + ')' : ''}: ${typeof ex === 'object' ? ex.message : ex}`); // eslint-disable-line prefer-template
++				return this.error(`bad conditional expression in <<${i === 0 ? 'if' : 'elseif'}>> clause${i > 0 ? ' (#' + i + ')' : ''}: ${typeof ex === 'object' ? `${ex.name}: ${ex.message}` : ex}`, null, ex.stack); // eslint-disable-line prefer-template
+ 			}
+ 		}
+ 	});
+diff --git a/src/markup/wikifier.js b/src/markup/wikifier.js
+index 2f3b07d..eaeac6b 100644
+--- a/src/markup/wikifier.js
++++ b/src/markup/wikifier.js
+@@ -222,7 +222,7 @@ var Wikifier = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		}
+ 
+ 		outputText(destination, startPos, endPos) {
+-			jQuery(destination).append(document.createTextNode(this.source.substring(startPos, endPos)));
++			destination.appendChild(document.createTextNode(this.source.substring(startPos, endPos)));
+ 		}
+ 
+ 		/*
+diff --git a/src/passage.js b/src/passage.js
+index 4835633..6e2c6e1 100644
+--- a/src/passage.js
++++ b/src/passage.js
+@@ -212,8 +212,10 @@ var Passage = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			const frag = document.createDocumentFragment();
+ 			new Wikifier(frag, this.processText(), options);
+ 
+-			// Update the excerpt cache to reflect the rendered text.
+-			this._excerpt = Passage.getExcerptFromNode(frag);
++			// Update the excerpt cache to reflect the rendered text, if we need it for the passage description
++			if (Config.passages.descriptions == null) {
++				this._excerpt = Passage.getExcerptFromNode(frag);
++			}
+ 
+ 			return frag;
+ 		}
+diff --git a/src/save.js b/src/save.js
+index 29714a3..36b4252 100644
+--- a/src/save.js
++++ b/src/save.js
+@@ -44,12 +44,66 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return false;
+ 		}
+ 
+-		let saves   = savesObjGet();
+-		let updated = false;
++
++		// convert the single big saves object into the new smaller objects
++		const saves = storage.get('saves');
++		if (saves !== null) {
++			storage.delete('saves'); // Make sure we have enough space to store the saves in the new format
++			const container = Dialog.setup('Backup');
++			const message = document.createElement('span');
++			message.className = 'red';
++			message.append('Due to changes to the saves system your existing saves were converted. Backup all saves' +
++				' that are important to you as they may have been lost during conversion. Once you close this dialog' +
++				' it will be IMPOSSIBLE to get your old saves back.');
++			container.append(message);
++			const index = indexGet();
++			// we store the index every time we store a save, so in case we exceed local storage only the
++			// last save is lost
++			if (saves.autosave !== null) {
++				container.append(savesLink('autosave', saves.autosave));
++				index.autosave = { title : saves.autosave.title, date : saves.autosave.date };
++				try {
++					storage.set('autosave', saves.autosave);
++					indexSave(index);
++				} catch (ex) {
++					storage.delete('autosave');
++					index.autosave = null;
++					indexSave(index);
++				}
++			}
++			for (let i = 0; i < saves.slots.length; i++) {
++				if (saves.slots[i] !== null) {
++					container.append(savesLink(`slot${i}`, saves.slots[i]));
++					index.slots[i] = { title : saves.slots[i].title, date : saves.slots[i].date };
++					try {
++						storage.set(`slot${i}`, saves.slots[i]);
++						indexSave(index);
++					} catch (ex) {
++						storage.delete(`slot${i}`);
++						index.slots[i] = null;
++						indexSave(index);
++					}
++				}
++			}
++			Dialog.open();
++		}
++
++		function savesLink(name, save) {
++			const div = document.createElement('div');
++			const a = document.createElement('a');
++			a.append(`Backup ${name}`);
++			a.onclick = () => {
++				exportToDisk(`backup-${name}`, {}, save);
++			};
++			div.append(a);
++			return div;
++		}
++
++		/* All SC2 compatibility converters are disabled, too much work */
+ 
+ 		/* legacy */
+ 		// Convert an ancient saves array into a new saves object.
+-		if (Array.isArray(saves)) {
++		/* if (Array.isArray(saves)) {
+ 			saves = {
+ 				autosave : null,
+ 				slots    : saves
+@@ -59,6 +113,7 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		/* /legacy */
+ 
+ 		// Handle the author changing the number of save slots.
++		/*
+ 		if (Config.saves.slots !== saves.slots.length) {
+ 			if (Config.saves.slots < saves.slots.length) {
+ 				// Attempt to decrease the number of slots; this will only compact
+@@ -83,10 +138,11 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 
+ 			updated = true;
+ 		}
++		 */
+ 
+ 		/* legacy */
+ 		// Update saves with old/obsolete properties.
+-		if (_savesObjUpdate(saves.autosave)) {
++		/* if (_savesObjUpdate(saves.autosave)) {
+ 			updated = true;
+ 		}
+ 
+@@ -104,29 +160,39 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		/* /legacy */
+ 
+ 		// If the saves object was updated, then update the store.
+-		if (updated) {
++		/* if (updated) {
+ 			_savesObjSave(saves);
+ 		}
++		*/
+ 
+-		_slotsUBound = saves.slots.length - 1;
++		_slotsUBound = indexGet().slots.length - 1;
+ 
+ 		return true;
+ 	}
+ 
+-	function savesObjCreate() {
++	function indexCreate() {
+ 		return {
+ 			autosave : null,
+ 			slots    : _appendSlots([], Config.saves.slots)
+ 		};
+ 	}
+ 
+-	function savesObjGet() {
+-		const saves = storage.get('saves');
+-		return saves === null ? savesObjCreate() : saves;
++	function indexGet() {
++		const index = storage.get('index');
++		return index === null ? indexCreate() : index;
++	}
++
++	function indexSave(index) {
++		return storage.set('index', index);
+ 	}
+ 
+ 	function savesObjClear() {
+-		storage.delete('saves');
++		storage.delete('autosave');
++		const index = indexGet();
++		for (let i = 0; i < index.slots.length; i++) {
++			storage.delete(`slot${i}`);
++		}
++		storage.delete('index');
+ 		return true;
+ 	}
+ 
+@@ -134,7 +200,6 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		return autosaveOk() || slotsOk();
+ 	}
+ 
+-
+ 	/*******************************************************************************************************************
+ 		Autosave Functions.
+ 	*******************************************************************************************************************/
+@@ -143,28 +208,21 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 	}
+ 
+ 	function autosaveHas() {
+-		const saves = savesObjGet();
+-
+-		if (saves.autosave === null) {
+-			return false;
+-		}
+-
+-		return true;
++		return indexGet().autosave !== null;
+ 	}
+ 
+ 	function autosaveGet() {
+-		const saves = savesObjGet();
+-		return saves.autosave;
++		return storage.get('autosave');
+ 	}
+ 
+ 	function autosaveLoad() {
+-		const saves = savesObjGet();
++		const autosave = autosaveGet();
+ 
+-		if (saves.autosave === null) {
++		if (autosave === null) {
+ 			return false;
+ 		}
+ 
+-		return _unmarshal(saves.autosave);
++		return _unmarshal(autosave);
+ 	}
+ 
+ 	function autosaveSave(title, metadata) {
+@@ -172,25 +230,38 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return false;
+ 		}
+ 
+-		const saves        = savesObjGet();
+ 		const supplemental = {
+ 			title : title || Story.get(State.passage).description(),
+ 			date  : Date.now()
+ 		};
++		const index = indexGet();
++		index.autosave = supplemental;
++		try {
++			indexSave(index);
++		} catch (ex) {
++			_storageAlert();
++			return false;
++		}
+ 
+ 		if (metadata != null) { // lazy equality for null
+ 			supplemental.metadata = metadata;
+ 		}
+ 
+-		saves.autosave = _marshal(supplemental, { type : Type.Autosave });
+-
+-		return _savesObjSave(saves);
++		try {
++			return storage.set('autosave', _marshal(supplemental, { type : Type.Autosave }), false);
++		} catch (ex) {
++			index.autosave = null;
++			indexSave(index);
++			_storageAlert();
++			return false;
++		}
+ 	}
+ 
+ 	function autosaveDelete() {
+-		const saves = savesObjGet();
+-		saves.autosave = null;
+-		return _savesObjSave(saves);
++		const index = indexGet();
++		index.autosave = null;
++		indexSave(index);
++		return storage.delete('autosave');
+ 	}
+ 
+ 
+@@ -210,14 +281,15 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return 0;
+ 		}
+ 
+-		const saves = savesObjGet();
++		const index = indexGet();
+ 		let count = 0;
+ 
+-		for (let i = 0, iend = saves.slots.length; i < iend; ++i) {
+-			if (saves.slots[i] !== null) {
+-				++count;
++		for (let i = 0; i < index.slots.length; i++) {
++			if (index.slots[i] !== null) {
++				count++;
+ 			}
+ 		}
++
+ 		return count;
+ 	}
+ 
+@@ -230,9 +302,9 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return false;
+ 		}
+ 
+-		const saves = savesObjGet();
++		const index = indexGet();
+ 
+-		if (slot >= saves.slots.length || saves.slots[slot] === null) {
++		if (slot >= index.slots.length || index.slots[slot] === null) {
+ 			return false;
+ 		}
+ 
+@@ -240,31 +312,19 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 	}
+ 
+ 	function slotsGet(slot) {
+-		if (slot < 0 || slot > _slotsUBound) {
+-			return null;
+-		}
+-
+-		const saves = savesObjGet();
+-
+-		if (slot >= saves.slots.length) {
+-			return null;
++		if (slotsHas(slot)) {
++			return storage.get(`slot${slot}`);
+ 		}
+ 
+-		return saves.slots[slot];
++		return null;
+ 	}
+ 
+ 	function slotsLoad(slot) {
+-		if (slot < 0 || slot > _slotsUBound) {
+-			return false;
+-		}
+-
+-		const saves = savesObjGet();
+-
+-		if (slot >= saves.slots.length || saves.slots[slot] === null) {
+-			return false;
++		if (slotsHas(slot)) {
++			return _unmarshal(storage.get(`slot${slot}`));
+ 		}
+ 
+-		return _unmarshal(saves.slots[slot]);
++		return false;
+ 	}
+ 
+ 	function slotsSave(slot, title, metadata) {
+@@ -283,24 +343,37 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return false;
+ 		}
+ 
+-		const saves = savesObjGet();
++		const index = indexGet();
+ 
+-		if (slot >= saves.slots.length) {
++		if (slot >= index.slots.length) {
+ 			return false;
+ 		}
+ 
+ 		const supplemental = {
+-			title : title || Story.get(State.passage).description(),
+-			date  : Date.now()
++			title: title || Story.get(State.passage).description(),
++			date: Date.now()
+ 		};
+ 
++		index.slots[slot] = supplemental;
++		try {
++			indexSave(index);
++		} catch (ex) {
++			_storageAlert();
++			return false;
++		}
++
+ 		if (metadata != null) { // lazy equality for null
+ 			supplemental.metadata = metadata;
+ 		}
+ 
+-		saves.slots[slot] = _marshal(supplemental, { type : Type.Slot });
+-
+-		return _savesObjSave(saves);
++		try {
++			return storage.set(`slot${slot}`, _marshal(supplemental, { type : Type.Slot }));
++		} catch (ex) {
++			index.slots[slot] = null;
++			indexSave(index);
++			_storageAlert();
++			return false;
++		}
+ 	}
+ 
+ 	function slotsDelete(slot) {
+@@ -308,21 +381,23 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			return false;
+ 		}
+ 
+-		const saves = savesObjGet();
++		const index = indexGet();
+ 
+-		if (slot >= saves.slots.length) {
++		if (slot >= index.slots.length) {
+ 			return false;
+ 		}
+ 
+-		saves.slots[slot] = null;
+-		return _savesObjSave(saves);
++		index.slots[slot] = null;
++		indexSave(index);
++
++		return storage.delete(`slot${slot}`);
+ 	}
+ 
+ 
+ 	/*******************************************************************************************************************
+ 		Disk Import/Export Functions.
+ 	*******************************************************************************************************************/
+-	function exportToDisk(filename, metadata) {
++	function exportToDisk(filename, metadata, marshaledSave) {
+ 		if (typeof Config.saves.isAllowed === 'function' && !Config.saves.isAllowed()) {
+ 			if (Dialog.isOpen()) {
+ 				$(document).one(':dialogclosed', () => UI.alert(L10n.get('savesDisallowed')));
+@@ -359,7 +434,9 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		const baseName     = filename == null ? Story.domId : getFilename(filename); // lazy equality for null
+ 		const saveName     = `${baseName}-${getDatestamp()}.save`;
+ 		const supplemental = metadata == null ? {} : { metadata }; // lazy equality for null
+-		const saveObj      = LZString.compressToBase64(JSON.stringify(_marshal(supplemental, { type : Type.Disk })));
++		const saveObj      = LZString.compressToBase64(JSON.stringify(
++			marshaledSave == null ? _marshal(supplemental, { type : Type.Disk }) : marshaledSave
++		));
+ 		saveAs(new Blob([saveObj], { type : 'text/plain;charset=UTF-8' }), saveName);
+ 	}
+ 
+@@ -433,7 +510,6 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		return saveObj.metadata;
+ 	}
+ 
+-
+ 	/*******************************************************************************************************************
+ 		Event Functions.
+ 	*******************************************************************************************************************/
+@@ -485,6 +561,14 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 	/*******************************************************************************************************************
+ 		Utility Functions.
+ 	*******************************************************************************************************************/
++	function _storageAlert() {
++		if (Dialog.isOpen()) {
++			$(document).one(':dialogclosed', () => UI.alert('Local storage full, delete saves or increase local storage'));
++		} else {
++			UI.alert('Local storage full, delete saves or increase local storage');
++		}
++	}
++
+ 	function _appendSlots(array, num) {
+ 		for (let i = 0; i < num; ++i) {
+ 			array.push(null);
+@@ -493,31 +577,8 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		return array;
+ 	}
+ 
+-	function _savesObjIsEmpty(saves) {
+-		const slots = saves.slots;
+-		let isSlotsEmpty = true;
+-
+-		for (let i = 0, iend = slots.length; i < iend; ++i) {
+-			if (slots[i] !== null) {
+-				isSlotsEmpty = false;
+-				break;
+-			}
+-		}
+-
+-		return saves.autosave === null && isSlotsEmpty;
+-	}
+-
+-	function _savesObjSave(saves) {
+-		if (_savesObjIsEmpty(saves)) {
+-			storage.delete('saves');
+-			return true;
+-		}
+-
+-		return storage.set('saves', saves);
+-	}
+-
+ 	function _savesObjUpdate(saveObj) {
+-		if (saveObj == null || typeof saveObj !== 'object') { // lazy equality for null
++		if (saveObj == null || typeof saveObj !== "object") { // lazy equality for null
+ 			return false;
+ 		}
+ 
+@@ -666,9 +727,9 @@ var Save = (() => { // eslint-disable-line no-unused-vars, no-var
+ 			Save Functions.
+ 		*/
+ 		init  : { value : savesInit },
+-		get   : { value : savesObjGet },
+ 		clear : { value : savesObjClear },
+ 		ok    : { value : savesOk },
++		index : { value : indexGet },
+ 
+ 		/*
+ 			Autosave Functions.
+diff --git a/src/state.js b/src/state.js
+index e21149c..ecef60f 100644
+--- a/src/state.js
++++ b/src/state.js
+@@ -104,7 +104,7 @@ var State = (() => { // eslint-disable-line no-unused-vars, no-var
+ 		}
+ 
+ 		if (_expired.length > 0) {
+-			stateObj.expired = [..._expired];
++			stateObj.expired = [];
+ 		}
+ 
+ 		if (_prng !== null) {
+@@ -224,8 +224,8 @@ var State = (() => { // eslint-disable-line no-unused-vars, no-var
+ 	*/
+ 	function momentCreate(title, variables) {
+ 		return {
+-			title     : title == null ? '' : String(title),       // lazy equality for null
+-			variables : variables == null ? {} : clone(variables) // lazy equality for null
++			title     : title == null ? '' : String(title), // lazy equality for null
++			variables : variables == null ? {} : variables   // lazy equality for null
+ 		};
+ 	}
+ 
+diff --git a/src/ui.js b/src/ui.js
+index bc62bf5..ca312f2 100644
+--- a/src/ui.js
++++ b/src/ui.js
+@@ -254,7 +254,7 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 				return $btn;
+ 			}
+ 
+-			const saves  = Save.get();
++			const index  = Save.index();
+ 			const $tbody = jQuery(document.createElement('tbody'));
+ 
+ 			if (Save.autosave.ok()) {
+@@ -272,7 +272,7 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 					.text('A') // '\u25C6' Black Diamond
+ 					.appendTo($tdSlot);
+ 
+-				if (saves.autosave) {
++				if (index.autosave) {
+ 					// Add the load button.
+ 					$tdLoad.append(
+ 						createButton('load', 'ui-close', L10n.get('savesLabelLoad'), 'auto', () => {
+@@ -282,13 +282,13 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 
+ 					// Add the description (title and datestamp).
+ 					jQuery(document.createElement('div'))
+-						.text(saves.autosave.title)
++						.text(index.autosave.title)
+ 						.appendTo($tdDesc);
+ 					jQuery(document.createElement('div'))
+ 						.addClass('datestamp')
+ 						.html(
+-							saves.autosave.date
+-								? `${new Date(saves.autosave.date).toLocaleString()}`
++							index.autosave.date
++								? `${new Date(index.autosave.date).toLocaleString()}`
+ 								: `<em>${L10n.get('savesUnknownDate')}</em>`
+ 						)
+ 						.appendTo($tdDesc);
+@@ -324,7 +324,7 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 					.appendTo($tbody);
+ 			}
+ 
+-			for (let i = 0, iend = saves.slots.length; i < iend; ++i) {
++			for (let i = 0, iend = index.slots.length; i < iend; ++i) {
+ 				const $tdSlot = jQuery(document.createElement('td'));
+ 				const $tdLoad = jQuery(document.createElement('td'));
+ 				const $tdDesc = jQuery(document.createElement('td'));
+@@ -333,9 +333,10 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 				// Add the slot ID.
+ 				$tdSlot.append(document.createTextNode(i + 1));
+ 
+-				if (saves.slots[i]) {
+-					// Add the load button.
++				if (index.slots[i]) {
++					// Add the save & load buttons.
+ 					$tdLoad.append(
++						createButton('save', 'ui-close', L10n.get('savesLabelSave'), i, Save.slots.save),
+ 						createButton('load', 'ui-close', L10n.get('savesLabelLoad'), i, slot => {
+ 							jQuery(document).one(':dialogclosed', () => Save.slots.load(slot));
+ 						})
+@@ -343,13 +344,13 @@ var UI = (() => { // eslint-disable-line no-unused-vars, no-var
+ 
+ 					// Add the description (title and datestamp).
+ 					jQuery(document.createElement('div'))
+-						.text(saves.slots[i].title)
++						.text(index.slots[i].title)
+ 						.appendTo($tdDesc);
+ 					jQuery(document.createElement('div'))
+ 						.addClass('datestamp')
+ 						.html(
+-							saves.slots[i].date
+-								? `${new Date(saves.slots[i].date).toLocaleString()}`
++							index.slots[i].date
++								? `${new Date(index.slots[i].date).toLocaleString()}`
+ 								: `<em>${L10n.get('savesUnknownDate')}</em>`
+ 						)
+ 						.appendTo($tdDesc);

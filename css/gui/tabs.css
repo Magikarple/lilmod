@@ -1,0 +1,99 @@
+div.tab-bar {
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+div.tab-bar button {
+	background-color: var(--button-color);
+	border: solid 2px var(--button-color);
+	color: var(--link-color);
+	float: left;
+	outline: none;
+	cursor: pointer;
+	padding: 1ex 1ex;
+	transition: 0.2s;
+	font-size: large;
+}
+
+div.tab-bar button.card {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border: none;
+	margin-bottom: 0;
+}
+
+div.tab-bar button.card.active {
+	background-color: #1a1a1a;
+}
+
+div.tab-bar button:hover {
+	background-color: var(--button-hover-color);
+}
+
+div.tab-bar button.active {
+	background-color: var(--button-selected-color);
+	color: #c7cedf;
+}
+
+div.tab-bar button.show-warning { /* dumb name, but warning and error already exist */
+	background-color: #b30000;
+	border-color: #b30000;
+}
+
+div.tab-bar button.show-warning:hover {
+	background-color: #e60000
+}
+
+div.tab-bar button.show-warning.active {
+	background-color: #4d0000;
+}
+
+div.tab-bar a.active {
+	color: white;
+	pointer-events: none;
+	cursor: default;
+}
+
+.tab-content {
+	display: none;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+.tab-content:not(.no-fade) {
+	padding: 6px 12px;
+	-webkit-animation: fadeEffect 0.3s;
+	animation: fadeEffect 0.3s;
+}
+
+.tab-content.card {
+	border-radius: 0 8px 8px 8px;
+	background-color: #1a1a1a;
+	border: 0;
+}
+
+.tab-content.card .slaveSummary.card {
+	background-color: #252525;
+}
+
+@-webkit-keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeEffect {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

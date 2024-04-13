@@ -1,0 +1,23 @@
+div.slaveSummary {
+	clear: both;
+}
+
+/* slave summary paragraph when "see images" is enabled */
+p.si {
+	margin-bottom: 0;
+	margin-top: 0;
+	text-indent: 1.5em;
+}
+
+span.freeAssignment {
+	color: lawngreen;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+/* Slave Summary Block */
+.ssb {
+	display: inline-block;
+	margin-right: 2em;
+	text-indent: 0;
+}

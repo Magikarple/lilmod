@@ -1,0 +1,11 @@
+:: custom Slaves Database
+
+<<set $heroSlaves = []>>
+<<set _i = 1000000>>
+/*
+<<set _HS = App.Entity.SlaveState.makeSkeleton()>>
+<<set _HS.slaveName = "McChesterton", _HS.birthName = "Testy", _HS.origin = "$He is obsessed with testing new customizations of $his body.", _HS.ID = _i++, _HS.birthWeek = random(0,51), _HS.actualAge = 24, _HS.physicalAge = 24, _HS.visualAge = 24, _HS.ovaryAge = 24, setHealth(_HS, 20), _HS.devotion = 100, _HS.weight = 25, _HS.origHColor = "chestnut", _HS.pubicHColor = "chestnut", _HS.hLength = 30, _HS.hStyle = "shoulder-length and in a bun", _HS.boobs = 700, _HS.butt = 3, _HS.vagina = 1, _HS.vaginaLube = 1, _HS.anus = 1, _HS.ovaries = 1, _HS.skill.vaginal = 15, _HS.skill.oral = 15, _HS.skill.anal = 15, _HS.skill.entertainment = 1, _HS.clothes = "a nice maid outfit", _HS.intelligence = 20, _HS.intelligenceImplant = 30, _HS.attrXY = 40, _HS.fetish = "submissive", _HS.career = "a maid", _HS.eyewear = "corrective glasses">>
+<<run eyeSurgery(_HS, "both", "blur")>>
+<<set $heroSlaves.push(_HS)>>
+
+/*To add custom slaves, try to use the format of the above example. Add new slaves below this line. If you wish to add more slaves later, always add them at the bottom of the file. IDs are assigned automatically and in order, and you want your new slave to have a unique ID instead of someone else's*/

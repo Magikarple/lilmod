@@ -1,0 +1,18 @@
+.purchase-button {
+	background-color: var(--button-color);
+	border: solid 2px var(--button-border-color);
+	font-style: normal;
+	margin: 0.25em 1em;
+	outline: none;
+	transition: 0.2s;
+}
+
+.purchase-button:hover {
+	background-color: var(--button-hover-color);
+	border: solid 2px var(--button-border-color);
+}
+
+.purchase-button.disabled, .purchase-button.disabled:hover {
+	background-color: black;
+	cursor: not-allowed;
+}

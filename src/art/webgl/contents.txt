@@ -1,0 +1,197 @@
+OUTDATED!!!
+
+///////////////// MORPHS /////////////////
+General
+	physicalAgeYoung
+	physicalAgeOld
+	weight
+	weightThin
+	muscles
+	waist
+	belly
+	hips
+	butt
+	lips
+	shoulders
+	areolae
+	dick
+	balls
+	scrotum
+	foreskin
+	ballsRemove
+	dickRemove
+	vaginaRemove            - just closes the vagina
+
+amputee
+	leftArm
+	rightArm
+	leftLeg
+	rightLeg
+
+boobShape
+	small
+	normal
+	perky
+	saggy
+	torpedo-shaped          (torpedo)
+	downward-facing         (downward)
+	wide-set                (wide)
+	spherical
+
+nipples
+	huge
+	puffy
+
+faceShape
+	normal
+	masculine
+	androgynous
+	cute
+	sensual
+	exotic
+
+lips
+	thin
+	normal
+	pretty
+	plush
+	huge
+	facepussy
+
+eyes
+	normal
+	wide
+	round
+	cute
+	slit
+	small
+	open
+
+nose
+	normal
+	wide
+	forward
+	flat
+	triangular
+	small
+
+forehead
+	normal
+	round
+	small
+
+expressions
+	happy
+	fear
+
+race
+	white
+	asian
+	latina
+	black
+	pacific islander        (pacific)
+	southern european       (european)
+	amerindian
+	semitic
+	middle eastern          (eastern)
+	indo-aryan              (aryan)
+	malay
+
+poses
+	high
+	mid
+	low
+
+///////////////// MATERIALS /////////////////
+
+general
+	eye color
+	hColor
+	makeup
+	fingernails
+
+skin color
+	pure white		        (Ceridwen)
+	ivory		            (Ceridwen)
+	white		            (Ceridwen)
+	extremely pale		    (Celinette)
+	very pale		        (Celinette)
+	pale		            (Kimmy)
+	extremely fair		    (Kimmy)
+	very fair		        (Saffron)
+	fair		            (Saffron)
+	light		            (FemaleBase)
+	light olive		        (FemaleBase)
+	tan		                (Reagan)
+	olive		            (Kathy)
+	bronze		            (Mylou)
+	dark olive		        (Adaline)
+	dark		            (Daphne)
+	light beige		        (Minami)
+	beige		            (Tara)
+	dark beige		        (Topmodel)
+	light brown		        (Topmodel)
+	brown		            (Angelica)
+	dark brown		        (Angelica)
+	black		            (DarkSkin)
+	ebony		            (DarkSkin)
+	pure black		        (DarkSkin)
+
+dick color
+	pure white	            (WhiteFuta)
+	ivory	                (WhiteFuta)
+	white	                (WhiteFuta)
+	extremely pale	        (WhiteFuta)
+	very pale	            (WhiteFuta)
+	pale	                (WhiteFuta)
+	extremely fair      	(WhiteFuta)
+	very fair	            (LightFuta)
+	fair	                (LightFuta)
+	light	                (LightFuta)
+	light olive	            (LightFuta)
+	tan	                    (MidFuta)
+	olive	                (MidFuta)
+	bronze	                (MidFuta)
+	dark olive          	(MidFuta)
+	dark	                (MidFuta)
+	light beige	            (MidFuta)
+	beige	                (MidFuta)
+	dark beige	            (DarkFuta)
+	light brown	            (DarkFuta)
+	brown	                (DarkFuta)
+	dark brown	            (DarkFuta)
+	black	                (DarkFuta)
+	ebony	                (DarkFuta)
+	pure black	            (DarkFuta)
+
+///////////////// MESH /////////////////
+
+General
+	genesis8
+	vagina
+	dick
+
+Hairstyle
+	Neat					(Samira)
+	Afro					(Yara)
+	Braided					(Mishka)
+	Cornrows				(Tiger)
+	Curled					(Havana)
+	Dreadlocks				(Dreads)
+	Eary					(Georgina)
+	In a bun				(Adia)
+	In a messy bun			(Krayon)
+	In a ponytail			(Ponytail)
+	In tails				(Kinley)
+	Luxurious				(Baroness)
+	Messy					(Messy)
+	Permed					(Ichigo)
+	Shaved sides			(Rebel)
+	Up						(Pina)
+	Half-Shaved				(Edit)
+	Bangs					(Neko)
+	Hime					(Nyo)
+	Drills					(Bunny)
+
+
+

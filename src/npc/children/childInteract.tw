@@ -1,0 +1,1559 @@
+:: Child Interact [nobr]
+
+<<if $cheatMode>>
+	<center><i>[[Cheat Edit Child Alternative|MOD_Edit Child Cheat New][$cheater = 1]]</i></center>
+<</if>>
+
+<<set _i = App.Facilities.Nursery.childIndexForID($activeChild.ID)>>
+
+<<set $nextButton = "Confirm changes", $nextLink = "AC Dump", $returnTo = "Nursery", _SL = $slaves.length, _CL = $cribs.length, $cribs[_i] = $activeChild>>
+
+<<setLocalPronouns $activeChild>>
+<<run Enunciate($activeChild)>>
+<<set _dairyNameCaps = capFirstChar($dairyName)>>
+
+/* TODO: the encyclopedia will most likely need to be updated for children as well */
+<<set $encyclopedia = either("Costs Summary", "Disease in the Free Cities", "Drugs and Their Effects", "From Rebellious to Devoted", "Gender", "Modern Anal", "Nymphomania", "Slave Couture")>>
+<<if $activeChild.dick > 0>>
+	<<set $encyclopedia = "Gender">>
+<</if>>
+
+<center>
+<span class="hotkey">
+	<<print App.UI.Hotkeys.hotkeys("prev-child")>>
+</span>
+<span id="prev-child">
+	<b>
+	<<link "Prev" "Previous Child In Line">><</link>>
+	</b>
+</span>
+&nbsp;&nbsp;&nbsp;&nbsp;<b><u>@@.pink;$activeChild.slaveName@@</u></b>&nbsp;&nbsp;&nbsp;&nbsp;
+<span id="next-child">
+	<b>
+	<<link "Next" "Next Child In Line">><</link>>
+	</b>
+</span>
+<span class="hotkey">
+	<<print App.UI.Hotkeys.hotkeys("next-child")>>
+</span>
+</center>
+<br>
+
+<<if $seeDetails>>
+	<span id="LCD">
+		<<= App.Facilities.Nursery.LongChildDescription($activeChild)>>
+	</span>
+	<br><i>
+	[[Options][$nextLink = passage()]] |
+	[[Hide descriptions|Child Interact][$seeDetails = 0]] |
+	[[Customize|Customize Child]] |
+	<b>
+	<<link "Update">>
+		<<replace "#LCD">>
+			<<= App.Facilities.Nursery.LongChildDescription($activeChild)>>
+		<</replace>>
+	<</link>>
+	</b></i>
+<<else>>
+	<u>[[Show descriptions|Child Interact][$seeDetails = 1]]</u>
+<</if>>
+/*
+FIXME:
+<br><br>__Take slave to another room:__
+[[Wardrobe|Wardrobe Use][$degradation = 0]]
+| [[Auto salon|Salon][$degradation = 0, $tattooChoice = "", $piercingLevel = ""]]
+| [[Body mod studio|Body Modification][$degradation = 0, $tattooChoice = undefined]]
+| [[Remote surgery|Remote Surgery][$degradation = 0]]
+| [[Configure cybernetics|Prosthetics Configuration][$AS = $activeChild.ID, $prostheticsConfig = "main"]]
+*/
+
+/*TODO: These will most likely need to be reworked*/
+<<if $extremeUnderage && $childSex>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<span id="mini-scene"><i>Or use $him here:</i></span>
+	<span id="sexoption">
+	<<if ($activeChild.vagina > -1)>>
+		<<if canDoVaginal($activeChild)>>
+		<<link "Fuck $him">>
+			<<replace "#mini-scene">><<include "FVagina">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+		<<if canDoAnal($activeChild)>>
+			<<link "Use $his holes">>
+				<<replace "#mini-scene">><<include "FButt">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+			<</if>>
+		<<else>>
+			<i>Remove $his chastity belt if you wish to fuck $him</i>
+		<</if>>
+	<</if>>
+	</span>
+	<span id="analsexoption">
+	<<if canDoAnal($activeChild)>>
+		<<link "Fuck $his ass">>
+			<<replace "#mini-scene">><<include "FAnus">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<<else>>
+		| <i>Remove $his chastity belt if you wish to fuck $his ass</i>
+	<</if>>
+	</span>
+	<<link "Use $his mouth">>
+		<<replace "#mini-scene">><<include "FLips">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<link "Kiss $him">>
+		<<replace "#mini-scene">><<include "FKiss">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<link "Play with $his tits">>
+		<<replace "#mini-scene">><<include "FBoobs">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<link "Caress $him">>
+		<<replace "#mini-scene">><<include "FCaress">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<link "Give $him a hug">>
+		<<replace "#mini-scene">><<include "FEmbrace">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<if $cheatMode>>
+		<<link "Pat $his head">>
+			<<replace "#mini-scene">><<include "FPat">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Grope $his boobs">>
+		<<replace "#mini-scene">><<include "FondleChildBoobs">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+	<</link>> |
+	<<if $activeChild.nipples == "fuckable" && $PC.dick>>
+		<<link "Fuck $his nipples">>
+			<<replace "#mini-scene">><<include "FNippleFuck">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<</if>>
+	<<if $activeChild.lactation && $activeChild.boobs >= 2000 && $activeChild.belly < 60000>>
+		<<link "Drink $his milk">>
+			<<replace "#mini-scene">><<include "FSuckle">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<</if>>
+	<span id="analgropeoption">
+	<<if canDoAnal($activeChild)>>
+		<<link "Grope $his butt">>
+			<<replace "#mini-scene">><<include "FondleChildButt">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<</if>>
+	</span>
+	<span id="gropeoption">
+	<<if ($activeChild.vagina > -1)>>
+		<<if canDoVaginal($activeChild)>>
+			<<link "Grope $his pussy">>
+				<<replace "#mini-scene">><<include "FondleChildVagina">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+			<<link "Eat $him out">>
+				<<replace "#mini-scene">><<include "FLickPussy">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+		<</if>>
+	<</if>>
+	</span>
+	<span id="dickgropeoption">
+	<<if $activeChild.dick>>
+		<<if !$activeChild.chastityPenis>>
+		<<link "Grope $his dick">>
+			<<replace "#mini-scene">><<include "FondleChildDick">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+			<<if canPenetrate($activeChild) && $policies.sexualOpenness == 1>>
+				<<link "Ride $his dick">>
+					<<replace "#mini-scene">><<include "FDick">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+				<</link>> |
+			<</if>>
+		<<else>>
+			| //Remove $his dick chastity belt if you wish to play with $his cock//
+		<</if>>
+	<</if>>
+	</span>
+	<<if (hasAnyLegs($activeChild)) && $PC.dick != 0>>
+		<<link "Get a footjob">><<replace "#mini-scene">><<set $childSex = 1>><<include "FFeet">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>> |
+	<</if>>
+
+	/* TODO: will children be able to be inflated? */
+	<<if $activeChild.assignment != "work in the dairy" && $activeChild.assignment != "be confined in the arcade" && $activeChild.assignment != "be confined in the cellblock">>
+		<<if $boughtItem.toys.enema>>
+			<<if ($activeChild.inflation < 3 && $activeChild.pregKnown == 0 && $activeChild.bellyImplant < 1500) || ($activeChild.inflation < 1)>>
+				<<if $activeChild.inflationType == "water" || $activeChild.inflationType == "none">>
+					|	<<link "Fill $his ass with water">>
+						<<set $activeChild.inflationType = "water">>
+						<<set $activeChild.inflationMethod = 2>>
+							<<replace "#mini-scene">>
+							<<include "FillUpButt">><br><</replace>>
+							<</link>>
+				<</if>>
+				<<if $boughtItem.toys.medicalEnema>>
+					<<if $activeChild.inflationType == "aphrodisiac" || $activeChild.inflationType == "none">>
+						|	<<link "Fill $his ass with aphrodisiacs">>
+							<<set $activeChild.inflationType = "aphrodisiac">>
+							<<set $activeChild.inflationMethod = 2>>
+								<<replace "#mini-scene">>
+								<<include "FillUpButt">><br><</replace>>
+								<</link>>
+					<</if>>
+					<<if $activeChild.inflationType == "curative" || $activeChild.inflationType == "none">>
+						|	<<link "Fill $his ass with curatives">>
+							<<set $activeChild.inflationType = "curative">>
+							<<set $activeChild.inflationMethod = 2>>
+								<<replace "#mini-scene">>
+								<<include "FillUpButt">><br><</replace>>
+								<</link>>
+					<</if>>
+					<<if $activeChild.inflationType == "tightener" || $activeChild.inflationType == "none">>
+						|	<<link "Fill $his ass with rectal tighteners">>
+							<<set $activeChild.inflationType = "tightener">>
+							<<set $activeChild.inflationMethod = 2>>
+								<<replace "#mini-scene">>
+								<<include "FillUpButt">><br><</replace>>
+								<</link>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $dairyPiping>>
+			<<if ($milkPipeline > 88 && $milkPipeline != 0) || $arcologies[0].FSPastoralistLaw>>
+				<<if ($activeChild.inflation < 3 && $activeChild.pregKnown == 0 && $activeChild.bellyImplant < 1500) || ($activeChild.inflation < 1)>>
+					<<if $activeChild.inflationType == "milk" || $activeChild.inflationType == "none">>
+						|	<<link "Fill $his ass with milk">>
+							<<set $activeChild.inflationType = "milk">>
+							<<set $activeChild.inflationMethod = 2>>
+								<<replace "#mini-scene">>
+								<<include "FillUpButt">><br><</replace>>
+								<</link>>
+						|	<<link "Force-feed $him milk">>
+							<<set $activeChild.inflationType = "milk">>
+							<<set $activeChild.inflationMethod = 1>>
+								<<replace "#mini-scene">>
+								<<include "FillUpFace">><br><</replace>>
+								<</link>>
+					<</if>>
+				<</if>>
+			<<else>>
+				| //_dairyNameCaps is not producing enough milk to pump through the pipes//
+			<</if>>
+			<<if ($cumPipeline > 88 && $cumPipeline != 0) || $arcologies[0].FSPastoralistLaw>>
+				<<if ($activeChild.inflation < 3 && $activeChild.pregKnown == 0 && $activeChild.bellyImplant < 1500) || ($activeChild.inflation < 1)>>
+					<<if $activeChild.inflationType == "cum" || $activeChild.inflationType == "none">>
+						|	<<link "Fill $his ass with cum">>
+							<<set $activeChild.inflationType = "cum">>
+							<<set $activeChild.inflationMethod = 2>>
+								<<replace "#mini-scene">>
+								<<include "FillUpButt">><br><</replace>>
+								<</link>>
+						|	<<link "Force-feed $him cum">>
+							<<set $activeChild.inflationType = "cum">>
+							<<set $activeChild.inflationMethod = 1>>
+								<<replace "#mini-scene">>
+								<<include "FillUpFace">><br><</replace>>
+								<</link>>
+					<</if>>
+				<</if>>
+			<<else>>
+				| //_dairyNameCaps is not producing enough cum to pump through the pipes//
+			<</if>>
+		<</if>>
+		<<if $wcPiping == 1>>
+			<<if ($activeChild.inflation < 3 && $activeChild.pregKnown == 0 && $activeChild.bellyImplant < 1500) || ($activeChild.inflation < 1)>>
+				<<if $activeChild.inflationType == "urine" || $activeChild.inflationType == "none">>
+				|	<<link "Fill $his ass with urine">>
+					<<set $activeChild.inflationType = "urine">>
+					<<set $activeChild.inflationMethod = 2>>
+					<<replace "#mini-scene">><<include "FillUpButt">><br><</replace>>
+					<</link>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $activeChild.inflation == 0 && $activeChild.bellyImplant < 1500>>
+		|	<<link "Use another slave to force-feed $him" "SlaveOnSlaveFeedingWorkAround">>
+		<</link>>
+		<<if $boughtItem.toys.buckets>>
+			|	<<link "Make $him consume two liters of slave food">>
+				<<set $activeChild.inflationType = "food">>
+				<<set $activeChild.inflationMethod = 1>>
+				<<set $activeChild.inflation = 1>>
+					<<replace "#mini-scene">><<include "ForceFeeding">><br><</replace>>
+					<</link>>
+			<<if $activeChild.pregKnown == 0>>
+				|	<<link "Force $him to consume a gallon of slave food">>
+					<<set $activeChild.inflationType = "food">>
+					<<set $activeChild.inflationMethod = 1>>
+					<<set $activeChild.inflation = 2>>
+						<<replace "#mini-scene">><<include "ForceFeeding">><br><</replace>>
+						<</link>>
+				|	<<link "Force two gallons of slave food into $him">>
+					<<set $activeChild.inflationType = "food">>
+					<<set $activeChild.inflationMethod = 1>>
+					<<set $activeChild.inflation = 3>>
+						<<replace "#mini-scene">><<include "ForceFeeding">><br><</replace>>
+						<</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if canDoVaginal($activeChild)>>
+		<<link "Have another slave fuck $his pussy" "FSlaveSlaveVag">>
+		<</link>> |
+	<</if>>
+	<<if canPenetrate($activeChild)>>
+		<<link "Have another slave ride $his cock" "FSlaveSlaveDick">>
+		<</link>> |
+	<<elseif $activeChild.clit >= 4>>
+		<<link "Have another slave ride $his clit-dick" "FSlaveSlaveDick">>
+		<</link>> |
+	<</if>>
+	<<if $seeBestiality>>
+		<<if $farmyardKennels > 0 && $active.canine>>
+			<<link "Have a $active.canine.species mount $him">>
+				<<set $animalType = "canine">>
+				<<replace "#mini-scene">><<include "BeastFucked">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+		<</if>>
+		<<if $farmyardStables > 0 && $active.hooved.species>>
+			<<link "Let a $active.hooved.species mount $him">>
+				<<set $animalType = "hooved">>
+				<<replace "#mini-scene">><<include "BeastFucked">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+		<</if>>
+		<<if $farmyardCages > 0 && $active.feline>>
+			<<link "Have a $active.feline.species mount $him">>
+				<<set $animalType = "feline">>
+				<<replace "#mini-scene">><<include "BeastFucked">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>> |
+		<</if>>
+	<</if>>
+	<<if $cheatMode>>
+		<<link "Check $his deadliness">>
+			<<replace "#mini-scene">><<include "Deadliness">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Abuse $him">>
+		<<replace "#mini-scene">><<include "FAbuse">><</replace>>
+	<</link>>
+	<<if $seeIncest == 1>>
+		<<set _availRelatives = availableRelatives($activeChild)>>
+		<<if _availRelatives.mother>>
+		|	<<link "Fuck $him with $his mother">>
+			<<replace "#mini-scene">>
+			<<set $partner = "mother">>
+			<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>>
+		<<elseif _availRelatives.motherName !== null>>
+			//$His mother, _availRelatives.motherName, is unavailable//
+		<</if>>
+		/*
+		<<if _availRelatives.father>>
+		|	<<link "Fuck $him with $his father">>
+			<<replace "#mini-scene">><<set $partner = "father">>
+			<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>>
+		<<elseif _availRelatives.fatherName !== null>>
+			//$His father, _availRelatives.fatherName, is unavailable//
+		<</if>>
+		*/
+		<<if $activeChild.sisters > 0>>
+			<<if _availRelatives.sisters == 0>>
+				<<if $activeChild.sisters == 1>>
+					//$His _sister2 is unavailable//
+				<<else>>
+					//$His sisters are unavailable//
+				<</if>>
+			<<else>>
+				<<if $activeChild.sisters == 1>>
+				|	<<link "Fuck $him with $his _sister2">>
+					<<replace "#mini-scene">>
+					<<set $partner = "sister">>
+					<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+					<</link>>
+				<<else>>
+				|	<<link "Fuck $him with one of $his sisters">>
+					<<replace "#mini-scene">>
+					<<set $partner = "sister">>
+					<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+					<</link>>
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if ($activeChild.relationship > 0)>>
+		<<set _si = $slaveIndices[$activeChild.relationshipTarget]>>
+		<<if isSlaveAvailable($slaves[_si])>>
+			<<setLocalPronouns $slaves[_si] 2>>
+			<<if ($activeChild.relationship)>>
+				|	<<link `"Fuck $him with $his friend <<= SlaveFullName($slaves[_si])>>"`>>
+						<<replace "#mini-scene">>
+							<<set $partner = "relationship">>
+							<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+						<</link>>
+			<<elseif ($activeChild.relationship == 2)>>
+				|	<<link `"Fuck $him with $his best friend <<= SlaveFullName($slaves[_si])>>"`>>
+						<<replace "#mini-scene">>
+							<<set $partner = "relationship">>
+							<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+						<</link>>
+			<<elseif ($activeChild.relationship == 3)>>
+				|	<<link `"Fuck $him with $his FWB <<= SlaveFullName($slaves[_si])>>"`>>
+						<<replace "#mini-scene">>
+							<<set $partner = "relationship">>
+							<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+						<</link>>
+			<<elseif ($activeChild.relationship == 4)>>
+				|	<<link `"Fuck $him with $his lover <<= SlaveFullName($slaves[_si])>>"`>>
+						<<replace "#mini-scene">>
+							<<set $partner = "relationship">>
+							<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+						<</link>>
+			<<else>>
+				|	<<link `"Fuck $him with $his slave _wife2 <<= SlaveFullName($slaves[_si])>>"`>>
+						<<replace "#mini-scene">>
+							<<set $partner = "relationship">>
+							<<include "FRelation">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+						<</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if ($activeChild.rivalryTarget != 0) && canWalk($activeChild)>>
+		|	<<link "Abuse $his rival with $him">>
+				<<replace "#mini-scene">><<include "FRival">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>>
+			<</link>>
+	<</if>>
+	<<if ($activeChild.fetish != Fetish.MINDBROKEN) && (canTalk($activeChild) || hasAnyArms($activeChild))>>
+		| <<link "Ask $him about $his feelings">><<replace "#mini-scene">><<set $childSex = 1>><<include "FFeelings">><br>&nbsp;&nbsp;&nbsp;&nbsp;<</replace>><</link>>
+	<</if>>
+	<<if $activeChild.devotion >= 100 && $activeChild.relationship < 0 && $activeChild.relationship > -3>>
+		|	<<link "Talk to $him about relationships" "Matchmaking">>
+				<<set $AS = $activeChild.ID>>
+			<</link>>
+	<</if>>
+<</if>>
+
+<br><br>
+<span id="family">
+	<span id="family-tree-link">
+		<<link "Pull up the file on $his family tree.">>
+				<<replace #family-tree-link>>
+					/* TODO: this may need to be updated */<<includeDOM renderFamilyTree($slaves, $activeChild.ID)>>
+				<</replace>>
+		<</link>>
+	</span>
+</span>
+
+<br><br>
+/* TODO: the RA may need to be reworked to work with children in the Nursery */
+<<if $activeChild.useRulesAssistant == 0>>
+	@@.gray;''Not subject'' to the Rules Assistant.@@
+	<<link "Include $him" "Child Interact">>
+		<<set $activeChild.useRulesAssistant = 1>>
+	<</link>>
+	<br>
+<<else>>
+	__Rules Assistant:__ [[Rules Assistant Options|Rules Assistant]]
+
+	<<if (def $activeChild.currentRules) && ($activeChild.currentRules.length > 0)>>
+		<ul>
+			<<= $defaultRules.filter(x => ruleApplied($activeChild, x)).map(x => `<li>Rule "${x.name}" applied</li>`).join(" ") >>
+		</ul>
+	<</if>> |
+	<<link "//Apply rules//">>
+		<<silently>>
+		<<run DefaultRules($activeChild)>>
+		<</silently>>
+		<<goto "Child Interact">>
+	<</link>> |
+	<<link "Exempt $him" "Child Interact">>
+		<<set $activeChild.useRulesAssistant = 0>>
+		<</link>>
+<</if>>
+
+/* TODO: move all wardrobe options to a wardrobe passage */
+
+
+	<br><br>__Appearance:__
+	<br>Clothes: <b><span id="clothes">$activeChild.clothes.</span></b>
+	<<link "Let $him choose">>
+		<<set $activeChild.clothes = "choosing her own clothes", $activeChild.choosesOwnClothes = 1>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<i>Nice:</i>
+	<<link "Ballgown">>
+		<<set $activeChild.clothes = "a ball gown", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "Mini dress">>
+		<<set $activeChild.clothes = "a mini dress", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "Oversized t-shirt">>
+		<<set $activeChild.clothes = "an oversized t-shirt", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "Schoolgirl">>
+		<<set $activeChild.clothes = "a schoolgirl outfit", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "Slave gown">>
+		<<set $activeChild.clothes = "a slave gown", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "Sweater">>
+		<<set $activeChild.clothes = "a sweater", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>> |
+	<<link "T-shirt">>
+		<<set $activeChild.clothes = "a t-shirt", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>>
+
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<i>Harsh:</i>
+	<<link "Go naked">>
+		<<set $activeChild.clothes = "no clothing", $activeChild.choosesOwnClothes = 0>>
+		<<replace "#clothes">>$activeChild.clothes<</replace>>
+	<</link>>
+
+	<br>Collar: <b><span id="collar">$activeChild.collar.</span></b>
+	<<link "None">>
+		<<set $activeChild.collar = "none">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;//Nice://
+	<<link "Stylish leather">>
+		<<set $activeChild.collar = "stylish leather">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Satin choker">>
+		<<set $activeChild.collar = "satin choker">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Silken ribbon">>
+		<<set $activeChild.collar = "silk ribbon">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Heavy gold">>
+		<<set $activeChild.collar = "heavy gold">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Pretty jewelry">>
+		<<set $activeChild.collar = "pretty jewelry">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<if $seeAge>>
+		<<link "Nice retirement counter">>
+			<<set $activeChild.collar = "nice retirement counter">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Bell">>
+		<<set $activeChild.collar = "bell collar">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Cowbell">>
+		<<set $activeChild.collar = "leather with cowbell">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>>
+	<<if isItemAccessible.entry("bowtie", "collar")>>
+	| //FS// <<link "Bowtie collar">>
+			<<set $activeChild.collar = "bowtie">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>>
+	<</if>>
+	<<if isItemAccessible.entry("ancient Egyptian", "collar")>>
+	| //FS// <<link "Ancient Egyptian">>
+			<<set $activeChild.collar = "ancient Egyptian">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>>
+	<</if>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	<i>Harsh:</i>
+		<<link "Tight steel">>
+			<<set $activeChild.collar = "tight steel">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<<if $seeAge>>
+		<<link "Cruel retirement counter">>
+			<<set $activeChild.collar = "cruel retirement counter">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Uncomfortable leather">>
+	<<set $activeChild.collar = "uncomfortable leather">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<if $activeChild.preg > -1 && $seePreg != 0>>
+		<<link "Pregnancy biometrics">>
+			<<set $activeChild.collar = "preg biometrics">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Shock punishment">>
+		<<set $activeChild.collar = "shock punishment">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<link "Dildo gag">>
+		<<set $activeChild.collar = "dildo gag">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+	<</link>> |
+	<<if isItemAccessible.entry("massive dildo gag", "collar") && $activeChild.skill.oral > 50>>
+		<<link "Massive dildo gag">>
+			<<set $activeChild.collar = "massive dildo gag">>
+			<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Ball gag">>
+		<<set $activeChild.collar = "ball gag">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<<link "Bit gag">>
+		<<set $activeChild.collar = "bit gag">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<<link "Neck corset">>
+		<<set $activeChild.collar = "neck corset">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>> |
+	<<link "Porcelain mask">>
+		<<set $activeChild.collar = "porcelain mask">>
+		<<replace "#collar">>$activeChild.collar<</replace>>
+		<</link>>
+
+	<<if hasAnyArms($activeChild)>>
+		<br>Arm accessory: <b><span id="armAccessory">$activeChild.armAccessory.</span></b>
+		<<link "None">>
+			<<set $activeChild.armAccessory = "none">>
+			<<replace "#armAccessory">>$activeChild.armAccessory<</replace>>
+		<</link>> |
+		<<link "Hand Gloves">>
+			<<set $activeChild.armAccessory = "hand gloves">>
+			<<replace "#armAccessory">>$activeChild.armAccessory<</replace>>
+		<</link>> |
+		<<link "Elbow Gloves">>
+			<<set $activeChild.armAccessory = "elbow gloves">>
+			<<replace "#armAccessory">>$activeChild.armAccessory<</replace>>
+		<</link>>
+	<</if>>
+
+	<<if hasAnyLegs($activeChild)>>
+		<br>Shoes: <b><span id="shoes">$activeChild.shoes.</span></b>
+		<<link "Go barefoot">>
+			<<set $activeChild.shoes = "none">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>> |
+		<<link "Flats">>
+			<<set $activeChild.shoes = "flats">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>> |
+		<<link "Heels">>
+			<<set $activeChild.shoes = "heels">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>> |
+		<<link "Pumps">>
+			<<set $activeChild.shoes = "pumps">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>> |
+		<<link "Thigh boots">>
+			<<set $activeChild.shoes = "boots">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>> |
+		<<link "Painfully extreme heels">>
+			<<set $activeChild.shoes = "extreme heels">>
+			<<replace "#shoes">>$activeChild.shoes<</replace>>
+		<</link>>
+
+		<br>Leg accessory: <b><span id="legAccessory">$activeChild.legAccessory.</span></b>
+		<<link "None">>
+			<<set $activeChild.legAccessory = "none">>
+			<<replace "#legAccessory">>$activeChild.legAccessory<</replace>>
+		<</link>> |
+		<<link "Short Stockings">>
+			<<set $activeChild.legAccessory = "short stockings">>
+			<<replace "#legAccessory">>$activeChild.legAccessory<</replace>>
+		<</link>> |
+		<<link "Long Stockings">>
+			<<set $activeChild.legAccessory = "long stockings">>
+			<<replace "#legAccessory">>$activeChild.legAccessory<</replace>>
+		<</link>>
+	<</if>>
+
+	<br>Torso accessory: <b><span id="bellyAccessory">$activeChild.bellyAccessory.</span></b>
+	<<link "None">>
+		<<set $activeChild.bellyAccessory = "none">>
+		<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+	<</link>> |
+	<<link "Tight corset">>
+		<<set $activeChild.bellyAccessory = "a corset">>
+		<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+	<</link>>
+	<<if ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>> |
+	|	<<link "Extreme corset">>
+			<<set $activeChild.bellyAccessory = "an extreme corset">>
+			<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+		<</link>>
+	<</if>>
+	<<if ($activeChild.belly > 10000)>>
+	|	<<link "Supportive band">>
+			<<set $activeChild.bellyAccessory = "a support band">>
+			<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+		<</link>>
+	<</if>>
+	<<if isItemAccessible.entry("a small empathy belly", "bellyAccessory")>> /* works for all of them */
+	<<if $activeChild.belly < 1500 && $activeChild.weight < 130>> |
+		|	<<link "1st Trimester belly">>
+				<<set $activeChild.bellyAccessory = "a small empathy belly">>
+				<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+			<</link>>
+		|	<<link "2nd Trimester belly">>
+				<<set $activeChild.bellyAccessory = "a medium empathy belly">>
+				<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+			<</link>>
+		|	<<link "3rd Trimester belly">>
+				<<set $activeChild.bellyAccessory = "a large empathy belly">>
+				<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+			<</link>>
+		|	<<link "3rd Trimester twins belly">>
+				<<set $activeChild.bellyAccessory = "a huge empathy belly">>
+				<<replace "#bellyAccessory">>$activeChild.bellyAccessory<</replace>>
+			<</link>>
+		<<else>>
+			| $His stomach is too big to fit an empathy belly around.
+		<</if>>
+	<</if>>
+
+	<br>Anal accessory: <b><span id="buttplug">$activeChild.buttplug.</span></b>
+	<<link "None">>
+		<<set $activeChild.buttplug = "none", $activeChild.buttplugAttachment = "none">>
+		<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+	<</link>> |
+	<<link "Normal">>
+		<<set $activeChild.buttplug = "plug">>
+		<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+	<</link>>
+	<<if isItemAccessible.entry("long plug", "buttPlug") && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+		<<link "Long">>
+			<<set $activeChild.buttplug = "long plug">>
+			<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+		<</link>>
+	<</if>>
+	<<link "Large">>
+		<<set $activeChild.buttplug = "large plug">>
+		<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+	<</link>>
+	<<if isItemAccessible.entry("long, large plug", "buttPlug") && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+		<<link "Long and large">>
+			<<set $activeChild.buttplug = "long, large plug">>
+			<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+		<</link>> |
+	<</if>>
+	<<if $activeChild.anus >= 2>>
+		<<link "Huge">>
+			<<set $activeChild.buttplug = "huge plug">>
+			<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+		<</link>>
+	<</if>>
+	<<if isItemAccessible.entry("long, huge plug", "buttPlug")>>
+		<<if ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl) && $activeChild.anus >= 2>>
+			<<link "Long and huge">>
+				<<set $activeChild.buttplug = "long, huge plug">>
+				<<replace "#buttplug">>$activeChild.buttplug<</replace>>
+			<</link>> |
+		<</if>>
+	<</if>>
+	<<if isItemAccessible.entry("tail", "buttplugAttachment") && $activeChild.buttplug != "none">>
+		&nbsp;&nbsp;&nbsp;&nbsp;Anal accessory attachment: <b><span id="buttplugAttach">$activeChild.buttplugAttachment.</span></b>
+		<<link "None">>
+			<<set $activeChild.buttplugAttachment = "none">>
+			<<replace "#buttplugAttach">>$activeChild.buttplugAttachment<</replace>>
+		<</link>>
+		<<if $boughtItem.clothing.buttPlugTails>>
+			<<link "Tail">>
+				<<set $activeChild.buttplugAttachment = "tail">>
+				<<replace "#buttplugAttach">>$activeChild.buttplugAttachment<</replace>>
+			<</link>> |
+			<<link "Cat tail">>
+				<<set $activeChild.buttplugAttachment = "cat tail">>
+				<<replace "#buttplugAttach">>$activeChild.buttplugAttachment<</replace>>
+			<</link>> |
+			<<link "Fox tail">>
+				<<set $activeChild.buttplugAttachment = "fox tail">>
+				<<replace "#buttplugAttach">>$activeChild.buttplugAttachment<</replace>>
+			<</link>>
+		<</if>>
+	<</if>>
+	<<if $activeChild.vagina > -1>>
+		<br>Vaginal accessory: <b><span id="vaginalAccessory">$activeChild.vaginalAccessory.</span></b>
+		<<link "None">>
+			<<set $activeChild.vaginalAccessory = "none">>
+			<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+			/* TODO: replace these */
+		<</link>> |
+		<<link "Dildo">>
+			<<set $activeChild.vaginalAccessory = "dildo">>
+			<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+		<</link>> |
+		<<if isItemAccessible.entry("long dildo", "vaginalAccessory") && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+			<<link "Long dildo">>
+				<<set $activeChild.vaginalAccessory = "long dildo">>
+				<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+			<</link>> |
+		<</if>>
+		<<link "Large dildo">>
+			<<set $activeChild.vaginalAccessory = "large dildo">>
+			<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+		<</link>>
+		<<if isItemAccessible.entry("long, large dildo", "vaginalAccessory") && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+		|	<<link "Large and long dildo">>
+				<<set $activeChild.vaginalAccessory = "long, large dildo">>
+				<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+			<</link>>
+		<</if>>
+		<<if $activeChild.vagina >= 2>>
+		|	<<link "Huge dildo">>
+				<<set $activeChild.vaginalAccessory = "huge dildo">>
+				<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+			<</link>>
+		<</if>>
+		<<if isItemAccessible.entry("long, huge dildo", "vaginalAccessory") && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+		|	<<if $activeChild.vagina >= 2>>
+				<<link "Huge and long dildo">>
+					<<set $activeChild.vaginalAccessory = "long, huge dildo">>
+					<<replace "#vaginalAccessory">>$activeChild.vaginalAccessory<</replace>>
+				<</link>>
+			<</if>>
+		<</if>>
+	<</if>>
+	<<if $activeChild.dick > 0>>
+		<br>Dick accessory: <b><span id="dickAccessory">$activeChild.dickAccessory.</span></b>
+		<<link "None">>
+			<<set $activeChild.dickAccessory = "none">>
+			<<replace "#dickAccessory">>$activeChild.dickAccessory<</replace>>
+		<</link>>
+		<<if isItemAccessible.entry("bullet vibrator", "dickAccessory") && $boughtItem.clothing.vaginalAttachments>>
+		|	<<link "Bullet vibrator">>
+				<<set $activeChild.dickAccessory = "bullet vibrator">>
+				<<replace "#dickAccessory">>$activeChild.dickAccessory<</replace>>
+			<</link>>
+		<</if>>
+		<<if isItemAccessible.entry("smart bullet vibrator", "dickAccessory") && $boughtItem.clothing.vaginalAttachments>>
+		|	<<link "Smart bullet vibrator">>
+				<<set $activeChild.dickAccessory = "smart bullet vibrator">>
+				<<replace "#dickAccessory">>$activeChild.dickAccessory<</replace>>
+			<</link>>
+		<</if>>
+	<</if>>
+
+	/* TODO: redo all this */
+	/* TODO: will children have chastity options?
+	<br>Chastity device: <b><span id="chastity"><<if $activeChild.chastityAnus && $activeChild.chastityPenis && $activeChild.chastityVagina>>Full Chastity<<elseif $activeChild.chastityPenis && $activeChild.chastityVagina>>Genital Chastity<<elseif $activeChild.chastityAnus && $activeChild.chastityPenis>>Combined Chastity Cage<<elseif $activeChild.chastityAnus && $activeChild.chastityVagina>>Combined Chastity Belt<<elseif $activeChild.chastityVagina>>Chastity Belt<<elseif $activeChild.chastityPenis>>Chastity Cage<<elseif $activeChild.chastityAnus>>Anal Chastity<<elseif $activeChild.chastityAnus == 0 && $activeChild.chastityPenis == 0 && $activeChild.chastityVagina == 0>>None<<else>>THERE HAS BEEN AN ERROR.</span></b><</if>>
+
+	<<link "None">>
+		<<set $activeChild.chastityAnus = 0>>
+		<<set $activeChild.chastityPenis = 0>>
+		<<set $activeChild.chastityVagina = 0>>
+		<<replace "#chastity">>None<</replace>>
+	<</link>> |
+	<<link "Anal Chastity">>
+		<<set $activeChild.choosesOwnChastity = 0>>
+		<<set $activeChild.chastityAnus = 1>>
+		<<set $activeChild.chastityPenis = 0>>
+		<<set $activeChild.chastityVagina = 0>>
+		<<replace "#chastity">>Anal Chastity<</replace>>
+	<</link>> |
+	<<if $activeChild.vagina > -1>>
+		<<link "Chastity Belt">>
+			<<set $activeChild.choosesOwnChastity = 0>>
+			<<set $activeChild.chastityAnus = 0>>
+			<<set $activeChild.chastityPenis = 0>>
+			<<set $activeChild.chastityVagina = 1>>
+			<<replace "#chastity">>Vaginal Chastity<</replace>>
+		<</link>> |
+		<<link "Combined Chastity Belt">>
+			<<set $activeChild.choosesOwnChastity = 0>>
+			<<set $activeChild.chastityAnus = 0>>
+			<<set $activeChild.chastityPenis = 0>>
+			<<set $activeChild.chastityVagina = 0>>
+			<<replace "#chastity">>Combined Chastity Belt<</replace>>
+		<</link>>
+	<</if>>
+	<<if $activeChild.dick > 0>>
+	|	<<link "Chastity Cage">>
+			<<set $activeChild.choosesOwnChastity = 0>>
+			<<set $activeChild.chastityAnus = 0>>
+			<<set $activeChild.chastityPenis = 1>>
+			<<set $activeChild.chastityVagina = 0>>
+			<<replace "#chastity">>Chastity Cage<</replace>>
+		<</link>> |
+		<<link "Combined Chastity Cage">>
+			<<set $activeChild.choosesOwnChastity = 0>>
+			<<set $activeChild.chastityAnus = 1>>
+			<<set $activeChild.chastityPenis = 1>>
+			<<set $activeChild.chastityVagina = 0>>
+			<<replace "#chastity">>Combined Chastity Cage<</replace>>
+		<</link>>
+		<<if $activeChild.vagina > -1>>
+		|	<<link "Genital Chastity">>
+				<<set $activeChild.choosesOwnChastity = 0>>
+				<<set $activeChild.chastityAnus = 0>>
+				<<set $activeChild.chastityPenis = 1>>
+				<<set $activeChild.chastityVagina = 1>>
+				<<replace "#chastity">>Genital Chastity<</replace>>
+			<</link>> |
+			<<link "Full Chastity">>
+				<<set $activeChild.choosesOwnChastity = 0>>
+				<<set $activeChild.chastityAnus = 1>>
+				<<set $activeChild.chastityPenis = 1>>
+				<<set $activeChild.chastityVagina = 1>>
+				<<replace "#chastity">>Full Chastity<</replace>>
+			<</link>>
+		<</if>>
+	<</if>>
+
+	<<if FutureSocieties.isActive('FSRestart') && $activeChild.devotion > 20 && $activeChild.trust > 0 && $activeChild.choosesOwnClothes>>
+	<br>
+		<<if $activeChild.choosesOwnChastity>>
+			$He is allowed to decide whether $he to wear chastity devices.
+			[[Withdraw Privilege|Child Interact][$activeChild.choosesOwnChastity = 0]]
+		<<else>>
+			$He is not allowed to choose whether to wear chastity devices.
+			[[Allow Choice|Child Interact][$activeChild.choosesOwnChastity = 1]]
+		<</if>>
+	<</if>>
+*/
+/* CLOSES WARDROBE */
+
+<br><br>__Physical Regimen:__
+<span id="drugs">
+/* TODO: will children be able to be put on drugs? if so, which drugs? */
+	<br>Drugs: <span id="drugs"><b>$activeChild.drugs</b>.</span>
+	<<link "None">>
+		<<set $activeChild.drugs = "no drugs">>
+		<</link>>
+		<<if $activeChild.drugs == "intensive breast injections" || $activeChild.drugs == "intensive butt injections" || $activeChild.drugs == "intensive penis enhancement" || $activeChild.drugs == "intensive testicle enhancement">>
+		|	<<link "Moderate">>
+				<<switch $activeChild.drugs>>
+				<<case "intensive breast injections">>
+					<<set $activeChild.drugs = "breast injections">>
+				<<case "intensive butt injections">>
+					<<set $activeChild.drugs = "butt injections">>
+				<<case "intensive penis enhancement">>
+					<<set $activeChild.drugs = "penis enhancement">>
+				<<case "intensive testicle enhancement">>
+					<<set $activeChild.drugs = "testicle enhancement">>
+				<</switch>>
+			<</link>>
+		<<elseif $activeChild.drugs == "breast injections" || $activeChild.drugs == "butt injections" || $activeChild.drugs == "penis enhancement" || $activeChild.drugs == "testicle enhancement">>
+		|	<<link "Intensify">>
+				<<set $activeChild.drugs = "intensive " + $activeChild.drugs>>
+			<</link>>
+		<</if>>
+		<<if $activeChild.intelligence > -100>>
+		|	<<link "Psychosuppressants">>
+				<<set $activeChild.drugs = "psychosuppressants">>
+			<</link>>
+		<<else>>
+		|	Psychosuppressants
+		<</if>>
+		<<if ($activeChild.boobs < 48000)>>
+		|	<<link "Breasts">>
+				<<set $activeChild.drugs = "breast injections">>
+			<</link>>
+		<<else>>
+		|	Breasts
+		<</if>>
+		<<if $arcologies[0].FSAssetExpansionistResearch>>
+			<<if ($activeChild.boobs < 25000)>>
+			|	<<link "Hyper-Breasts">>
+					<<set $activeChild.drugs = "hyper breast injections">>
+				<</link>>
+			<<else>>
+			|	Hyper Breasts
+			<</if>>
+		<</if>>
+		<<if $dispensary == 1>>
+			<<if (["cute", "flat", "inverted", "partially inverted", "puffy", "tiny"].includes($activeChild.nipples))>>
+			|	<<link "Nipple enhancers">>
+					<<set $activeChild.drugs = "nipple enhancers">>
+				<</link>>
+			<<else>>
+			|	Nipple enhancers
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.boobs-$activeChild.boobsImplant > 100)>>
+			|	<<link "Breast reducers">>
+					<<set $activeChild.drugs = "breast redistributors">>
+				<</link>>
+			<<else>>
+			|	Breast reducers
+			<</if>>
+			<<if ($activeChild.nipples == "huge" || $activeChild.nipples == "puffy" || $activeChild.nipples == "cute")>>
+			|	<<link "Nipple reducers">>
+					<<set $activeChild.drugs = "nipple atrophiers">>
+				<</link>>
+			<<else>>
+			|	Nipple reducers
+			<</if>>
+		<</if>>
+		<<if ($activeChild.butt < 9)>>
+		|	<<link "Buttocks">>
+				<<set $activeChild.drugs = "butt injections">>
+			<</link>>
+		<<else>>
+		|	Buttocks
+		<</if>>
+		<<if $arcologies[0].FSAssetExpansionistResearch>>
+			<<if ($activeChild.butt < 20)>>
+			|	<<link "Hyper-Buttocks">>
+					<<set $activeChild.drugs = "hyper butt injections">>
+				<</link>>
+			<<else>>
+			|	Hyper Buttocks
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.butt-$activeChild.buttImplant > 0)>>
+			|	<<link "Butt reducers">>
+					<<set $activeChild.drugs = "butt redistributors">>
+				<</link>>
+			<<else>>
+			|	Butt reducers
+			<</if>>
+		<</if>>
+		<<if ($activeChild.lips <= 95) || (($activeChild.lips <= 85) && ($seeExtreme != 1))>>
+		|	<<link "Lips">>
+				<<set $activeChild.drugs = "lip injections">>
+			<</link>>
+		<<else>>
+		|	Lips
+		<</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.lips-$activeChild.lipsImplant > 0)>>
+			|	<<link "Lip reducers">>
+					<<set $activeChild.drugs = "lip atrophiers">>
+				<</link>>
+			<<else>>
+			|	Lip reducers
+			<</if>>
+		<</if>>
+		<<if $growthStim>>
+			<<if canImproveHeight($activeChild)>>
+			|	<<link "Growth Stimulants">>
+					<<set $activeChild.drugs = "growth stimulants">>
+				<</link>>
+			<<else>>
+			|	Growth Stimulants
+			<</if>>
+		<</if>>
+		<<if ($activeChild.dick > 0)>>
+			<<if ($activeChild.dick < 10)>>
+			|	<<link "Penis enhancement">>
+					<<set $activeChild.drugs = "penis enhancement">>
+				<</link>>
+			<<else>>
+			|	Penis enhancement
+			<</if>>
+		<<else>>
+			<<if ($activeChild.clit < 5)>>
+			|	<<link "Clitoris enhancement">>
+					<<set $activeChild.drugs = "penis enhancement">>
+				<</link>>
+			<<else>>
+			|	Clitoris enhancement
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSAssetExpansionistResearch>>
+			<<if ($activeChild.dick > 0)>>
+				<<if ($activeChild.dick < 31)>>
+				|	<<link "Hyper penis enhancement">>
+						<<set $activeChild.drugs = "hyper penis enhancement">>
+					<</link>>
+				<<else>>
+				|	Hyper penis enhancement
+				<</if>>
+			<<else>>
+				<<if ($activeChild.clit < 5)>>
+				|	<<link "Hyper clitoris enhancement">>
+						<<set $activeChild.drugs = "penis enhancement">>
+					<</link>>
+				<<else>>
+				|	Hyper clitoris enhancement
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.dick > 1)>>
+			|	<<link "Penis reducers">>
+					<<set $activeChild.drugs = "penis atrophiers">>
+				<</link>>
+			<<elseif $activeChild.dick>>
+			|	Penis reducers
+			<</if>>
+		<</if>>
+		<<if ($activeChild.balls > 0)>>
+		|	<<link "Testicle enhancement">>
+				<<set $activeChild.drugs = "testicle enhancement">>
+			<</link>>
+			<<if $arcologies[0].FSAssetExpansionistResearch>>
+			|	<<link "Hyper testicle enhancement">>
+					<<set $activeChild.drugs = "hyper testicle enhancement">>
+				<</link>>
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.balls > 1)>>
+			|	<<link "Testicle reducers">>
+					<<set $activeChild.drugs = "testicle atrophiers">>
+				<</link>>
+			<<elseif $activeChild.balls>>
+			|	Testicle reducers
+			<</if>>
+			<<if ($activeChild.clit > 0)>>
+			|	<<link "Clitoris reducers">>
+					<<set $activeChild.drugs = "clitoris atrophiers">>
+				<</link>>
+			<</if>>
+			<<if $activeChild.labia > 0 && $activeChild.vagina > -1>>
+			|	<<link "Labia reducers">>
+					<<set $activeChild.drugs = "labia atrophiers">>
+				<</link>>
+			<</if>>
+		<</if>>
+		<<if $arcologies[0].FSYouthPreferentialistResearch>>
+			<<if ($activeChild.visualAge > 18)>>
+			|	<<link "Anti-aging cream">>
+					<<set $activeChild.drugs = "anti-aging cream">>
+				<</link>>
+			<<else>>
+			|	Anti-aging cream
+			<</if>>
+		<</if>>
+	|	<<link "Steroids">>
+			<<set $activeChild.drugs = "steroids">>
+		<</link>>
+		<<if $arcologies[0].FSSlimnessEnthusiastResearch>>
+			<<if ($activeChild.weight > -95)>>
+			|	<<link "Weight loss pills">>
+					<<set $activeChild.drugs = "appetite suppressors">>
+				<</link>>
+			<<else>>
+			|	Weight loss pills
+			<</if>>
+		<</if>>
+		<<if $precociousPuberty && $pubertyHormones && ($activeChild.breedingMark != 1 || !$propOutcome || $eugenicsFullControl)>>
+			<<if ($activeChild.ovaries || $activeChild.mpreg) && $activeChild.pubertyXX == 0>>
+			|	<<link "Female hormone injections">>
+					<<set $activeChild.drugs = "female hormone injections">>
+				<</link>>
+			<</if>>
+			<<if $activeChild.balls > 0 && $activeChild.pubertyXY == 0>>
+			|	<<link "Male hormone injections">>
+					<<set $activeChild.drugs = "male hormone injections">>
+				<</link>>
+			<</if>>
+		<</if>>
+	|	<<link "Hormone enhancers">>
+			<<set $activeChild.drugs = "hormone enhancers">>
+		<</link>>
+	|	<<link "Hormone blockers">>
+			<<set $activeChild.drugs = "hormone blockers">>
+		<</link>>
+		<<if $activeChild.boobs > 250 && $activeChild.boobShape != "saggy" && $purchasedSagBGone>>
+		|	<<link "Sag-B-Gone breast lifting cream">>
+				<<set $activeChild.drugs = "sag-B-gone">>
+			<</link>>
+		<</if>>
+</span>
+
+<br>
+
+Health: <b><span id="curatives">$activeChild.curatives.</span></b>
+<<link "None">>
+	<<set $activeChild.curatives = "none">>
+	<<replace "#curatives">>$activeChild.curatives<</replace>>
+<</link>> |
+<<link "Preventatives">>
+	<<set $activeChild.curatives = "preventatives">>
+	<<replace "#curatives">>$activeChild.curatives<</replace>>
+<</link>> |
+<<link "Curatives">>
+	<<set $activeChild.curatives = "curatives">>
+	<<replace "#curatives">>$activeChild.curatives<</replace>>
+<</link>>
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+/* TODO: will children be able to be put on aphrodisiacs? */
+Aphrodisiacs: <b><span id="aphrodisiacs">$activeChild.aphrodisiacs.</span></b>
+<<link "None">>
+	<<set $activeChild.aphrodisiacs = "none">>
+	<<replace "#aphrodisiacs">>$activeChild.aphrodisiacs<</replace>>
+<</link>> |
+<<link "Apply">>
+	<<set $activeChild.aphrodisiacs = "applied">>
+	<<replace "#aphrodisiacs">>$activeChild.aphrodisiacs<</replace>>
+<</link>> |
+<<link "Extreme">>
+	<<set $activeChild.aphrodisiacs = "extreme">>
+	<<replace "#aphrodisiacs">>$activeChild.aphrodisiacs<</replace>>
+<</link>> |
+<<link "Anaphrodisiacs">>
+	<<set $activeChild.aphrodisiacs = "anaphrodisiacs">>
+	<<replace "#aphrodisiacs">>$activeChild.aphrodisiacs<</replace>>
+<</link>>
+
+/* TODO: will children be able to be bloated*/
+<span id="bloating">
+<<if $activeChild.inflation > 0>>
+	<br>&nbsp;&nbsp;&nbsp;&nbsp;
+	__Required Bloating__: <b><span id="inflate"><<if $activeChild.inflation == 3>><<print "$He is required to keep 2 gallons of $activeChild.inflationType in $him at all times">><<elseif $activeChild.inflation == 2>><<print "$He is required to keep 4 liters of $activeChild.inflationType in $him at all times">><<elseif $activeChild.inflation>><<print "$He is required to keep 2 liters of $activeChild.inflationType in $him at all times">><</if>></span></b>.
+	<<link "Let $him deflate">>
+		<<run deflate($activeChild)>>
+	<</link>>
+<</if>>
+</span>
+
+<br>
+Hormones: <b><span id="hormones">$activeChild.hormones.</span></b>
+<<link "Intensive Female">>
+	<<set $activeChild.hormones = "intensive female">>
+	<<replace "#hormones">>$activeChild.hormones<</replace>>
+<</link>> |
+<<link "Female">>
+	<<set $activeChild.hormones = "female">>
+	<<replace "#hormones">>$activeChild.hormones<</replace>>
+<</link>> |
+<<link "None">>
+	<<set $activeChild.hormones = "none">>
+	<<replace "#hormones">>$activeChild.hormones<</replace>>
+<</link>> |
+<<link "Male">>
+	<<set $activeChild.hormones = "male">>
+	<<replace "#hormones">>$activeChild.hormones<</replace>>
+<</link>> |
+<<link "Intensive Male">>
+	<<set $activeChild.hormones = "intensive male">>
+	<<replace "#hormones">>$activeChild.hormones<</replace>>
+<</link>>
+
+<br>Diet: <b><span id="diet">$activeChild.diet.</span></b>
+<<link "Healthy">>
+	<<set $activeChild.diet = "healthy">>
+	<<replace "#diet">>$activeChild.diet<</replace>>
+<</link>>
+<<if ($activeChild.health.condition < 90) && ($activeChild.chem >= 10) && ($dietCleanse)>>
+|	<<link "Cleanse">>
+		<<set $activeChild.diet = "cleansing">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>> |
+<<elseif ($dietCleanse)>>
+	| //$He is already healthy//
+<</if>>
+<<if ($activeChild.balls > 0) && ($cumProDiet)>>
+|	<<link "Cum production">>
+		<<set $activeChild.diet = "cum production">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+<</if>>
+<<if canGetPregnant($activeChild) && ($dietFertility)>>
+|	<<link "Fertility">>
+		<<set $activeChild.diet = "fertility">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+<</if>>
+<<if ($activeChild.weight >= -95)>>
+|	<<link "Lose weight">>
+		<<set $activeChild.diet = "restricted">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+<<else>>
+	| //$He is already underweight//
+<</if>>
+<<if $activeChild.weight <= 200>>
+|	<<link "Fatten">>
+		<<set $activeChild.diet = "fattening">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+<<else>>
+|	//$He is already extremely overweight//
+<</if>>
+<<if $feeder>>
+|	<<link "Estrogen enriched">>
+		<<set $activeChild.diet = "XX">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+|	<<link "Testosterone enriched">>
+		<<set $activeChild.diet = "XY">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+	<<if $dietXXY && $activeChild.balls > 0 && ($activeChild.ovaries || $activeChild.mpreg)>>
+	|	<<link "Herm hormone blend">>
+			<<set $activeChild.diet = "XXY">>
+			<<replace "#diet">>$activeChild.diet<</replace>>
+		<</link>>
+	<</if>>
+<</if>>
+<<if ($activeChild.muscles < 100) && !isAmputee($activeChild)>>
+|	<<link "Build muscle">><<set $activeChild.diet = "muscle building">><<replace "#diet">>$activeChild.diet<</replace>><</link>>
+<<elseif $activeChild.muscles >= 100 && !isAmputee($activeChild)>>
+	| //$He is maintaining $his enormous musculature//
+<<else>>
+	| //$He has no limbs and thus can't effectively build muscle//
+<</if>>
+<<if $activeChild.muscles > 0 && canWalk($activeChild)>>
+|	<<link "Slim down">>
+		<<set $activeChild.diet = "slimming">>
+		<<replace "#diet">>$activeChild.diet<</replace>>
+	<</link>>
+<<elseif !canWalk($activeChild)>>
+	| //$He can't move and thus can't trim down//
+<</if>>
+
+/* TODO: replace these with strings */
+<br>Diet Base:
+	<b><span id="diet-base">
+	<<if $activeChild.dietCum == 2>>
+		Cum Based
+	<<elseif ($activeChild.dietCum) && ($activeChild.dietMilk == 0)>>
+		Cum Added
+	<<elseif ($activeChild.dietCum) && ($activeChild.dietMilk)>>
+		Cum and Milk Added
+	<<elseif ($activeChild.dietMilk) && ($activeChild.dietCum == 0)>>
+		Milk Added
+	<<elseif ($activeChild.dietMilk == 2)>>
+		Milk Based
+	<<elseif ($activeChild.dietCum == 0) && ($activeChild.dietMilk == 0)>>
+		Normal
+	<<else>>
+		THERE HAS BEEN AN ERROR
+	<</if>>
+	</span></b>
+<<link "Normal">>
+	<<set $activeChild.dietCum = 0>>
+	<<set $activeChild.dietMilk = 0>>
+	<<replace "#diet-base">>Normal<</replace>>
+<</link>> |
+<<link "Cum Added">>
+	<<set $activeChild.dietCum = 1>>
+	<<set $activeChild.dietMilk = 0>>
+	<<replace "#diet-base">>Cum Added<</replace>>
+<</link>> |
+<<link "Milk Added">>
+	<<set $activeChild.dietCum = 0>>
+	<<set $activeChild.dietMilk = 1>>
+	<<replace "#diet-base">>Milk Added<</replace>>
+<</link>> |
+<<link "Cum & Milk Added">>
+	<<set $activeChild.dietCum = 1>>
+	<<set $activeChild.dietMilk = 1>>
+	<<replace "#diet-base">>Cum & Milk Added<</replace>>
+<</link>> |
+<<link "Cum Based">>
+	<<set $activeChild.dietCum = 2>>
+	<<set $activeChild.dietMilk = 0>>
+	<<replace "#diet-base">>Cum Based<</replace>>
+<</link>> |
+<<link "Milk Based">>
+	<<set $activeChild.dietCum = 0>>
+	<<set $activeChild.dietMilk = 2>>
+	<<replace "#diet-base">>Milk Based<</replace>>
+<</link>>
+
+<br><br>__Behavior__:<br>
+Living standard: <b><span id="livingRules">$activeChild.rules.living.</span></b>
+//$His living conditions are managed by $nurseryName's décor.//
+
+<br>Typical punishment: <b><span id="standardPunishment">$activeChild.rules.punishment.</span></b>
+<<link "Confinement">>
+	<<set $activeChild.rules.punishment = "confinement">>
+	<<replace "#standardPunishment">>$activeChild.rules.punishment<</replace>>
+<</link>> |
+<<link "Whipping">>
+	<<set $activeChild.rules.punishment = "whipping">>
+	<<replace "#standardPunishment">>$activeChild.rules.punishment<</replace>>
+<</link>> |
+<<link "Chastity">>
+	<<set $activeChild.rules.punishment = "chastity">>
+	<<replace "#standardPunishment">>$activeChild.rules.punishment<</replace>>
+<</link>> |
+<<link "Situational">>
+	<<set $activeChild.rules.punishment = "situational">>
+	<<replace "#standardPunishment">>$activeChild.rules.punishment<</replace>>
+<</link>>
+&nbsp;&nbsp;&nbsp;&nbsp;
+Typical reward: ''<span id="standardReward">$activeChild.rules.reward.</span>''
+<<link "Relaxation">><<set $activeChild.rules.reward = "relaxation">><<replace "#standardReward">>$activeChild.rules.reward<</replace>><</link>> |
+<<link "Drugs">><<set $activeChild.rules.reward = "drugs">><<replace "#standardReward">>$activeChild.rules.reward<</replace>><</link>> |
+<<link "Orgasm">><<set $activeChild.rules.reward = "orgasm">><<replace "#standardReward">>$activeChild.rules.reward<</replace>><</link>> |
+<<link "Situational">><<set $activeChild.rules.reward = "situational">><<replace "#standardReward">>$activeChild.rules.reward<</replace>><</link>>
+
+<br><br>Non-assignment orgasm rules:z
+<div style="text-indent:2em">
+Masturbation is ''<span id="relMasturbation"><<if $activeChild.rules.release.masturbation === 1>>allowed<<else>>forbidden<</if>>.</span>''
+	<<link "Allow">><<set $activeChild.rules.release.masturbation = 1>><<replace "#relMasturbation">>allowed<</replace>><</link>> |
+	<<link "Forbid">><<set $activeChild.rules.release.masturbation = 0>><<replace "#relMasturbation">>forbidden<</replace>><</link>>
+</div>
+<div style="text-indent:2em">
+Sex with romantic partner is ''<span id="relPartner"><<if $activeChild.rules.release.partner === 1>>allowed<<else>>forbidden<</if>>.</span>''
+	<<link "Allow">><<set $activeChild.rules.release.partner = 1>><<replace "#relPartner">>allowed<</replace>><</link>> |
+	<<link "Forbid">><<set $activeChild.rules.release.partner = 0>><<replace "#relPartner">>forbidden<</replace>><</link>>
+</div>
+<<if $seeIncest == 1>>
+	<div style="text-indent:2em">
+	Sex with close family is ''<span id="relFamily"><<if $activeChild.rules.release.family === 1>>allowed<<else>>forbidden<</if>>.</span>''
+		<<link "Allow">><<set $activeChild.rules.release.family = 1>><<replace "#relFamily">>allowed<</replace>><</link>> |
+		<<link "Forbid">><<set $activeChild.rules.release.family = 0>><<replace "#relFamily">>forbidden<</replace>><</link>>
+	</div>
+<</if>>
+<div style="text-indent:2em">
+Sex with other slaves is ''<span id="relSlaves"><<if $activeChild.rules.release.slaves === 1>>allowed<<else>>forbidden<</if>>.</span>''
+	<<link "Allow">><<set $activeChild.rules.release.slaves = 1>><<replace "#relSlaves">>allowed<</replace>><</link>> |
+	<<link "Forbid">><<set $activeChild.rules.release.slaves = 0>><<replace "#relSlaves">>forbidden<</replace>><</link>>
+</div>
+<div style="text-indent:2em">
+Routine sex with <<= properMaster()>> is ''<span id="relMaster"><<if $activeChild.rules.release.master === 1>>granted<<else>>denied<</if>>.</span>''
+	<<link "Grant">><<set $activeChild.rules.release.master = 1>><<replace "#relMaster">>granted<</replace>><</link>> |
+	<<link "Deny">><<set $activeChild.rules.release.master = 0>><<replace "#relMaster">>denied<</replace>><</link>>
+</div>
+
+/* TODO: will children be able to have clit piercings? */
+<<if $activeChild.clitPiercing == 3>>
+	<div>
+	<<if $activeChild.dick < 1>>
+		$His smart clit piercing is set to
+	<<else>>$His smart frenulum piercing is set to
+	<</if>>
+	<b><span id="setting">$activeChild.clitSetting.</span></b>
+	<<link "Vanilla">>
+		<<set $activeChild.clitSetting = "vanilla">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Oral">>
+		<<set $activeChild.clitSetting = "oral">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Anal">>
+		<<set $activeChild.clitSetting = "anal">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Boobs">>
+		<<set $activeChild.clitSetting = "boobs">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Sub">>
+		<<set $activeChild.clitSetting = "submissive">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Dom">>
+		<<set $activeChild.clitSetting = "dom">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Humiliation">>
+		<<set $activeChild.clitSetting = "humiliation">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<if $seePreg != 0>>
+		<<link "Preg">>
+			<<set $activeChild.clitSetting = "pregnancy">>
+			<<replace "#setting">>$activeChild.clitSetting<</replace>>
+		<</link>> |
+	<</if>>
+	<<link "Pain">>
+		<<set $activeChild.clitSetting = "masochist">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Sadism">>
+		<<set $activeChild.clitSetting = "sadist">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Men">>
+		<<set $activeChild.clitSetting = "men">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Anti-men">>
+		<<set $activeChild.clitSetting = "anti-men">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Women">>
+		<<set $activeChild.clitSetting = "women">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "Anti-women">>
+		<<set $activeChild.clitSetting = "anti-women">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "All sex">>
+		<<set $activeChild.clitSetting = "all">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>> |
+	<<link "No sex">>
+		<<set $activeChild.clitSetting = "none">>
+		<<replace "#setting">>$activeChild.clitSetting<</replace>>
+	<</link>>
+	</div>
+<</if>>
+
+<<if $activeChild.voice != 0>>
+	<br>Speech rules: <b><span id="speechRules">$activeChild.rules.speech.</span></b>
+	<<link "Restrictive">>
+		<<set $activeChild.rules.speech = "restrictive">>
+			<<replace "#speechRules">>$activeChild.rules.speech<</replace>>
+		<</link>> |
+	<<link "Permissive">>
+		<<set $activeChild.rules.speech = "permissive">>
+			<<replace "#speechRules">>$activeChild.rules.speech<</replace>>
+		<</link>>
+	<<if $activeChild.accent.isBetween(0, 4)>>|	<<link "Accent elimination">>
+		<<set $activeChild.rules.speech = "accent elimination">>
+			<<replace "#speechRules">>$activeChild.rules.speech<</replace>>
+		<</link>>
+	<<elseif $activeChild.accent > 3>>|	<<link "Language lessons">>
+		<<set $activeChild.rules.speech = "language lessons">>
+			<<replace "#speechRules">>$activeChild.rules.speech<</replace>>
+		<</link>>
+	<</if>>
+<</if>>
+
+<br>
+Relationship rules: <b><span id="relationshipRules">$activeChild.rules.relationship.</span></b>
+<<link "Restrictive">>
+	<<set $activeChild.rules.relationship = "restrictive">>
+	<<replace "#relationshipRules">>$activeChild.rules.relationship<</replace>>
+<</link>> |
+<<link "Just friends">>
+	<<set $activeChild.rules.relationship = "just friends">>
+	<<replace "#relationshipRules">>$activeChild.rules.relationship<</replace>>
+<</link>> |
+<<link "Permissive">>
+	<<set $activeChild.rules.relationship = "permissive">>
+	<<replace "#relationshipRules">>$activeChild.rules.relationship<</replace>>
+<</link>>
+
+<br>
+Target destination: <b><span id="targetLocation">$activeChild.targetLocation.</span></b>
+<<link "Slavery">>
+	<<set $activeChild.targetLocation = "slavery">>
+	<<replace "#targetLocation">>$activeChild.targetLocation<</replace>>
+<</link>> |
+<<link "Freedom">>
+	<<set $activeChild.targetLocation = "freedom">>
+	<<replace "#targetLocation">>$activeChild.targetLocation<</replace>>
+<</link>>
+
+<br><br>
+
+<<link "Export this child" "Export Slave">>
+<</link>>
+<<if $cheatMode>>
+	|	<<link "Import a child" "Import Slave">>
+	<</link>>
+<</if>>
+<<if $cheatMode>>
+	<br>''Cheatmode:''
+	<<link "Retrieve immediately" "Nursery Retrieval Workaround">>
+		<<set $readySlave = $cribs.pluck([$i], [$i])>>
+	<</link>>
+<</if>>
+<br>
+<<if $activeChild.actualAge < $minimumSlaveAge>>
+	<<link "Remove from $nurseryName" "Nursery Discard Workaround">><</link>>
+	<br>//Children that are younger than <<print $minimumSlaveAge>> will be given to another arcology to be raised//
+<<else>>
+	<<link "Remove from $nurseryName" "Nursery Retrieval Workaround">><</link>>
+<</if>>

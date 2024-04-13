@@ -1,0 +1,93 @@
+/* Styles that mainly affect how text looks, but not where it is */
+
+.scene-intro,	/* setting at the beginning of a scene / subscene */
+.detail,		/* adds detail to an option: Do something. <span class="detail">Sentence that explains the effect/conditions */
+.note,			/* additional information not related to a specific option */
+.italics {
+	font-style: italic;
+}
+
+.icons {
+	font-family: 'tme-fa-icons';
+}
+
+.story-label, .regularParties, .underline {
+	text-decoration: underline;
+}
+
+/* Note: Do not do a linebreak after span in HTML, because it will underline the automatic space it inserts: "Matilda_is a cow" */
+.slave-name {
+	color: pink;
+	font-weight: bold;
+	text-decoration: underline;
+	text-decoration-color: white;
+}
+
+.name {
+	font-weight: bold;
+}
+
+.custom-label {
+	color: yellow;
+	font-weight: bold;
+}
+
+/* strong & bold are deprecated, use custom classes instead */
+/* :not(.defiant) : quick fix to make defiant styles look correct */
+.major-link, .bold:not(.defiant), .strong {
+	font-weight: bold;
+}
+
+.monospace {
+	font-family: monospace;
+}
+
+.strikethrough {
+	text-decoration: line-through
+}
+
+.clear-formatting {
+	color: white;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.clear-formatting a {
+	color: var(--link-color) !important;
+}
+
+.major-warning {
+	font-weight: bold;
+	color: red;
+}
+
+input:invalid {
+	border-color: #900;
+	background-color: rgba(255, 0, 0, 0.25);
+}
+
+input:focus:invalid {
+	outline: none;
+}
+
+input:out-of-range {
+	background-color: rgba(255, 0, 0, 0.25);
+	border: 2px solid #900;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin-bottom: 1em;
+}
+
+dt::after {
+	content: ":";
+}

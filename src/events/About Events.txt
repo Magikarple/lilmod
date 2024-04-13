@@ -1,0 +1,19 @@
+/*  Events are organized into several files and folders								*/
+/*	genericPlotEvents.tw															*/
+/*	PESS.tw: Player Event, Single Slave												*/
+/*	PETS.tw: Player Event, Two Slaves												*/
+/*	RECI.tw: Random Event, Check In													*/
+/*	REFI.tw: Random Event, Fetish Interest											*/
+/*	REFS.tw: Random Event, Future Societies											*/
+/*	RESS.tw: Random Event, Single Slave												*/
+/*	RESSTR.tw: Random Event, Single Slave (Test Realm, for debugging events)		*/
+/*	RETS.tw: Random Event, Two Slaves												*/
+/*																					*/
+/* Events can also be in a dedicated *.tw file, formatted as follows:				*/
+/*	jeXXXXX.tw: Justice Event														*/
+/*	pXXXXXX.tw: Player event														*/
+/*	peXXXXX.tw: Player Event focused on a slave										*/
+/*	reXXXXX.tw: Random Event														*/
+/*	resXXXX.tw: Random Event, School												*/
+/*	seXXXXX.tw: Slave Event, focuses on slaves coming or going						*/
+/*	securityForceXXXXX.tw: Special (Security) Force event							*/

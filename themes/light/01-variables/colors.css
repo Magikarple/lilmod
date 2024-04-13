@@ -1,0 +1,78 @@
+:root {
+    /* base */
+    --background-color: #fff;
+    --sidebar-color: #ccf;
+    --sidebar-hover-color: #99f;
+    --text-color: #000;
+    --divider-color: #888;
+
+    /* button */
+    --button-color: #b38cd9;
+    --button-border-color: #9966cc;
+    --button-selected-color: #663399;
+    --button-hover-color: #ccb3e6;
+    --button-disabled-color: #8c70a9;
+
+    --link-color: #2A52B7;
+    --link-hover-color: #446DD5;
+}
+
+.aquamarine, .aquamarine a, .skill, .skill a { color: #008563 }
+.coral, .coral a, .fetish.loss, .fetish.loss a { color: #8a5c2e }
+.cyan, .cyan a, .hotkey { color: #008585 }
+/*
+.darkgoldenrod, .darkgoldenrod a, .trust.extremely-terrified, .trust.extremely-terrified a { color: darkgoldenrod }
+.darkred, .darkred a, .defiant.full, .defiant.full a { color: darkred }
+.darkviolet, .darkviolet a, .devotion.hateful, .devotion.hateful a { color: darkviolet }
+.deeppink, .deeppink a, .devotion.devoted, .devotion.devoted a { color: deeppink }
+.steelblue, .steelblue a { color: steelblue }
+*/
+.deepskyblue, .deepskyblue a, .intelligent, .intelligent a { color: #00B4F0 }
+/*
+.dodgerblue, .dodgerblue a { color: dodgerblue }
+.blue, .blue a { color: blue }
+*/
+.gold, .gold a, .trust.dec, .trust.dec a, .trust.frightened, .trust.frightened a { color: #cc8d00 }
+/*
+.goldenrod, .goldenrod a, .trust.terrified, .trust.terrified a { color: goldenrod }
+.gray, .gray a { color: gray }
+*/
+.green, .green a, .reputation.inc, .reputation.inc a, .improvement, .improvement a, .flaw.break, .flaw.break a, .skill.inc, .skill.inc a, .positive, .positive a { color: #006600 }
+/*
+.hotpink, .hotpink a, .devotion.inc, .devotion.inc a, .devotion.accept, .devotion.accept a { color: hotpink }
+.lawngreen, .lawngreen a { color: lawngreen }
+.lightblue, .lightblue a { color: lightblue }
+*/
+.lightcoral, .lightcoral a, .fetish.gain, .fetish.gain a { color: #B85C00 }
+.lightgreen, .lightgreen a, .relationship, .relationship a { color: #008550 }
+/*
+.lightpink, .lightpink a { color: lightpink }
+.lightsalmon, .lightsalmon a, .fetish.inc, .fetish.inc a { color: lightsalmon }
+.lime, .lime a, .change.positive, .change.positive a, .virginity.loss, .virginity.loss a, .pregnant, .pregnant a { color: lime }
+.limegreen, .limegreen a { color: limegreen }
+.magenta, .magenta a, .devotion.worship, .devotion.worship a { color: magenta }
+*/
+.mediumaquamarine, .mediumaquamarine a, .trust.inc, .trust.inc a, .trust.careful, .trust.careful a { color: #0F6161 }
+/*
+.mediumorchid, .mediumorchid a, .devotion.dec, .devotion.dec a, .devotion.resistant, .devotion.resistant a { color: mediumorchid }
+.mediumseagreen, .mediumseagreen a, .trust.trusting, .trust.trusting a { color: mediumseagreen }
+*/
+.orange, .orange a, .stupid, .stupid a, .change.negative, .change.negative a, .defiant.careful, .defiant.careful a, .intro.question { color: #B85C00 }
+/*
+.orangered, .orangered a, .defiant.inc, .defiant.inc a, .defiant.bold, .defiant.bold, .education.neg a { color: orangered }
+.orchid, .orchid a { color: orchid }
+*/
+.pink, .pink a, .slave.name.simple, .slave-name { color: #E00070 }
+/*
+.red, .red a, .health.dec, .health.dec a, .cash.dec, .cash.dec a, .flaw.gain, .flaw.gain a, .error, .error a, .elites.loss, .elites.loss a, .reputation.dec, .reputation.dec a, .warning, .warning a { color: red }
+.seagreen, .seagreen a, .trust.prof-trusting, .trust.prof-trusting a { color: seagreen }
+.springgreen, .springgreen a, .skill.player, .skill.player a { color: springgreen }
+*/
+.tan, .tan a { color: #846E58 }
+/*
+.chocolate, .chocolate a { color: chocolate }
+.saddlebrown, .saddlebrown a { color: saddlebrown }
+.teal, .teal a { color: teal }
+*/
+.yellow, .yellow a, .noteworthy, .noteworthy a, .devotion.ambivalent, .devotion.ambivalent a, .trust.fearful, .trust.fearful a { color: #cc9600 }
+.yellowgreen, .yellowgreen a, .cash.inc, .cash.inc a, .cash, .cash a { color: #677f1f }

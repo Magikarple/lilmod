@@ -1,0 +1,10 @@
+#ui-dialog-titlebar {
+	background-color: var(--divider-color);
+}
+#ui-dialog-body {
+	background-color: var(--sidebar-color);
+	border: 1px solid var(--divider-color);
+}
+#ui-dialog-body hr {
+	background-color: var(--divider-color);
+}

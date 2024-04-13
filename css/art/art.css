@@ -1,0 +1,96 @@
+/* small trick to hide broken images */
+img {
+	text-indent: -10000px;
+}
+
+.imageColumn { /* TODO: this is mostly a copy of imageRef to get its flex features working properly. They can probably be removed from imageRef at some point */
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	position: relative;
+	float: right;
+}
+
+.imageRef {
+	align-items: flex-start;
+	background-color: rgba(80, 80, 80, 0.5);
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	position: relative;
+}
+
+.tinyImg {
+	border: 1px solid #333333;
+	float: left;
+	height: 8em;
+	width: 8em;
+}
+
+.smlImg {
+	height: 10em;
+	width: 10em;
+	float: left;
+}
+
+.smlImg > img, .smlImg > video {
+	height: auto;
+}
+
+.medImg {
+	height: 16em;
+	width: 16em;
+	float: right;
+	margin: 1em;
+}
+
+.medImg > img, .medImg > video {
+	height: auto;
+}
+
+.lrgRender {
+	border: 2px solid #333333;
+	float: right;
+	margin-left: 1em;
+	margin-top: 1em;
+	width: 33%;
+}
+
+.lrgVector {
+	border: 2px solid #333333;
+	float: right;
+	height: 40em;
+	margin-left: 1em;
+	margin-top: 1em;
+	width: 33%;
+}
+
+.lrgVector.custom {
+	height: auto;
+}
+
+.lrgRender > svg {
+	height: 40em;
+	position: relative;
+}
+
+object {
+	object-fit: scale-down;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+img.paperdoll {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 0;
+}
+
+img.assistant {
+	float: right;
+	border: 3px hidden;
+	object-fit: contain;
+}

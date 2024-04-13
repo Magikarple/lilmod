@@ -1,0 +1,26 @@
+.fs-recommend {
+	border: 1px solid;
+	padding: 2px;
+	border-radius: 3px;
+	font-size: smaller;
+}
+
+.fs-recommend-great {
+	border-color: green;
+	color: green;
+}
+
+.fs-recommend-good {
+	border-color: greenyellow;
+	color: greenyellow;
+}
+
+.fs-recommend-neutral {
+	border-color: gold;
+	color: gold;
+}
+
+.fs-recommend-bad {
+	border-color: red;
+	color: red;
+}

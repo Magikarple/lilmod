@@ -1,0 +1,59 @@
+/* these colors have to be accessed directly for graph colors */
+:root {
+	--genre-color-paraphilia: yellow;
+	--genre-color-fetish: lightcoral;
+	--genre-color-generic: gray;
+	--genre-color-quirk: lawngreen;
+	--genre-color-general: white;
+}
+
+/* and they have to be accessed through classes for text */
+.genre.paraphilia {
+	color: var(--genre-color-paraphilia);
+}
+
+.genre.fetish {
+	color: var(--genre-color-fetish);
+}
+
+.genre.generic {
+	color: var(--genre-color-generic);
+}
+
+.genre.quirk {
+	color: var(--genre-color-quirk);
+}
+
+.genre.general {
+	color: var(--genre-color-general);
+}
+
+/* genre table styles */
+table.genre-stats {
+	width: fit-content;
+	border: 2px solid white
+}
+
+.genre-stats td {
+	padding: 0 10px;
+}
+
+.genre-stats tbody tr td:not(:first-child) {
+	text-align: right;
+}
+
+.genre-stats tr:first-child td {
+	padding-top: 10px;
+}
+
+.genre-stats tr:last-child td {
+	padding-bottom: 10px;
+}
+
+.genre-stats thead tr td.sort-asc:after {
+	content: "\25b4";
+}
+
+.genre-stats thead tr td.sort-desc:after {
+	content: "\25be";
+}

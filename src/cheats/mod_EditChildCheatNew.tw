@@ -1,0 +1,3361 @@
+:: MOD_Edit Child Cheat New [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "MOD_Edit Child Cheat Datatype Cleanup New", $tempSlave = clone($activeSlave)>>
+<<run App.Utils.setLocalPronouns($tempSlave)>>
+
+<<widget COptions>>
+	<<link "[$args[0]]">>
+	<<replace #career>>
+		<<set $tempSlave.career = $args[0]>>
+		<<set _carR = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget NOptions>>
+	<<link "[$args[0]]">>
+	<<replace #nation>>
+		<<set $tempSlave.nationality = $args[0]>>
+		<<set _natR = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget H1Options>>
+	<<link "[$args[0]]">>
+	<<replace #hcol1>>
+		<<set $tempSlave.hColor = $args[0]>>
+		<<set _hcol1R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget H2Options>>
+	<<link "[$args[0]]">>
+	<<replace #hcol2>>
+		<<set $tempSlave.origHColor = $args[0]>>
+		<<set _hcol2R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget H3Options>>
+	<<link "[$args[0]]">>
+	<<replace #hcol3>>
+		<<set $tempSlave.pubicHColor = $args[0]>>
+		<<set _hcol3R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget H4Options>>
+	<<link "[$args[0]]">>
+	<<replace #hcol4>>
+		<<set $tempSlave.underArmHColor = $args[0]>>
+		<<set _hcol4R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget H5Options>>
+	<<link "[$args[0]]">>
+	<<replace #hcol5>>
+		<<set $tempSlave.eyebrowHColor = $args[0]>>
+		<<set _hcol5R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget E1Options>>
+	<<link "[$args[0]]">>
+	<<replace #ecol1>>
+		<<set $tempSlave.eyeColor = $args[0]>>
+		<<set _ecol1R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget E2Options>>
+	<<link "[$args[0]]">>
+	<<replace #ecol2>>
+		<<set $tempSlave.origEye = $args[0]>>
+		<<set _ecol2R = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget POptions>>
+	<<link "[$args[0]]">>
+	<<replace #ppil>>
+		<<set $tempSlave.origEye = $args[0]>>
+		<<set _ppilR = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget ScOptions>>
+	<<link "[$args[0]]">>
+	<<replace #sclr>>
+		<<set $tempSlave.origEye = $args[0]>>
+		<<set _sclrR = 0>>
+	<</replace>>
+	<</link>>
+<</widget>>
+
+<<widget NameTab>>
+	<br>''Legal status:''<br>
+	<br>''$He is your Slave since Week @@.yellow;$tempSlave.weekAcquired@@ ''<br>
+	<<textbox "$tempSlave.weekAcquired" $tempSlave.weekAcquired>>
+	<br>
+	<br>''Birth Name: ( [first Name] [Surname] 0 for no Surname)''<br>
+	<<textbox "$tempSlave.birthName" $tempSlave.birthName>>
+	<<textbox "$tempSlave.birthSurname" $tempSlave.birthSurname>><br>
+	''Current Name: ( [first Name] [Surname] 0 for no Surname)''<br>
+	<<textbox "$tempSlave.slaveName" $tempSlave.slaveName>>
+	<<textbox "$tempSlave.slaveSurname" $tempSlave.slaveSurname>>
+	<br>
+<</widget>>
+
+<<widget FamilyTab>>
+	<br>
+	''Active Slaves ID : @@.yellow;$tempSlave.ID@@''
+	<br><br>
+	''Enter the IDs for this slave's parents (0: unknown, -1: you, -2: citizen):''
+	<br>
+	''mother ID''
+	<<textbox "$tempSlave.mother" $tempSlave.mother>>
+	<br>
+	''father ID''
+	<<textbox "$tempSlave.father" $tempSlave.father>>
+	<br><br>
+
+	<br><br>
+	''Relationship (-3:married to you, -2:relationship, -1:emotional slut, 0:none, 1:like, 2:friend, 3:sex friend, 4:lover, 5:married):''
+	<br>
+	<<switch $tempSlave.relationship>>
+		<<case -3>>
+			@@.green;Married to you@@
+		<<case -2>>
+			@@.lightgreen;Emotional bound to you@@
+		<<case -1>>
+			@@.hotpink;Emotional Slut@@
+		<<case 0>>
+			No Relation
+		<<case 1>>
+			@@.yellow;Likes SlaveID $tempSlave.relationshipTarget@@
+		<<case 2>>
+			@@.lightgreen;Friends with SlaveID $tempSlave.relationshipTarget@@
+		<<case 3>>
+			@@.lightpink;Sex Friend with SlaveID $tempSlave.relationshipTarget@@
+		<<case 4>>
+			@@.hotpink;Lover with SlaveID $tempSlave.relationshipTarget@@
+		<<case 5>>
+			@@.green;Married to SlaveID $tempSlave.relationshipTarget@@
+	<</switch>>
+	<br>
+
+	<<radiobutton "$tempSlave.relationship" -3>> Married to You
+	<<radiobutton "$tempSlave.relationship" -2>> In Relationship with You
+	<<radiobutton "$tempSlave.relationship" -1>> Emotional Slut
+	<<radiobutton "$tempSlave.relationship" 0>> None
+	<<radiobutton "$tempSlave.relationship" 1>> Like
+	<<radiobutton "$tempSlave.relationship" 2>> Friend
+	<<radiobutton "$tempSlave.relationship" 3>> Sex Friend
+	<<radiobutton "$tempSlave.relationship" 4>> Lover
+	<<radiobutton "$tempSlave.relationship" 5>> Married
+	<br>
+	''Relationship Target ID:'' <<textbox "$tempSlave.relationshipTarget" $tempSlave.relationshipTarget>>
+	<br>
+	<br>
+	''Rival (0:none, 1:dislike, 2:Rival, 3:Bitter Rival ): ''
+	<br>
+		<<switch $tempSlave.rivalry>>
+		<<case 0>>
+			@@.yellow;No Rival@@
+		<<case 1>>
+			@@.lightpink;Dislikes SlaveID $tempSlave.rivalryTarget@@
+		<<case 2>>
+			@@.red;Rival of SlaveID $tempSlave.rivalryTarget@@
+		<<case 3>>
+			@@.red;Bitter rivalry with SlaveID $tempSlave.rivalryTarget@@
+		<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.rivalry" 0>> None
+	<<radiobutton "$tempSlave.rivalry" 1>> Dislike
+	<<radiobutton "$tempSlave.rivalry" 2>> Rival
+	<<radiobutton "$tempSlave.rivalry" 3>> Bitter Rival
+	<br>
+	''Rivals Target ID:'' <<textbox "$tempSlave.rivalryTarget" $tempSlave.rivalryTarget>>
+	<br>
+<</widget>>
+
+<<widget NationalTab>>
+
+	<br><br>
+
+	<<link "Nationality:">>
+	<<if (ndef _natR) || (_natR == 0) >>
+	<<replace "#nation">>
+			<<set _natR = 1>>
+			<br>Current Nationality : @@.yellow;$tempSlave.nationality@@ <br>
+				<br>Non-Nations<br>
+				<<NOptions "Slave" >>
+				<<print " | ">>
+				<<NOptions "Stateless" >>
+				<br>
+
+				<br>North America<br>
+				<<NOptions "American" >>
+				<<print " | ">>
+				<<NOptions "Antiguan" >>
+				<<print " | ">>
+				<<NOptions "Aruban" >>
+				<<print " | ">>
+				<<NOptions "Bahamian" >>
+				<<print " | ">>
+				<<NOptions "Barbadian" >>
+				<<print " | ">>
+				<<NOptions "Belizean" >>
+				<<print " | ">>
+				<<NOptions "Bermudian" >>
+				<<print " | ">>
+				<<NOptions "Canadian" >>
+				<<print " | ">>
+				<<NOptions "Costa Rican" >>
+				<<print " | ">>
+				<<NOptions "Cuban" >>
+				<br>
+				<<NOptions "Curaçaoan" >>
+				<<print " | ">>
+				<<NOptions "Dominican" >>
+				<<print " | ">>
+				<<NOptions "Dominiquais" >>
+				<<print " | ">>
+				<<NOptions "Greenlandic" >>
+				<<print " | ">>
+				<<NOptions "Grenadian" >>
+				<<print " | ">>
+				<<NOptions "Guatemalan" >>
+				<<print " | ">>
+				<<NOptions "Haitian" >>
+				<<print " | ">>
+				<<NOptions "Honduran" >>
+				<<print " | ">>
+				<<NOptions "Jamaican" >>
+				<<print " | ">>
+				<<NOptions "Kittitian" >>
+				<br>
+				<<NOptions "Mexican" >>
+				<<print " | ">>
+				<<NOptions "Nicaraguan" >>
+				<<print " | ">>
+				<<NOptions "Panamanian" >>
+				<<print " | ">>
+				<<NOptions "Puerto Rican" >>
+				<<print " | ">>
+				<<NOptions "Saint Lucian" >>
+				<<print " | ">>
+				<<NOptions "Salvadoran" >>
+				<<print " | ">>
+				<<NOptions "Trinidadian" >>
+				<<print " | ">>
+				<<NOptions "Vincentian" >>
+				<br>
+
+				<br>South America<br>
+				<<NOptions "Argentinian" >>
+				<<print " | ">>
+				<<NOptions "Bolivian" >>
+				<<print " | ">>
+				<<NOptions "Brazilian" >>
+				<<print " | ">>
+				<<NOptions "Chilean" >>
+				<<print " | ">>
+				<<NOptions "Colombian" >>
+				<<print " | ">>
+				<<NOptions "Ecuadorian" >>
+				<<print " | ">>
+				<<NOptions "French Guianan" >>
+				<<print " | ">>
+				<<NOptions "Guyanese" >>
+				<<print " | ">>
+				<<NOptions "Paraguayan" >>
+				<<print " | ">>
+				<<NOptions "Peruvian" >>
+				<br>
+				<<NOptions "Peruvian" >>
+				<<print " | ">>
+				<<NOptions "Surinamese" >>
+				<<print " | ">>
+				<<NOptions "Uruguayan" >>
+				<<print " | ">>
+				<<NOptions "Venezuelan" >>
+				<br>
+
+				<br>Europe<br>
+				<<NOptions "Albanian" >>
+				<<print " | ">>
+				<<NOptions "Andorran" >>
+				<<print " | ">>
+				<<NOptions "Austrian" >>
+				<<print " | ">>
+				<<NOptions "Belarusian" >>
+				<<print " | ">>
+				<<NOptions "Belgian" >>
+				<<print " | ">>
+				<<NOptions "Bosnian" >>
+				<<print " | ">>
+				<<NOptions "British" >>
+				<<print " | ">>
+				<<NOptions "Bulgarian" >>
+				<<print " | ">>
+				<<NOptions "Catalan" >>
+				<<print " | ">>
+				<<NOptions "Croatian" >>
+				<br>
+				<<NOptions "Czech" >>
+				<<print " | ">>
+				<<NOptions "Danish" >>
+				<<print " | ">>
+				<<NOptions "Dutch" >>
+				<<print " | ">>
+				<<NOptions "Estonian" >>
+				<<print " | ">>
+				<<NOptions "Finnish" >>
+				<<print " | ">>
+				<<NOptions "French" >>
+				<<print " | ">>
+				<<NOptions "German" >>
+				<<print " | ">>
+				<<NOptions "Greek" >>
+				<<print " | ">>
+				<<NOptions "Hungarian" >>
+				<<print " | ">>
+				<<NOptions "Icelandic" >>
+				<br>
+				<<NOptions "Irish" >>
+				<<print " | ">>
+				<<NOptions "Italian" >>
+				<<print " | ">>
+				<<NOptions "Kosovan" >>
+				<<print " | ">>
+				<<NOptions "Latvian" >>
+				<<print " | ">>
+				<<NOptions "a Liechtensteiner" >>
+				<<print " | ">>
+				<<NOptions "Lithuanian" >>
+				<<print " | ">>
+				<<NOptions "Luxembourgian" >>
+				<<print " | ">>
+				<<NOptions "Macedonian" >>
+				<<print " | ">>
+				<<NOptions "Maltese" >>
+				<<print " | ">>
+				<<NOptions "Moldovan" >>
+				<br>
+				<<NOptions "Monégasque" >>
+				<<print " | ">>
+				<<NOptions "Montenegrin" >>
+				<<print " | ">>
+				<<NOptions "Norwegian" >>
+				<<print " | ">>
+				<<NOptions "Polish" >>
+				<<print " | ">>
+				<<NOptions "Portuguese" >>
+				<<print " | ">>
+				<<NOptions "Romanian" >>
+				<<print " | ">>
+				<<NOptions "Russian" >>
+				<<print " | ">>
+				<<NOptions "Sammarinese" >>
+				<<print " | ">>
+				<<NOptions "Scottish" >>
+				<<print " | ">>
+				<<NOptions "Serbian" >>
+				<br>
+				<<NOptions "Slovak" >>
+				<<print " | ">>
+				<<NOptions "Slovene" >>
+				<<print " | ">>
+				<<NOptions "Spanish" >>
+				<<print " | ">>
+				<<NOptions "Swedish" >>
+				<<print " | ">>
+				<<NOptions "Swiss" >>
+				<<print " | ">>
+				<<NOptions "Ukrainian" >>
+				<<print " | ">>
+				<<NOptions "Vatican" >>
+				<br>
+
+				<br>Asia<br>
+				<<NOptions "Bangladeshi" >>
+				<<print " | ">>
+				<<NOptions "Bhutanese" >>
+				<<print " | ">>
+				<<NOptions "Bruneian" >>
+				<<print " | ">>
+				<<NOptions "Burmese" >>
+				<<print " | ">>
+				<<NOptions "Cambodian" >>
+				<<print " | ">>
+				<<NOptions "Chinese" >>
+				<<print " | ">>
+				<<NOptions "East Timorese" >>
+				<<print " | ">>
+				<<NOptions "Filipina" >>
+				<<print " | ">>
+				<<NOptions "Indian" >>
+				<<print " | ">>
+				<<NOptions "Indonesian" >>
+				<br>
+				<<NOptions "Japanese" >>
+				<<print " | ">>
+				<<NOptions "Kazakh" >>
+				<<print " | ">>
+				<<NOptions "Korean" >>
+				<<print " | ">>
+				<<NOptions "Kyrgyz" >>
+				<<print " | ">>
+				<<NOptions "Laotian" >>
+				<<print " | ">>
+				<<NOptions "Malaysian" >>
+				<<print " | ">>
+				<<NOptions "Maldivian" >>
+				<<print " | ">>
+				<<NOptions "Mongolian" >>
+				<<print " | ">>
+				<<NOptions "Nepalese" >>
+				<<print " | ">>
+				<<NOptions "Pakistani" >>
+				<br>
+				<<NOptions "Singaporean" >>
+				<<print " | ">>
+				<<NOptions "Sri Lankan" >>
+				<<print " | ">>
+				<<NOptions "Taiwanese" >>
+				<<print " | ">>
+				<<NOptions "Tajik" >>
+				<<print " | ">>
+				<<NOptions "Thai" >>
+				<<print " | ">>
+				<<NOptions "Tibetan" >>
+				<<print " | ">>
+				<<NOptions "Turkmen" >>
+				<<print " | ">>
+				<<NOptions "Uzbek" >>
+				<<print " | ">>
+				<<NOptions "Vietnamese" >>
+				<br>
+
+				<br>Middle East<br>
+				<<NOptions "Afghan" >>
+				<<print " | ">>
+				<<NOptions "Armenian" >>
+				<<print " | ">>
+				<<NOptions "Azerbaijani" >>
+				<<print " | ">>
+				<<NOptions "Bahraini" >>
+				<<print " | ">>
+				<<NOptions "Cypriot" >>
+				<<print " | ">>
+				<<NOptions "Egyptian" >>
+				<<print " | ">>
+				<<NOptions "Emirati" >>
+				<<print " | ">>
+				<<NOptions "Georgian" >>
+				<<print " | ">>
+				<<NOptions "Iranian" >>
+				<<print " | ">>
+				<<NOptions "Iraqi" >>
+				<br>
+				<<NOptions "Israeli" >>
+				<<print " | ">>
+				<<NOptions "Jordanian" >>
+				<<print " | ">>
+				<<NOptions "Kurdish" >>
+				<<print " | ">>
+				<<NOptions "Kuwaiti" >>
+				<<print " | ">>
+				<<NOptions "Lebanese" >>
+				<<print " | ">>
+				<<NOptions "Omani" >>
+				<<print " | ">>
+				<<NOptions "Palestinian" >>
+				<<print " | ">>
+				<<NOptions "Qatari" >>
+				<<print " | ">>
+				<<NOptions "Saudi" >>
+				<<print " | ">>
+				<<NOptions "Syrian" >>
+				<br>
+				<<NOptions "Turkish" >>
+				<<print " | ">>
+				<<NOptions "Yemeni" >>
+				<br>
+
+				<br>Africa<br>
+				<<NOptions "Algerian" >>
+				<<print " | ">>
+				<<NOptions "Angolan" >>
+				<<print " | ">>
+				<<NOptions "Beninese" >>
+				<<print " | ">>
+				<<NOptions "Bissau-Guinean" >>
+				<<print " | ">>
+				<<NOptions "Burkinabé" >>
+				<<print " | ">>
+				<<NOptions "Burundian" >>
+				<<print " | ">>
+				<<NOptions "Cameroonian" >>
+				<<print " | ">>
+				<<NOptions "Cape Verdean" >>
+				<<print " | ">>
+				<<NOptions "Central African" >>
+				<<print " | ">>
+				<<NOptions "Chadian" >>
+				<br>
+				<<NOptions "Comorian" >>
+				<<print " | ">>
+				<<NOptions "Congolese" >>
+				<<print " | ">>
+				<<NOptions "Djiboutian" >>
+				<<print " | ">>
+				<<NOptions "Equatoguinean" >>
+				<<print " | ">>
+				<<NOptions "Eritrean" >>
+				<<print " | ">>
+				<<NOptions "Ethiopian" >>
+				<<print " | ">>
+				<<NOptions "Gabonese" >>
+				<<print " | ">>
+				<<NOptions "Gambian" >>
+				<<print " | ">>
+				<<NOptions "Ghanan" >>
+				<<print " | ">>
+				<<NOptions "Guinean" >>
+				<br>
+				<<NOptions "Ivorian" >>
+				<<print " | ">>
+				<<NOptions "Kenyan" >>
+				<<print " | ">>
+				<<NOptions "Liberian" >>
+				<<print " | ">>
+				<<NOptions "Libyan" >>
+				<<print " | ">>
+				<<NOptions "Malagasy" >>
+				<<print " | ">>
+				<<NOptions "Malawian" >>
+				<<print " | ">>
+				<<NOptions "Malian" >>
+				<<print " | ">>
+				<<NOptions "Mauritanian" >>
+				<<print " | ">>
+				<<NOptions "Mauritian" >>
+				<<print " | ">>
+				<<NOptions "Moroccan" >>
+				<br>
+				<<NOptions "Mosotho" >>
+				<<print " | ">>
+				<<NOptions "Motswana" >>
+				<<print " | ">>
+				<<NOptions "Mozambican" >>
+				<<print " | ">>
+				<<NOptions "Namibian" >>
+				<<print " | ">>
+				<<NOptions "Nigerian" >>
+				<<print " | ">>
+				<<NOptions "Nigerien" >>
+				<<print " | ">>
+				<<NOptions "Rwandan" >>
+				<<print " | ">>
+				<<NOptions "Sahrawi" >>
+				<<print " | ">>
+				<<NOptions "São Toméan" >>
+				<<print " | ">>
+				<<NOptions "Senegalese" >>
+				<br>
+				<<NOptions "Seychellois" >>
+				<<print " | ">>
+				<<NOptions "Sierra Leonean" >>
+				<<print " | ">>
+				<<NOptions "Somali" >>
+				<<print " | ">>
+				<<NOptions "South African" >>
+				<<print " | ">>
+				<<NOptions "South Sudanese" >>
+				<<print " | ">>
+				<<NOptions "Sudanese" >>
+				<<print " | ">>
+				<<NOptions "Swazi" >>
+				<<print " | ">>
+				<<NOptions "Tanzanian" >>
+				<<print " | ">>
+				<<NOptions "Togolese" >>
+				<<print " | ">>
+				<<NOptions "Tunisian" >>
+				<br>
+				<<NOptions "Ugandan" >>
+				<<print " | ">>
+				<<NOptions "Zairian" >>
+				<<print " | ">>
+				<<NOptions "Zambian" >>
+				<<print " | ">>
+				<<NOptions "Zimbabwean" >>
+				<br>
+
+				<br>Australia<br>
+				<<NOptions "Australian" >>
+				<<print " | ">>
+				<<NOptions "a Cook Islander" >>
+				<<print " | ">>
+				<<NOptions "Fijian" >>
+				<<print " | ">>
+				<<NOptions "French Polynesian" >>
+				<<print " | ">>
+				<<NOptions "Guamanian" >>
+				<<print " | ">>
+				<<NOptions "I-Kiribati" >>
+				<<print " | ">>
+				<<NOptions "Marshallese" >>
+				<<print " | ">>
+				<<NOptions "Micronesian" >>
+				<<print " | ">>
+				<<NOptions "Nauruan" >>
+				<<print " | ">>
+				<<NOptions "New Caledonian" >>
+				<br>
+				<<NOptions "a New Zealander" >>
+				<<print " | ">>
+				<<NOptions "Ni-Vanuatu" >>
+				<<print " | ">>
+				<<NOptions "Niuean" >>
+				<<print " | ">>
+				<<NOptions "Palauan" >>
+				<<print " | ">>
+				<<NOptions "Papua New Guinean" >>
+				<<print " | ">>
+				<<NOptions "Samoan" >>
+				<<print " | ">>
+				<<NOptions "a Solomon Islander" >>
+				<<print " | ">>
+				<<NOptions "Tongan" >>
+				<<print " | ">>
+				<<NOptions "Tuvaluan" >>
+				<br>
+			<</replace>>
+	<<else>>
+			<<replace "#nation">>
+				<<set _natR = 0>>
+			<</replace>>
+	<</if>>
+	<</link>>
+	<span id="nation"></span><br>
+	Custom Nation: <<textbox "$tempSlave.nationality" $tempSlave.nationality>>
+	&nbsp;&nbsp;&nbsp;&nbsp;//This will not alter name or race//<br>
+	<br><br>
+
+	''Race: (@@.yellow;$tempSlave.race@@)''
+	<<textbox "$tempSlave.race" $tempSlave.race>>
+	<br>
+	<<radiobutton "$tempSlave.race" "white">> White
+	<<radiobutton "$tempSlave.race" "asian">> Asian
+	<<radiobutton "$tempSlave.race" "latina">> Latina
+	<<radiobutton "$tempSlave.race" "middle eastern">> Middle Eastern
+	<<radiobutton "$tempSlave.race" "black">> Black
+	<<radiobutton "$tempSlave.race" "semitic">> Semitic
+	<<radiobutton "$tempSlave.race" "southern european">> Southern European
+	<<radiobutton "$tempSlave.race" "indo-aryan">> Indo-Aryan
+	<<radiobutton "$tempSlave.race" "amerindian">> Amerindian
+	<<radiobutton "$tempSlave.race" "pacific islander">> Pacific Islander
+	<<radiobutton "$tempSlave.race" "catgirl">> Catgirl
+	<<radiobutton "$tempSlave.race" "malay">> Malay
+	<<radiobutton "$tempSlave.race" "mixed race">> Mixed Race
+
+	<br>
+
+	''Original Race: (@@.yellow;$tempSlave.origRace@@)''
+	<<textbox "$tempSlave.origRace" $tempSlave.origRace>>
+	<br>
+	<<radiobutton "$tempSlave.origRace" "white">> White
+	<<radiobutton "$tempSlave.origRace" "asian">> Asian
+	<<radiobutton "$tempSlave.origRace" "latina">> Latina
+	<<radiobutton "$tempSlave.origRace" "middle eastern">> Middle Eastern
+	<<radiobutton "$tempSlave.origRace" "black">> Black
+	<<radiobutton "$tempSlave.origRace" "semitic">> Semitic
+	<<radiobutton "$tempSlave.origRace" "southern european">> Southern European
+	<<radiobutton "$tempSlave.origRace" "indo-aryan">> Indo-Aryan
+	<<radiobutton "$tempSlave.origRace" "amerindian">> Amerindian
+	<<radiobutton "$tempSlave.origRace" "pacific islander">> Pacific Islander
+	<<radiobutton "$tempSlave.origRace" "catgirl">> Catgirl
+	<<radiobutton "$tempSlave.origRace" "malay">> Malay
+	<<radiobutton "$tempSlave.origRace" "mixed race">> Mixed Race
+
+	<br>
+
+	''Skin Color: (@@.yellow;$tempSlave.skin@@)''
+	<<textbox "$tempSlave.skin" $tempSlave.skin>>
+	<br>
+	<<radiobutton "$tempSlave.skin" "pure white">> Pure White
+	<<radiobutton "$tempSlave.skin" "ivory">> Ivory
+	<<radiobutton "$tempSlave.skin" "white">> White
+	<<radiobutton "$tempSlave.skin" "extremely pale">> Extremely Pale
+	<<radiobutton "$tempSlave.skin" "very pale">> Very Pale
+	<<radiobutton "$tempSlave.skin" "pale">> Pale
+	<<radiobutton "$tempSlave.skin" "extremely fair">> Extremely Fair
+	<<radiobutton "$tempSlave.skin" "very fair">> Very Fair
+	<<radiobutton "$tempSlave.skin" "fair">> Fair
+	<<radiobutton "$tempSlave.skin" "light">> Light
+	<<radiobutton "$tempSlave.skin" "light olive">> Light Olive
+	<<radiobutton "$tempSlave.skin" "tan">> Tan
+	<<radiobutton "$tempSlave.skin" "olive">> Olive
+	<<radiobutton "$tempSlave.skin" "bronze">> Bronze
+	<<radiobutton "$tempSlave.skin" "dark olive">> Dark Olive
+	<<radiobutton "$tempSlave.skin" "dark">> Dark
+	<<radiobutton "$tempSlave.skin" "light beige">> Light Beige
+	<<radiobutton "$tempSlave.skin" "beige">> Beige
+	<<radiobutton "$tempSlave.skin" "dark beige">> Dark Beige
+	<<radiobutton "$tempSlave.skin" "light brown">> Light Brown
+	<<radiobutton "$tempSlave.skin" "brown">> Brown
+	<<radiobutton "$tempSlave.skin" "dark brown">> Dark Brown
+	<<radiobutton "$tempSlave.skin" "black">> Black
+	<<radiobutton "$tempSlave.skin" "ebony">> Ebony
+	<<radiobutton "$tempSlave.skin" "black and white striped">> Black and White Striped
+	<<radiobutton "$tempSlave.skin" "yellow">> Yellow
+	<<radiobutton "$tempSlave.skin" "red">> Red
+	<<radiobutton "$tempSlave.skin" "pure black">> Pure Black
+	<br>
+
+	''Original Skin Color: (@@.yellow;$tempSlave.origSkin@@)''
+	<<textbox "$tempSlave.origSkin" $tempSlave.origSkin>>
+	<br>
+	<<radiobutton "$tempSlave.origSkin" "pure white">> Pure White
+	<<radiobutton "$tempSlave.origSkin" "ivory">> Ivory
+	<<radiobutton "$tempSlave.origSkin" "white">> White
+	<<radiobutton "$tempSlave.origSkin" "extremely pale">> Extremely Pale
+	<<radiobutton "$tempSlave.origSkin" "very pale">> Very Pale
+	<<radiobutton "$tempSlave.origSkin" "pale">> Pale
+	<<radiobutton "$tempSlave.origSkin" "extremely fair">> Extremely Fair
+	<<radiobutton "$tempSlave.origSkin" "very fair">> Very Fair
+	<<radiobutton "$tempSlave.origSkin" "fair">> Fair
+	<<radiobutton "$tempSlave.origSkin" "light">> Light
+	<<radiobutton "$tempSlave.origSkin" "light olive">> Light Olive
+	<<radiobutton "$tempSlave.origSkin" "tan">> Tan
+	<<radiobutton "$tempSlave.origSkin" "olive">> Olive
+	<<radiobutton "$tempSlave.origSkin" "bronze">> Bronze
+	<<radiobutton "$tempSlave.origSkin" "dark olive">> Dark Olive
+	<<radiobutton "$tempSlave.origSkin" "dark">> Dark
+	<<radiobutton "$tempSlave.origSkin" "light beige">> Light Beige
+	<<radiobutton "$tempSlave.origSkin" "beige">> Beige
+	<<radiobutton "$tempSlave.origSkin" "dark beige">> Dark Beige
+	<<radiobutton "$tempSlave.origSkin" "light brown">> Light Brown
+	<<radiobutton "$tempSlave.origSkin" "brown">> Brown
+	<<radiobutton "$tempSlave.origSkin" "dark brown">> Dark Brown
+	<<radiobutton "$tempSlave.origSkin" "black">> Black
+	<<radiobutton "$tempSlave.origSkin" "ebony">> Ebony
+	<<radiobutton "$tempSlave.origskin" "black and white striped">> Black and White Striped
+	<<radiobutton "$tempSlave.origskin" "yellow">> Yellow
+	<<radiobutton "$tempSlave.origskin" "red">> Red
+	<<radiobutton "$tempSlave.origSkin" "pure black">> Pure Black
+	<br>
+<</widget>>
+
+<<widget AgeTab>>
+	<br>
+	''Age - Actual:''
+	<<textbox "$tempSlave.actualAge" $tempSlave.actualAge>>
+	<br>
+	''Age - Physical:''
+	<<textbox "$tempSlave.physicalAge" $tempSlave.physicalAge>>
+	<br>
+	''Age - Ovaries:''
+	<<textbox "$tempSlave.ovaryAge" $tempSlave.ovaryAge>>
+	<br>
+	''Age - Visual:''
+	<<textbox "$tempSlave.visualAge" $tempSlave.visualAge>>
+	<br>
+	''Birth week:''
+	<<textbox "$tempSlave.birthWeek" $tempSlave.birthWeek>>
+	<br><br>
+	''Condition (-99 to 100, -100 is death. Condition minus short and long term damage of -100 is also death):''
+	<<textbox "$tempSlave.health.condition" $tempSlave.health.condition>>
+	<br>
+	''Damage - Short Term:''
+	<<textbox "$tempSlave.health.shortDamage" $tempSlave.health.shortDamage>>
+	<br>
+	''Damage - Long Term:''
+	<<textbox "$tempSlave.health.longDamage" $tempSlave.health.longDamage>>
+	<br>
+	''Illness (0 to 5):''
+	<<textbox "$tempSlave.health.illness" $tempSlave.health.illness>>
+	<br>
+	''Tired (0 to 100):''
+	<<textbox "$tempSlave.health.tired" $tempSlave.health.tired>>
+	<br>
+	''DNA Errors (0 to 990):''
+	<<textbox "$tempSlave.chem" $tempSlave.chem>>
+	<br>
+	''Addiction:''
+	<<textbox "$tempSlave.addict" $tempSlave.addict>>
+	<br>
+<</widget>>
+
+<<widget DevoTab>>
+	<br>
+	//Don't set devotion too far away from old devotion otherwise it won't stick//
+	<br>
+	''Devotion (-100 to 100):''
+	<<textbox "$tempSlave.devotion" $tempSlave.devotion>>
+	<br>
+	''Old Devotion (-100 to 100):''
+	<<textbox "$tempSlave.oldDevotion" $tempSlave.oldDevotion>>
+	<br>
+	<br>
+	//Don't set trust too far away from old trust otherwise it won't stick//
+	<br>
+	''Trust (-100 to 100):''
+	<<textbox "$tempSlave.trust" $tempSlave.trust>>
+	<br>
+	''Old Trust (-100 to 100):''
+	<<textbox "$tempSlave.oldTrust" $tempSlave.oldTrust>>
+	<br>
+<</widget>>
+
+<<widget FaceTab>>
+	<br>
+	''Face (-100 to 100): ''
+	<<if $tempSlave.face >= 100>>@@.yellow;Very Beautiful@@
+	<<elseif $tempSlave.face >= 55>>@@.yellow;Beautiful@@
+	<<elseif $tempSlave.face >= 15>>@@.yellow;Attractive@@
+	<<elseif $tempSlave.face >= 0>>@@.yellow;Pretty@@
+	<<elseif $tempSlave.face >= -15>>@@.yellow;Unattractive@@
+	<<elseif $tempSlave.face >= -55>>@@.yellow;Ugly@@
+	<<else>>@@.yellow;Very Ugly@@
+	<</if>>
+	<<textbox "$tempSlave.face" $tempSlave.face>>
+	<br>
+	<<radiobutton "$tempSlave.face" -100>> Very Ugly
+	<<radiobutton "$tempSlave.face" -55>> Ugly
+	<<radiobutton "$tempSlave.face" -15>> Unattractive
+	<<radiobutton "$tempSlave.face" 0>> Pretty
+	<<radiobutton "$tempSlave.face" 15>> Attractive
+	<<radiobutton "$tempSlave.face" 55>> Beautiful
+	<<radiobutton "$tempSlave.face" 100>> Very Beautiful
+	<br><br>
+
+	''Face Shape: @@.yellow;$tempSlave.faceShape@@ ''
+	<br>
+	<<radiobutton "$tempSlave.faceShape" "masculine">> Masculine
+	<<radiobutton "$tempSlave.faceShape" "androgynous">> Androgynous
+	<<radiobutton "$tempSlave.faceShape" "normal">> Normal
+	<<radiobutton "$tempSlave.faceShape" "cute">> Cute
+	<<radiobutton "$tempSlave.faceShape" "feline">> Feline
+	<<radiobutton "$tempSlave.faceShape" "sensual">> Sensual
+	<<radiobutton "$tempSlave.faceShape" "exotic">> Exotic
+	<br><br>
+
+	''Face Implant (0 to 100):''
+	<<if $tempSlave.faceImplant < 6>> None
+	<<elseif $tempSlave.faceImplant > 95>> Uncanny Valley
+	<<elseif $tempSlave.faceImplant > 60>> Heavily Reworked
+	<<elseif $tempSlave.faceImplant > 30>> Noticeable Work
+	<<else>> Subtle Improvements
+	<</if>>
+	<br>
+	<<textbox "$tempSlave.faceImplant" $tempSlave.faceImplant>>
+	<<radiobutton "$tempSlave.faceImplant" 0>> None
+	<<radiobutton "$tempSlave.faceImplant" 15>> Subtle Improvements
+	<<radiobutton "$tempSlave.faceImplant" 35>> Noticeable Work
+	<<radiobutton "$tempSlave.faceImplant" 65>> Heavily Reworked
+	<<radiobutton "$tempSlave.faceImplant" 100>> Uncanny Valley
+	<br><br>
+
+	''Natural Skin Distinctiveness: @@.yellow;$tempSlave.markings@@ ''
+	<br>
+	<<radiobutton "$tempSlave.markings" "none">> None
+	<<radiobutton "$tempSlave.markings" "freckles">> Freckles
+	<<radiobutton "$tempSlave.markings" "heavily freckled">> Heavy Freckles
+	<<radiobutton "$tempSlave.markings" "beauty mark">> Beauty Mark
+	<<radiobutton "$tempSlave.markings" "birthmark">> Birth Mark
+	<br><br>
+
+	''Sense of Hearing:''
+	<<switch $tempSlave.hears>>
+	<<case -2>>@@.yellow;Deaf@@
+	<<case -1>>@@.yellow;Hard Of Hearing@@
+	<<case 0>>@@.yellow;Normal@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.hears" 0>> Normal
+	<<radiobutton "$tempSlave.hears" -1>> Hard Of Hearing
+	<<radiobutton "$tempSlave.hears" -2>> Deaf
+	<br>
+
+	''Ear Implants (none: 0 | exist: 1):''
+	<<if $tempSlave.earImplant == 1>>
+		@@.yellow;exist@@
+	<<checkbox "$tempSlave.earImplant" 0 1 checked>>
+	<<else>>
+		@@.yellow;none@@
+	<<checkbox "$tempSlave.earImplant" 0 1>>
+	<</if>>
+
+	''Sense of Smell:''
+	<<switch $tempSlave.smells>>
+	<<case -1>>@@.yellow;None@@
+	<<case 0>>@@.yellow;Normal@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.smells" 0>> Normal
+	<<radiobutton "$tempSlave.smells" -1>> None
+	<br>
+
+<</widget>>
+
+<<widget HairTab>>
+	<br>
+	''Can grow hair on the head:''
+	<<if $tempSlave.bald == 0>>
+		''@@.yellow;true@@''
+		<<checkbox "$tempSlave.bald" 0 1>>
+	<<else>>
+		''@@.yellow;false@@''
+		<<checkbox "$tempSlave.bald" 0 1 checked>>
+	<</if>>
+	<br>
+	''Hair length: @@.yellow;$tempSlave.hLength@@''
+	Custom hair length: <<textbox "$tempSlave.hLength" $tempSlave.hLength>>
+	<br>
+	<<switch $tempSlave.hStyle>>
+	<<case "cornrows" "curled" "dreadlocks" "tails">>
+		''$His hair is in @@.yellow;$tempSlave.hStyle@@''
+	<<case "ponytail">>
+		''$His hair is in a @@.yellow;$tempSlave.hStyle@@''
+	<<default>>
+		''$His hair is @@.yellow;$tempSlave.hStyle@@''
+	<</switch>>
+	Custom hair description: <<textbox "$tempSlave.hStyle" $tempSlave.hStyle>>
+	<br>
+	//For best results, use a short, uncapitalized and unpunctuated description; for example: 'back in a ponytail'//
+	<br>
+	<<radiobutton "$tempSlave.hStyle" "neat">> Neat
+	<<radiobutton "$tempSlave.hStyle" "shaved">> Shaved
+	<<radiobutton "$tempSlave.hStyle" "trimmed">> Trimmed
+	<<radiobutton "$tempSlave.hStyle" "buzzcut">> Buzzcut
+	<<radiobutton "$tempSlave.hStyle" "up">> Up
+	<<radiobutton "$tempSlave.hStyle" "ponytail">> Ponytail
+	<<radiobutton "$tempSlave.hStyle" "bun">> Bun
+	<<radiobutton "$tempSlave.hStyle" "curled">> Curls
+	<br>
+	<<radiobutton "$tempSlave.hStyle" "permed">> Permed
+	<<radiobutton "$tempSlave.hStyle" "luxurious">> Luxurious
+	<<radiobutton "$tempSlave.hStyle" "dreadlocks">> Dreadlocks
+	<<radiobutton "$tempSlave.hStyle" "cornrows">> Cornrows
+	<<radiobutton "$tempSlave.hStyle" "braided">> Braided
+	<<radiobutton "$tempSlave.hStyle" "tails">> Tails
+	<<radiobutton "$tempSlave.hStyle" "afro">> Afro
+	<<radiobutton "$tempSlave.hStyle" "strip">> Strip
+
+	<br><br>
+	$His hair is currently ''@@.yellow;$tempSlave.hColor@@'' in color
+	<<link "Hair Colors">>
+		<<if (ndef _hcol1R) || (_hcol1R == 0) >>
+			<<replace "#hcol1">>
+				<<set _hcol1R = 1>>
+				<br>
+				<<H1Options "blonde" >>
+				<<H1Options "golden" >>
+				<<H1Options "platinum blonde" >>
+				<<H1Options "strawberry-blonde" >>
+				<<H1Options "copper" >>
+				<<H1Options "ginger" >>
+				<<H1Options "red" >>
+				<<H1Options "green" >>
+				<<H1Options "pink" >>
+				<<H1Options "dark brown" >>
+				<br>
+				<<H1Options "brown" >>
+				<<H1Options "auburn" >>
+				<<H1Options "burgundy" >>
+				<<H1Options "chocolate brown" >>
+				<<H1Options "chestnut" >>
+				<<H1Options "hazel" >>
+				<<H1Options "jet black" >>
+				<<H1Options "black" >>
+				<<H1Options "grey" >>
+				<<H1Options "silver" >>
+				<<H1Options "white" >>
+				<<H1Options "blue-violet" >>
+				<<H1Options "purple" >>
+				<<H1Options "dark orchid" >>
+				<<H1Options "sea green" >>
+				<<H1Options "green-yellow" >>
+				<<H1Options "dark blue" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#hcol1">>
+				<<set _hcol1R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=hcol1></span>
+	<br>Custom hair color: <<textbox "$tempSlave.hColor" $tempSlave.hColor>>
+	<br>
+	//For best results, use a short, uncapitalized and unpunctuated description; for example: 'black with purple highlights'//
+	<br>
+	''$His original hair color is @@.yellow;$tempSlave.origHColor@@''
+	<<link "Hair Colors">>
+		<<if (ndef _hcol2R) || (_hcol2R == 0) >>
+			<<replace "#hcol2">>
+				<<set _hcol2R = 1>>
+				<br>
+				<<H2Options "blonde" >>
+				<<H2Options "golden" >>
+				<<H2Options "platinum blonde" >>
+				<<H2Options "strawberry-blonde" >>
+				<<H2Options "copper" >>
+				<<H2Options "ginger" >>
+				<<H2Options "red" >>
+				<<H2Options "green" >>
+				<<H2Options "pink" >>
+				<<H2Options "dark brown" >>
+				<br>
+				<<H2Options "brown" >>
+				<<H2Options "auburn" >>
+				<<H2Options "burgundy" >>
+				<<H2Options "chocolate brown" >>
+				<<H2Options "chestnut" >>
+				<<H2Options "hazel" >>
+				<<H2Options "jet black" >>
+				<<H2Options "black" >>
+				<<H2Options "grey" >>
+				<<H2Options "silver" >>
+				<<H2Options "white" >>
+				<<H2Options "blue-violet" >>
+				<<H2Options "purple" >>
+				<<H2Options "dark orchid" >>
+				<<H2Options "sea green" >>
+				<<H2Options "green-yellow" >>
+				<<H2Options "dark blue" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#hcol2">>
+				<<set _hcol2R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=hcol2></span>
+	<br>Custom hair color: <<textbox "$tempSlave.origHColor" $tempSlave.origHColor>>
+	<br><br>
+	''$His eyebrows are @@.yellow;$tempSlave.eyebrowHColor@@ in color''
+	<<link "Hair Colors">>
+		<<if (ndef _hcol5R) || (_hcol5R == 0) >>
+			<<replace "#hcol5">>
+				<<set _hcol5R = 1>>
+				<br>
+				<<H5Options "blonde" >>
+				<<H5Options "golden" >>
+				<<H5Options "platinum blonde" >>
+				<<H5Options "strawberry-blonde" >>
+				<<H5Options "copper" >>
+				<<H5Options "ginger" >>
+				<<H5Options "red" >>
+				<<H5Options "green" >>
+				<<H5Options "pink" >>
+				<<H5Options "dark brown" >>
+				<br>
+				<<H5Options "brown" >>
+				<<H5Options "auburn" >>
+				<<H5Options "burgundy" >>
+				<<H5Options "chocolate brown" >>
+				<<H5Options "chestnut" >>
+				<<H5Options "hazel" >>
+				<<H5Options "jet black" >>
+				<<H5Options "black" >>
+				<<H5Options "grey" >>
+				<<H5Options "silver" >>
+				<<H5Options "white" >>
+				<<H5Options "blue-violet" >>
+				<<H5Options "purple" >>
+				<<H5Options "dark orchid" >>
+				<<H5Options "sea green" >>
+				<<H5Options "green-yellow" >>
+				<<H5Options "dark blue" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#hcol5">>
+				<<set _hcol5R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=hcol5></span>
+	<br>Custom eyebrow color: <<textbox "$tempSlave.eyebrowHColor" $tempSlave.eyebrowHColor>>
+	<br>
+	''Eyebrow Hair Style: (@@.yellow;$tempSlave.eyebrowHStyle@@)''
+	<<radiobutton "$tempSlave.eyebrowHStyle" "bald">> Bald
+	<<radiobutton "$tempSlave.eyebrowHStyle" "shaved">> Shaved
+	<<radiobutton "$tempSlave.eyebrowHStyle" "natural">> Natural
+	<<radiobutton "$tempSlave.eyebrowHStyle" "rounded">> Rounded
+	<<radiobutton "$tempSlave.eyebrowHStyle" "straight">> Straight
+	<<radiobutton "$tempSlave.eyebrowHStyle" "high-arched">> High-Arched
+	<<radiobutton "$tempSlave.eyebrowHStyle" "curved">> Curved
+	<<radiobutton "$tempSlave.eyebrowHStyle" "slanted inwards">> Slanted Inwards
+	<<radiobutton "$tempSlave.eyebrowHStyle" "slanted outwards">> Slanted Outwards
+	<<radiobutton "$tempSlave.eyebrowHStyle" "elongated">> Elongated
+	<<radiobutton "$tempSlave.eyebrowHStyle" "shortened">> Shortened
+	<br>
+	''Eyebrow Hair Shape: (@@.yellow;$tempSlave.eyebrowFullness@@)''
+	<<radiobutton "$tempSlave.eyebrowFullness" "pencil-thin">> Pencil-Thin
+	<<radiobutton "$tempSlave.eyebrowFullness" "thin">> Thin
+	<<radiobutton "$tempSlave.eyebrowFullness" "threaded">> Threaded
+	<<radiobutton "$tempSlave.eyebrowFullness" "natural">> Natural
+	<<radiobutton "$tempSlave.eyebrowFullness" "tapered">> Tapered
+	<<radiobutton "$tempSlave.eyebrowFullness" "thick">> Thick
+	<<radiobutton "$tempSlave.eyebrowFullness" "bushy">> Bushy
+	<br>
+	''$His pubic hair is @@.yellow;$tempSlave.pubicHColor@@ in color''
+	<<link "Hair Colors">>
+		<<if (ndef _hcol3R) || (_hcol3R == 0) >>
+			<<replace "#hcol3">>
+				<<set _hcol3R = 1>>
+				<br>
+				<<H3Options "blonde" >>
+				<<H3Options "golden" >>
+				<<H3Options "platinum blonde" >>
+				<<H3Options "strawberry-blonde" >>
+				<<H3Options "copper" >>
+				<<H3Options "ginger" >>
+				<<H3Options "red" >>
+				<<H3Options "green" >>
+				<<H3Options "pink" >>
+				<<H3Options "dark brown" >>
+				<br>
+				<<H3Options "brown" >>
+				<<H3Options "auburn" >>
+				<<H3Options "burgundy" >>
+				<<H3Options "chocolate brown" >>
+				<<H3Options "chestnut" >>
+				<<H3Options "hazel" >>
+				<<H3Options "jet black" >>
+				<<H3Options "black" >>
+				<<H3Options "grey" >>
+				<<H3Options "silver" >>
+				<<H3Options "white" >>
+				<<H3Options "blue-violet" >>
+				<<H3Options "purple" >>
+				<<H3Options "dark orchid" >>
+				<<H3Options "sea green" >>
+				<<H3Options "green-yellow" >>
+				<<H3Options "dark blue" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#hcol3">>
+				<<set _hcol3R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=hcol3></span>
+	<br>Custom pubic hair color: <<textbox "$tempSlave.pubicHColor" $tempSlave.pubicHColor>>
+	<br>
+	''Pubic Hair Style: (@@.yellow;$tempSlave.pubicHStyle@@)''
+	<<radiobutton "$tempSlave.pubicHStyle" "bald">> Not able to grow
+	<<radiobutton "$tempSlave.pubicHStyle" "hairless">> Hairless
+	<<radiobutton "$tempSlave.pubicHStyle" "waxed">> Waxed
+	<<radiobutton "$tempSlave.pubicHStyle" "in a strip">> Strip
+	<<radiobutton "$tempSlave.pubicHStyle" "neat">> Neat
+	<<radiobutton "$tempSlave.pubicHStyle" "bushy">> Bushy
+	<<radiobutton "$tempSlave.pubicHStyle" "very bushy">> Very Bushy
+	<br>
+	''$His underarm hair is @@.yellow;$tempSlave.underArmHColor@@ in color''
+		<<link "Hair Colors">>
+		<<if (ndef _hcol4R) || (_hcol4R == 0) >>
+			<<replace "#hcol4">>
+				<<set _hcol4R = 1>>
+				<br>
+				<<H4Options "blonde" >>
+				<<H4Options "golden" >>
+				<<H4Options "platinum blonde" >>
+				<<H4Options "strawberry-blonde" >>
+				<<H4Options "copper" >>
+				<<H4Options "ginger" >>
+				<<H4Options "red" >>
+				<<H4Options "green" >>
+				<<H4Options "pink" >>
+				<<H4Options "dark brown" >>
+				<br>
+				<<H4Options "brown" >>
+				<<H4Options "auburn" >>
+				<<H4Options "burgundy" >>
+				<<H4Options "chocolate brown" >>
+				<<H4Options "chestnut" >>
+				<<H4Options "hazel" >>
+				<<H4Options "jet black" >>
+				<<H4Options "black" >>
+				<<H4Options "grey" >>
+				<<H4Options "silver" >>
+				<<H4Options "white" >>
+				<<H4Options "blue-violet" >>
+				<<H4Options "purple" >>
+				<<H4Options "dark orchid" >>
+				<<H4Options "sea green" >>
+				<<H4Options "green-yellow" >>
+				<<H4Options "dark blue" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#hcol4">>
+				<<set _hcol4R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=hcol4></span>
+	<br>Custom underarm hair color: <<textbox "$tempSlave.underArmHColor" $tempSlave.underArmHColor>>
+	<br>
+	''Underarm Hairstyle: (@@.yellow;$tempSlave.underArmHStyle@@)''
+	<<radiobutton "$tempSlave.underArmHStyle" "bald">> Not able to grow
+	<<radiobutton "$tempSlave.underArmHStyle" "hairless">> Hairless
+	<<radiobutton "$tempSlave.underArmHStyle" "waxed">> Waxed
+	<<radiobutton "$tempSlave.underArmHStyle" "in a strip">> Strip
+	<<radiobutton "$tempSlave.underArmHStyle" "neat">> Neat
+	<<radiobutton "$tempSlave.underArmHStyle" "bushy">> Bushy
+	<br>
+<</widget>>
+
+<<widget EyesTab>>
+	<br>
+	''$His eyes are currently @@.yellow;$tempSlave.eyeColor@@ in color''
+	<<link "Eye Colors">>
+		<<if (ndef _ecol1R) || (_ecol1R == 0) >>
+			<<replace "#ecol1">>
+				<<set _ecol1R = 1>>
+				<br>
+				<<E1Options "blue" >>
+				<<E1Options "black" >>
+				<<E1Options "brown" >>
+				<<E1Options "green" >>
+				<<E1Options "turquoise" >>
+				<<E1Options "sky-blue" >>
+				<<E1Options "pale-grey" >>
+				<<E1Options "white" >>
+				<<E1Options "pink" >>
+				<<E1Options "amber" >>
+				<<E1Options "red" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#ecol1">>
+				<<set _ecol1R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=ecol1></span>
+	<br>Custom eye color: <<textbox "$tempSlave.eyeColor" $tempSlave.eyeColor>>
+	<br><br>
+	''$His original eye color is @@.yellow;$tempSlave.origEye@@''
+	<<link "Eye Colors">>
+		<<if (ndef _ecol2R) || (_ecol2R == 0) >>
+			<<replace "#ecol2">>
+				<<set _ecol2R = 1>>
+				<br>
+				<<E2Options "blue" #ecol2 _ecol2R >>
+				<<E2Options "black" #ecol2 _ecol2R >>
+				<<E2Options "brown" #ecol2 _ecol2R >>
+				<<E2Options "green" #ecol2 _ecol2R >>
+				<<E2Options "turquoise" #ecol2 _ecol2R >>
+				<<E2Options "sky-blue" #ecol2 _ecol2R >>
+				<<E2Options "pale-grey" #ecol2 _ecol2R >>
+				<<E2Options "white" #ecol2 _ecol2R >>
+				<<E2Options "pink" #ecol2 _ecol2R >>
+				<<E2Options "amber" #ecol2 _ecol2R >>
+				<<E2Options "red" #ecol2 _ecol2R >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#ecol2">>
+				<<set _ecol2R = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=ecol2></span>
+	<br>Custom eye color: <<textbox "$tempSlave.origEye" $tempSlave.origEye>>
+	<br><br>
+	''$His pupils are @@.yellow;$tempSlave.pupil@@ in shape''
+	<<link "Pupil Shape">>
+		<<if (ndef _ppilR) || (_ppilR == 0) >>
+			<<replace "#ppil">>
+				<<set _ppilR = 1>>
+				<br>
+				<<POptions "circular" >>
+				<<POptions "catlike" >>
+				<<POptions "serpent-like" >>
+				<<POptions "devilish" >>
+				<<POptions "demonic" >>
+				<<POptions "hypnotic" >>
+				<<POptions "heart-shaped" >>
+				<<POptions "wide-eyed" >>
+				<<POptions "almond-shaped" >>
+				<<POptions "bright" >>
+				<<POptions "teary" >>
+				<<POptions "vacant" >>
+				<<POptions "star-shaped" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#ppil">>
+				<<set _ppilR = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=ppil></span>
+	<br>Custom pupil shape: <<textbox "$tempSlave.pupil" $tempSlave.pupil>>
+	<br><br>
+	''$His sclerae are @@.yellow;$tempSlave.sclerae@@ in color''
+	<<link "Sclera Colors">>
+		<<if (ndef _sclrR) || (_sclrR == 0) >>
+			<<replace "#sclr">>
+				<<set _sclrR = 1>>
+				<br>
+				<<ScOptions "white" >>
+				<<ScOptions "blue" >>
+				<<ScOptions "black" >>
+				<<ScOptions "brown" >>
+				<<ScOptions "green" >>
+				<<ScOptions "turquoise" >>
+				<<ScOptions "sky-blue" >>
+				<<ScOptions "pale-grey" >>
+				<<ScOptions "pink" >>
+				<<ScOptions "amber" >>
+				<<ScOptions "red" >>
+				<br>
+			<</replace>>
+		<<else>>
+			<<replace "#sclr">>
+				<<set _sclrR = 0>>
+			<</replace>>
+		<</if>>
+	<</link>>
+	<span id=sclr></span>
+	<br>Custom sclera color: <<textbox "$tempSlave.sclerae" $tempSlave.sclerae>>
+	<br><br>
+	''$His vision is :''
+	<<switch $tempSlave.eyes>>
+	<<case -2>>@@.yellow;Blind@@
+	<<case -1>>@@.yellow;Nearsighted@@
+	<<case 1>>@@.yellow;Normal@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.eyes" 1>> Normal
+	<<radiobutton "$tempSlave.eyes" -1>> Nearsighted
+	<<radiobutton "$tempSlave.eyes" -2>> Blind
+	<br>
+	''$He has ''
+	<<if $tempSlave.eyesImplant == 0>>normal<<else>>artificial<</if>>eyes.
+	<br>
+	<<radiobutton "$tempSlave.eyesImplant" 0>> Normal
+	<<radiobutton "$tempSlave.eyesImplant" 1>> Artificial
+	<br>
+<</widget>>
+
+<<widget MouthTab>>
+	<br>
+	''Lips (0 to 100): ''
+	<<if $tempSlave.lips >= 100>> @@.yellow;Enormous facepussy@@
+	<<elseif $tempSlave.lips >= 85 >>@@.yellow;Huge@@
+	<<elseif $tempSlave.lips >= 65 >>@@.yellow;Big@@
+	<<elseif $tempSlave.lips >= 35 >>@@.yellow;Plush@@
+	<<elseif $tempSlave.lips >= 15 >>@@.yellow;Normal@@
+	<<else>>@@.yellow;Thin@@
+	<</if>>
+	<<textbox "$tempSlave.lips" $tempSlave.lips>>
+	<br>
+	<<radiobutton "$tempSlave.lips" 0>> Thin
+	<<radiobutton "$tempSlave.lips" 15>> Normal
+	<<radiobutton "$tempSlave.lips" 35>> Plush
+	<<radiobutton "$tempSlave.lips" 65>> Big
+	<<radiobutton "$tempSlave.lips" 85>> Huge
+	<<radiobutton "$tempSlave.lips" 100>> Enormous facepussy
+	<br>
+	''Lip Implants (0 to 30): ''
+	<<switch $tempSlave.lipsImplant >>
+	<<case 0>> @@.yellow;None@@ |
+	<<case 10>>@@.yellow;Normal@@ |
+	<<case 20>>@@.yellow;Large@@ |
+	<<case 30>>@@.yellow;Enormous@@ |
+	<</switch>>
+	<<radiobutton "$tempSlave.lipsImplant" 0>> None
+	<<radiobutton "$tempSlave.lipsImplant" 10>> Normal
+	<<radiobutton "$tempSlave.lipsImplant" 20>> Large
+	<<radiobutton "$tempSlave.lipsImplant" 30>> Enormous
+
+	<br><br>
+	''Teeth: @@.yellow;$tempSlave.teeth@@ ''
+	<br>
+	<<if $tempSlave.physicalAge >= 12>>
+		<<radiobutton "$tempSlave.teeth" "normal">> Normal
+	<<elseif $tempSlave.physicalAge >= 6>>
+		<<radiobutton "$tempSlave.teeth" "mixed">> Mixed
+	<<else>>
+		<<radiobutton "$tempSlave.teeth" "baby">> Baby
+	<</if>>
+	<<radiobutton "$tempSlave.teeth" "pointy">> Pointy
+	<<radiobutton "$tempSlave.teeth" "crooked">> Crooked
+	<<radiobutton "$tempSlave.teeth" "gapped">> Gapped
+	<<radiobutton "$tempSlave.teeth" "straightening braces">> Straightening Braces
+	<<radiobutton "$tempSlave.teeth" "cosmetic braces">> Cosmetic Braces
+	<<radiobutton "$tempSlave.teeth" "removable">> Removable
+
+	<br><br>
+
+	''Voice: ''
+	<<switch $tempSlave.voice>>
+	<<case 0>>@@.yellow;Mute@@
+	<<case 1>>@@.yellow;Deep@@
+	<<case 2>>@@.yellow;Normal@@
+	<<case 3>>@@.yellow;High@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.voice" 0>> Mute
+	<<radiobutton "$tempSlave.voice" 1>> Deep
+	<<radiobutton "$tempSlave.voice" 2>> Normal
+	<<radiobutton "$tempSlave.voice" 3>> High
+	<br>
+
+	''Accent: ''
+	<<if $tempSlave.accent == 0>>@@.yellow;None@@
+	<<elseif $tempSlave.accent == 1>>@@.yellow;Distinctive@@
+	<<elseif $tempSlave.accent == 2>>@@.yellow;Thick@@
+	<<else>>@@.yellow;Barely Understands Language@@<</if>>
+	<br>
+	<<radiobutton "$tempSlave.accent" 0>> None
+	<<radiobutton "$tempSlave.accent" 1>> Distinctive
+	<<radiobutton "$tempSlave.accent" 2>> Thick
+	<<radiobutton "$tempSlave.accent" 3>> Barely Understands Language
+	<br>
+
+	''Sense of Taste: ''
+	<<switch $tempSlave.tastes>>
+	<<case 0>>@@.yellow;Normal@@
+	<<case -1>>@@.yellow;None@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.tastes" 0>> Normal
+	<<radiobutton "$tempSlave.tastes" -1>> None
+	<br>
+
+<</widget>>
+
+<<widget BodyTab>>
+	<br>
+	''Genes (XX:female, XY:male):'' @@.yellow;$tempSlave.genes@@
+	<<radiobutton "$tempSlave.genes" "XX">> Female
+	<<radiobutton "$tempSlave.genes" "XY">> Male
+
+	<br>
+	''Hormone Balance (<-400 to >+400): $tempSlave.hormoneBalance |''
+		<<textbox "$tempSlave.hormoneBalance" $tempSlave.hormoneBalance>>
+		<br>
+		<<radiobutton "$tempSlave.hormoneBalance" -400>> Overwhelmingly masculine
+		<<radiobutton "$tempSlave.hormoneBalance" -300>> Extremely masculine
+		<<radiobutton "$tempSlave.hormoneBalance" -200>> Heavily masculine
+		<<radiobutton "$tempSlave.hormoneBalance" -100>> Very masculine
+		<<radiobutton "$tempSlave.hormoneBalance" -20>> Masculine
+		<<radiobutton "$tempSlave.hormoneBalance" 0>> Neutral
+		<<radiobutton "$tempSlave.hormoneBalance" 20>> Feminine
+		<<radiobutton "$tempSlave.hormoneBalance" 100>> Very feminine
+		<<radiobutton "$tempSlave.hormoneBalance" 200>> Heavily feminine
+		<<radiobutton "$tempSlave.hormoneBalance" 300>> Extremely feminine
+		<<radiobutton "$tempSlave.hormoneBalance" 400>> Overwhelmingly feminine
+
+	<br><br>
+	''Muscles (-100 to 100):''
+	<<if $tempSlave.muscles <= -96>>@@.yellow;Frail@@
+	<<elseif $tempSlave.muscles <= -31>>@@.yellow;Very Weak@@
+	<<elseif $tempSlave.muscles <= -6>>@@.yellow;Rather Weak@@
+	<<elseif $tempSlave.muscles <= 5>>@@.yellow;Soft@@
+	<<elseif $tempSlave.muscles <= 30>>@@.yellow;Well Built@@
+	<<elseif $tempSlave.muscles <= 95>>@@.yellow;Quite Muscular@@
+	<<else>>@@.yellow;Extremely Muscular@@ <</if>>
+	<<textbox "$tempSlave.muscles" $tempSlave.muscles>>
+	<br>
+	<<radiobutton "$tempSlave.muscles" -98>> Frail
+	<<radiobutton "$tempSlave.muscles" -63>> Very Weak
+	<<radiobutton "$tempSlave.muscles" -18>> Rather Weak
+	<<radiobutton "$tempSlave.muscles" 0>> Soft
+	<<radiobutton "$tempSlave.muscles" 17>> Well Built
+	<<radiobutton "$tempSlave.muscles" 62>> Quite Muscular
+	<<radiobutton "$tempSlave.muscles" 97>> Extremely Muscular
+	<br><br>
+
+	''Weight (-100 to 200):''
+	<<if $tempSlave.weight > 190 >>
+		@@.red;extremely obese@@
+	<<elseif $tempSlave.weight > 160 >>
+		@@.red;very obese@@
+	<<elseif $tempSlave.weight > 130 >>
+		@@.red;obese@@
+	<<elseif $tempSlave.weight > 95>>
+		@@.red;overweight@@
+	<<elseif $tempSlave.weight > 30>>
+		@@.red;chubby@@
+	<<elseif $tempSlave.weight > 10 >>
+		@@.yellow;pleasingly curvy@@
+	<<elseif $tempSlave.weight >= -10>>
+		@@.yellow;neither too fat nor too skinny@@
+	<<elseif $tempSlave.weight >= -30>>
+		@@.yellow;pleasingly thin@@
+	<<elseif $tempSlave.weight >= -95>>
+		@@.red;too skinny@@
+	<<else>>
+		@@.red;emaciated@@
+	<</if>>
+	<<textbox "$tempSlave.weight" $tempSlave.weight>>
+	<br>
+	<<radiobutton "$tempSlave.weight" -100>> Emaciated
+	<<radiobutton "$tempSlave.weight" -50>> Skinny
+	<<radiobutton "$tempSlave.weight" -20>> Thin
+	<<radiobutton "$tempSlave.weight" 0>> Average
+	<<radiobutton "$tempSlave.weight" 20>> Curvy
+	<<radiobutton "$tempSlave.weight" 60>> Chubby
+	<<radiobutton "$tempSlave.weight" 115>> Overweight
+	<<radiobutton "$tempSlave.weight" 145>> Obese
+	<<radiobutton "$tempSlave.weight" 175>> Very Obese
+	<<radiobutton "$tempSlave.weight" 200>> Extremely Obese
+
+	<br>
+	''Waist (Masculine:100 | Ugly:55 | Unattractive:15 | Average:0 | Feminine:-15 | hourglass:-55 | Absurd:-100): ''
+	<<if $tempSlave.waist > 95 >>
+		@@.red;Masculine@@ |
+	<<elseif $tempSlave.waist > 40 >>
+		@@.red;Ugly@@ |
+	<<elseif $tempSlave.waist > 10 >>
+		@@.red;Unattractive@@ |
+	<<elseif $tempSlave.waist >= -10>>
+		@@.yellow;Average@@ |
+	<<elseif $tempSlave.waist >= -40>>
+		@@.pink;Feminine@@ |
+	<<elseif $tempSlave.waist >= -95 >>
+		@@.pink;Hourglass@@ |
+	<<else>>
+		@@.pink;Absurd@@ |
+	<</if>>
+	<<textbox "$tempSlave.waist" $tempSlave.waist>>
+	<br>
+	<<radiobutton "$tempSlave.waist" 100>> Masculine
+	<<radiobutton "$tempSlave.waist" 55>> Ugly
+	<<radiobutton "$tempSlave.waist" 15>> Unattractive
+	<<radiobutton "$tempSlave.waist" 0>> Average
+	<<radiobutton "$tempSlave.waist" -15>> Feminine
+	<<radiobutton "$tempSlave.waist" -55>> Hourglass
+	<<radiobutton "$tempSlave.waist" -100>> Absurd
+
+	<br><br>
+	''Height:''
+	<<if $tempSlave.height <= 149>>@@.yellow;Petite@@
+	<<elseif $tempSlave.height <= 159>>@@.yellow;Short@@
+	<<elseif $tempSlave.height <= 169>>@@.yellow;Average@@
+	<<elseif $tempSlave.height <= 184>>@@.yellow;Tall@@
+	<<else>>@@.yellow;very Tall@@ <</if>>
+	<<textbox "$tempSlave.height" $tempSlave.height>>
+	<br>
+	(149 or lower: Petite, 150-159: Short, 160-169: Average, 170-184: Tall, 185 or higher: Very Tall)
+
+	<br><br>
+	''Shoulders (-2 to 2): ''
+	<<switch $tempSlave.shoulders>>
+	<<case -2>>@@.yellow;Very narrow@@
+	<<case -1>>@@.yellow;Narrow@@
+	<<case 0>>@@.yellow;Normal@@
+	<<case 1>>@@.yellow;Broad@@
+	<<case 2>>@@.yellow;Very broad@@
+	<</switch>>
+	<<radiobutton "$tempSlave.shoulders" -2>> Very narrow
+	<<radiobutton "$tempSlave.shoulders" -1>> Narrow
+	<<radiobutton "$tempSlave.shoulders" 0>> Normal
+	<<radiobutton "$tempSlave.shoulders" 1>> Broad
+	<<radiobutton "$tempSlave.shoulders" 2>> Very broad
+
+	<br>
+	''Hips (-2 to 2): ''
+	<<switch $tempSlave.hips>>
+	<<case -2>>@@.yellow;Very narrow@@
+	<<case -1>>@@.yellow;Narrow@@
+	<<case 0>>@@.yellow;Normal@@
+	<<case 1>>@@.yellow;Broad@@
+	<<case 2>>@@.yellow;Very broad@@
+	<</switch>>
+	<<radiobutton "$tempSlave.hips" -2>> Very narrow
+	<<radiobutton "$tempSlave.hips" -1>> Narrow
+	<<radiobutton "$tempSlave.hips" 0>> Normal
+	<<radiobutton "$tempSlave.hips" 1>> Broad
+	<<radiobutton "$tempSlave.hips" 2>> Very broad
+	<br>
+<</widget>>
+
+<<widget BellyTab>>
+	<br><br>
+
+	''Belly sagging:''@@.yellow;$tempSlave.bellySag@@ <br>
+	<<textbox "$tempSlave.bellySag" $tempSlave.bellySag>>
+
+	<br><br>
+<</widget>>
+
+<<widget BreastsTab>>
+	<br>
+	''Breasts (200 to 50000):''
+	<<textbox "$tempSlave.boobs" $tempSlave.boobs>>
+	<br>
+	''Breast Implants:''
+	<<textbox "$tempSlave.boobsImplant" $tempSlave.boobsImplant>>
+	<br>
+	''Breast Implant Type: @@.yellow;$tempSlave.boobsImplantType@@''
+	<<radiobutton "$tempSlave.boobsImplantType" "none">> None
+	<<radiobutton "$tempSlave.boobsImplantType" "normal">> Normal
+	<<radiobutton "$tempSlave.boobsImplantType" "string">> String
+	<<radiobutton "$tempSlave.boobsImplantType" "fillable">> Fillable
+	<<radiobutton "$tempSlave.boobsImplantType" "advanced fillable">> Advanced Fillable
+	<<radiobutton "$tempSlave.boobsImplantType" "hyper fillable">> Hyper Fillable
+	<br>
+
+	''Lactation (none:0 | natural:1 | artificial:2):''
+	<<switch $tempSlave.lactation>>
+	<<case 0>>@@.yellow;None@@
+	<<case 1>>@@.yellow;Natural@@
+	<<case 2>>@@.yellow;Artificial@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.lactation" 0>> None
+	<<radiobutton "$tempSlave.lactation" 1>> Natural
+	<<radiobutton "$tempSlave.lactation" 2>> Artificial
+	<br>
+
+	''Lactation Adaptation (0 to 100): $tempSlave.lactationAdaptation |''
+	<<textbox "$tempSlave.lactationAdaptation" $tempSlave.lactationAdaptation>>
+
+	<br><br>
+
+	''Breast Shape: @@.yellow;$tempSlave.boobShape@@''
+	<br>
+	<<radiobutton "$tempSlave.boobShape" "normal">> Normal
+	<<radiobutton "$tempSlave.boobShape" "perky">> Perky
+	<<radiobutton "$tempSlave.boobShape" "torpedo-shaped">> Torpedo-Shaped
+	<<radiobutton "$tempSlave.boobShape" "wide-set">> Wide-Set
+	<<radiobutton "$tempSlave.boobShape" "downward-facing">> Downward-Facing
+	<<radiobutton "$tempSlave.boobShape" "saggy">> Saggy
+
+	<br>
+
+	''Nipples: @@.yellow;$tempSlave.nipples@@ |''
+	<<radiobutton "$tempSlave.nipples" "tiny">> Tiny
+	<<radiobutton "$tempSlave.nipples" "cute">> Cute
+	<<radiobutton "$tempSlave.nipples" "puffy">> Puffy
+	<<radiobutton "$tempSlave.nipples" "partially inverted">> Partially Inverted
+	<<radiobutton "$tempSlave.nipples" "inverted">> Inverted
+	<<radiobutton "$tempSlave.nipples" "huge">> Huge
+	<<radiobutton "$tempSlave.nipples" "fuckable">> Penetrable
+
+	<br>
+
+	''Areolae Size (Normal:0 to Massive:4): ''
+	<<switch $tempSlave.areolae>>
+	<<case 0>>@@.yellow;Normal@@
+	<<case 1>>@@.yellow;Large@@
+	<<case 2>>@@.yellow;Wide@@
+	<<case 3>>@@.yellow;Huge@@
+	<<case 4>>@@.yellow;Massive@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.areolae" 0>> Normal
+	<<radiobutton "$tempSlave.areolae" 1>> Large
+	<<radiobutton "$tempSlave.areolae" 2>> Wide
+	<<radiobutton "$tempSlave.areolae" 3>> Huge
+	<<radiobutton "$tempSlave.areolae" 4>> Massive
+
+	<br>
+
+	''Areolae Shape:''
+	<<textbox "$tempSlave.areolaeShape" $tempSlave.areolaeShape>>
+	<br>
+
+<</widget>>
+
+<<widget ButtTab>>
+	<br>
+	''Butt Size (1 to 7): ''
+	<<textbox "$tempSlave.butt" $tempSlave.butt>>
+	<br>
+	''Butt Implants (0,1,2,3): |
+	<<switch $tempSlave.buttImplant>>
+	<<case 0>>@@.yellow;None@@
+	<<case 1>>@@.yellow;Normal@@
+	<<case 2>>@@.yellow;Large@@
+	<<case 3>>@@.yellow;Huge@@
+	<</switch>>
+	<<radiobutton "$tempSlave.buttImplant" 0>> None
+	<<radiobutton "$tempSlave.buttImplant" 1>> Normal
+	<<radiobutton "$tempSlave.buttImplant" 2>> Large
+	<<radiobutton "$tempSlave.buttImplant" 3>> Huge
+	<br>
+	''Butt Implant Type: @@.yellow;$tempSlave.buttImplantType@@''
+	<<radiobutton "$tempSlave.buttImplantType" "None">> None
+	<<radiobutton "$tempSlave.buttImplantType" "normal">> Normal
+	<<radiobutton "$tempSlave.buttImplantType" "string">> String
+	<<radiobutton "$tempSlave.buttImplantType" "fillable">> Fillable
+	<<radiobutton "$tempSlave.buttImplantType" "advanced fillable">> Advanced Fillable
+	<<radiobutton "$tempSlave.buttImplantType" "hyper fillable">> Hyper Fillable
+	<br><br>
+	''Anus Size:''
+	<<if $tempSlave.anus == 0>>@@.lime;Virgin.@@
+	<<elseif $tempSlave.anus == 1>>@@.yellow;Normal@@.
+	<<elseif $tempSlave.anus == 2>>@@.yellow;Veteran@@.
+	<<else>>@@.yellow;Gaping@@.
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.anus" 0>> Virgin
+	<<radiobutton "$tempSlave.anus" 1>> Normal
+	<<radiobutton "$tempSlave.anus" 2>> Veteran
+	<<radiobutton "$tempSlave.anus" 3>> Gaping
+	<br>
+<</widget>>
+
+<<widget VagTab>>
+	<br>
+	''Vagina (no vagina:-1,0,1,2,3):''
+	<<if $tempSlave.vagina == -1>>
+		//No vagina.//
+	<<elseif $tempSlave.vagina == 0>>
+		@@.lime;Virgin@@.
+	<<elseif $tempSlave.vagina == 1>>
+		@@.yellow;Normal@@.
+	<<elseif $tempSlave.vagina == 2>>
+		@@.yellow;Veteran@@.
+	<<else>>
+		@@.yellow;Gaping@@.
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.vagina" -1>> No vagina
+	<<radiobutton "$tempSlave.vagina" 0>> Virgin
+	<<radiobutton "$tempSlave.vagina" 1>> Normal
+	<<radiobutton "$tempSlave.vagina" 2>> Veteran
+	<<radiobutton "$tempSlave.vagina" 3>> Gaping
+
+	<br>
+
+	''Vagina Wetness (0,1,2):''
+	<<if $tempSlave.vaginaLube == 0>>
+		@@.yellow;Dry@@.
+	<<elseif $tempSlave.vaginaLube == 1>>
+		@@.yellow;Normal@@.
+	<<else>>
+		@@.yellow;Excessive@@.
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.vaginaLube" 0>> Dry
+	<<radiobutton "$tempSlave.vaginaLube" 1>> Normal
+	<<radiobutton "$tempSlave.vaginaLube" 2>> Excessive
+
+	<br>
+
+	''Clit:''
+	<<if $tempSlave.clit == 0>>
+		@@.yellow;Normal.@@ |
+	<<elseif $tempSlave.clit == 1>>
+		@@.yellow;Big.@@ |
+	<<elseif $tempSlave.clit == 2>>
+		@@.yellow;Huge.@@ |
+	<<elseif $tempSlave.clit == 3>>
+		@@.yellow;Enormous.@@ |
+	<<elseif $tempSlave.clit == 4>>
+		@@.yellow;Dick-like.@@ |
+	<<else>>
+		@@.yellow;Might as well be a big dick.@@ |
+	<</if>>
+	<<radiobutton "$tempSlave.clit" 0>> Normal
+	<<radiobutton "$tempSlave.clit" 1>> Large
+	<<radiobutton "$tempSlave.clit" 2>> Huge
+	<<radiobutton "$tempSlave.clit" 3>> Enormous
+	<<radiobutton "$tempSlave.clit" 4>> Dick-like
+	<<radiobutton "$tempSlave.clit" 5>> Like a huge dick
+	&nbsp;&nbsp;&nbsp;&nbsp;
+
+	<br>
+
+	''Labia:''
+	<<if $tempSlave.labia == 0>>
+		@@.yellow;Minimal.@@ |
+	<<elseif $tempSlave.labia == 1>>
+		@@.yellow;Normal.@@ |
+	<<elseif $tempSlave.labia == 2>>
+		@@.yellow;Large.@@ |
+	<<else>>
+		@@.yellow;Huge.@@ |
+	<</if>>
+	<<radiobutton "$tempSlave.labia" 0>> Minimal
+	<<radiobutton "$tempSlave.labia" 1>> Normal
+	<<radiobutton "$tempSlave.labia" 2>> Large
+	<<radiobutton "$tempSlave.labia" 3>> Huge
+
+	<br><br>
+
+	''Puberty (pre: 0 | post: 1):''
+	<<if ($tempSlave.pubertyXX == 1) || (ndef $tempSlave.pubertyXX)>>
+		@@.yellow;Post puberty@@
+		<<checkbox "$tempSlave.pubertyXX" 0 1 checked>>
+	<<else>>
+		@@.yellow;Pre puberty@@
+		<<checkbox "$tempSlave.pubertyXX" 0 1>>
+	<</if>>
+
+	<br>
+
+	''Puberty Age:'' @@.yellow;$tempSlave.pubertyAgeXX@@
+	<<textbox "$tempSlave.pubertyAgeXX" $tempSlave.pubertyAgeXX>>
+	<br>
+
+	''C-Section scar:''
+	<<if $tempSlave.scar.hasOwnProperty("belly") && $tempSlave.scar.belly["c-section"] > 0>>
+		@@.yellow;true@@
+		<<link "Remove">>
+			<<run App.Medicine.Modification.removeScar($tempSlave, "belly", "c-section")>>
+		<</link>>
+	<<else>>
+		@@.yellow;false@@
+		<<link "Add">>
+			<<run App.Medicine.Modification.addScar($tempSlave, "belly", "c-section")>>
+		<</link>>
+	<</if>>
+
+	<br>
+
+	''Breeding mark (only for Eugenic Societies):''
+	<<if $tempSlave.breedingMark == 1>>
+		@@.yellow;true@@
+		<<checkbox "$tempSlave.breedingMark" 0 1 checked>>
+	<<else>>
+		@@.yellow;false@@
+		<<checkbox "$tempSlave.breedingMark" 0 1>>
+	<</if>>
+
+	<br><br>
+	''Ovaries (none: 0 | exist: 1):''
+	<<if $tempSlave.ovaries == 1>>
+		@@.yellow;exist@@
+	<<checkbox "$tempSlave.ovaries" 0 1 checked>>
+	<<else>>
+		@@.yellow;none@@
+	<<checkbox "$tempSlave.ovaries" 0 1>>
+	<</if>>
+
+	<br>
+
+	''Pregnancy Level (-2: sterile, -1: contraceptives, 0: not pregnant, 1 to 25: pregnant):''
+	<<if $tempSlave.preg > 20>>
+		@@.yellow;Advanced@@.
+	<<elseif $tempSlave.preg > 5>>
+		@@.yellow;Early@@.
+	<<elseif $tempSlave.preg == 0>>
+		@@.yellow;None@@.
+	<<elseif $tempSlave.preg == -1>>
+		@@.yellow;Using contraceptives@@.
+	<<else>>
+		@@.yellow;Sterile@@.
+	<</if>>
+	<<textbox "$tempSlave.preg" $tempSlave.preg>>
+
+	<br>
+	''Pregnancy Week (Literal number of weeks pregnant):''
+	<<textbox "$tempSlave.pregWeek" $tempSlave.pregWeek>>
+
+	<br>
+	''Number of babies (0: none, 1 - 5):''
+	<<if $tempSlave.pregType == 1>>
+		@@.yellow;A single baby@@.
+	<<elseif $tempSlave.pregType == 2>>
+		@@.yellow;Twins@@.
+	<<elseif $tempSlave.pregType == 3>>
+		@@.yellow;Triplets@@.
+	<<elseif $tempSlave.pregType == 4>>
+		@@.yellow;Quadruplets@@.
+	<<elseif $tempSlave.pregType > 4>>
+		@@.yellow;Quintuplets@@.
+	<<else>>
+		@@.yellow;None@@.
+	<</if>>
+	<<textbox "$tempSlave.pregType" $tempSlave.pregType>>
+	<br>
+	<<radiobutton "$tempSlave.pregType" 0>> None
+	<<radiobutton "$tempSlave.pregType" 1>> Single
+	<<radiobutton "$tempSlave.pregType" 2>> Twins
+	<<radiobutton "$tempSlave.pregType" 3>> Triplets
+	<<radiobutton "$tempSlave.pregType" 4>> Quadruplets
+	<<radiobutton "$tempSlave.pregType" 5>> Quintuplets
+
+	<br>
+	''Father (0: none, -1: you, -2: unknown, slave ID):''
+	<<textbox "$tempSlave.pregSource" $tempSlave.pregSource>>
+	<br>
+<</widget>>
+
+<<widget PenisTab>>
+	<br>
+	''Penis (none:0, 1 to 10):''
+	<<if $tempSlave.dick == 0>>
+		@@.yellow;None@@.
+	<<elseif $tempSlave.dick == 1>>
+		@@.yellow;Tiny@@.
+	<<elseif $tempSlave.dick == 2>>
+		@@.yellow;Small@@.
+	<<elseif $tempSlave.dick == 3>>
+		@@.yellow;Normal@@.
+	<<elseif $tempSlave.dick == 4>>
+		@@.yellow;Large@@.
+	<<elseif $tempSlave.dick == 5>>
+		@@.yellow;Massive@@.
+	<<elseif $tempSlave.dick == 6>>
+		@@.yellow;Huger@@
+	<<elseif $tempSlave.dick == 7>>
+		@@.yellow;Still huge@@.
+	<<elseif $tempSlave.dick == 8>>
+		@@.yellow;Enormous@@.
+	<<elseif $tempSlave.dick == 9>>
+		@@.yellow;Monstrous@@.
+	<<else>>
+		@@.yellow;Big McLargeHuge@@.
+	<</if>>
+	<<textbox "$tempSlave.dick" $tempSlave.dick>>
+	<br>
+	<<radiobutton "$tempSlave.dick" 0>> None
+	<<radiobutton "$tempSlave.dick" 1>> Tiny
+	<<radiobutton "$tempSlave.dick" 2>> Small
+	<<radiobutton "$tempSlave.dick" 3>> Normal
+	<<radiobutton "$tempSlave.dick" 4>> Large
+	<<radiobutton "$tempSlave.dick" 5>> Massive
+	<<radiobutton "$tempSlave.dick" 6>> Huge
+	<<radiobutton "$tempSlave.dick" 7>> More Huge
+	<<radiobutton "$tempSlave.dick" 8>> Enormous
+	<<radiobutton "$tempSlave.dick" 9>> Monstrous
+	<<radiobutton "$tempSlave.dick" 10>> Big McLargeHuge
+
+	<br>
+	''Foreskin also Clithood if there is no Dick (0 to 10):''
+	<<if $tempSlave.foreskin == 0>> @@.yellow;None@@.
+	<<elseif $tempSlave.foreskin == 1>> @@.yellow;Tiny@@.
+	<<elseif $tempSlave.foreskin == 2>> @@.yellow;Small@@.
+	<<elseif $tempSlave.foreskin == 3>> @@.yellow;Normal@@.
+	<<elseif $tempSlave.foreskin == 4>> @@.yellow;Large@@.
+	<<elseif $tempSlave.foreskin == 5>> @@.yellow;Massive@@.
+	<<elseif $tempSlave.foreskin == 6>> @@.yellow;Huger@@
+	<<elseif $tempSlave.foreskin == 7>> @@.yellow;Still huge@@.
+	<<elseif $tempSlave.foreskin == 8>> @@.yellow;Enormous@@.
+	<<elseif $tempSlave.foreskin == 9>> @@.yellow;Monstrous@@.
+	<<else>> @@.yellow;Big McLargeHuge@@.
+	<</if>>
+	<<textbox "$tempSlave.foreskin" $tempSlave.foreskin>>
+	<br>
+	<<radiobutton "$tempSlave.foreskin" 0>> None
+	<<radiobutton "$tempSlave.foreskin" 1>> Vestigial
+	<<radiobutton "$tempSlave.foreskin" 2>> Small
+	<<radiobutton "$tempSlave.foreskin" 3>> Normal
+	<<radiobutton "$tempSlave.foreskin" 4>> Large
+	<<radiobutton "$tempSlave.foreskin" 5>> Massive
+	<<radiobutton "$tempSlave.foreskin" 6>> Huge
+	<<radiobutton "$tempSlave.foreskin" 7>> More Huge
+	<<radiobutton "$tempSlave.foreskin" 8>> Enormous
+	<<radiobutton "$tempSlave.foreskin" 9>> Monstrous
+	<<radiobutton "$tempSlave.foreskin" 10>> Big McLargeHuge
+
+	<br><br>
+
+	''Testicles (0 to 6):''
+	<<if $tempSlave.balls == 0>>
+		@@.yellow;None@@.
+	<<elseif $tempSlave.balls == 1>>
+		@@.yellow;Vestigial@@.
+	<<elseif $tempSlave.balls == 2>>
+		@@.yellow;Small@@.
+	<<elseif $tempSlave.balls == 3>>
+		@@.yellow;Normal@@.
+	<<elseif $tempSlave.balls == 4>>
+		@@.yellow;Large@@.
+	<<elseif $tempSlave.balls == 5>>
+		@@.yellow;Huge@@.
+	<<else>>
+		@@.yellow;Titanic@@.
+	<</if>>
+	<<textbox "$tempSlave.balls" $tempSlave.balls>>
+	<br>
+	<<radiobutton "$tempSlave.balls" 0>> None / Invisible
+	<<radiobutton "$tempSlave.balls" 1>> Vestigial
+	<<radiobutton "$tempSlave.balls" 2>> Small
+	<<radiobutton "$tempSlave.balls" 3>> Normal
+	<<radiobutton "$tempSlave.balls" 4>> Large
+	<<radiobutton "$tempSlave.balls" 5>> Huge
+	<<radiobutton "$tempSlave.balls" 6>> Titanic
+
+	<br>
+
+	''Ballsack (0 to 8):''
+	<<if $tempSlave.scrotum == 0>>
+		@@.yellow;None@@.
+	<<elseif $tempSlave.scrotum == 1>>
+		@@.yellow;Vestigial@@.
+	<<elseif $tempSlave.scrotum == 2>>
+		@@.yellow;Small@@.
+	<<elseif $tempSlave.scrotum == 3>>
+		@@.yellow;Normal@@.
+	<<elseif $tempSlave.scrotum == 4>>
+		@@.yellow;Large@@.
+	<<elseif $tempSlave.scrotum == 5>>
+		@@.yellow;Huge@@.
+	<<elseif $tempSlave.scrotum == 6>>
+		@@.yellow;Massive@@.
+	<<elseif $tempSlave.scrotum == 7>>
+		@@.yellow;Enormous@@.
+	<<else>>
+		@@.yellow;Monstrous@@.
+	<</if>>
+	<<textbox "$tempSlave.scrotum" $tempSlave.scrotum>>
+	<br>
+	<<radiobutton "$tempSlave.scrotum" 0>> None
+	<<radiobutton "$tempSlave.scrotum" 1>> Vestigial
+	<<radiobutton "$tempSlave.scrotum" 2>> Small
+	<<radiobutton "$tempSlave.scrotum" 3>> Normal
+	<<radiobutton "$tempSlave.scrotum" 4>> Large
+	<<radiobutton "$tempSlave.scrotum" 5>> Huge
+	<<radiobutton "$tempSlave.scrotum" 6>> Massive
+	<<radiobutton "$tempSlave.scrotum" 7>> Enormous
+	<<radiobutton "$tempSlave.scrotum" 8>> Monstrous
+
+	<br><br>
+
+	''Prostate (0: no prostate, 1:prostate, 2:hyperactive, 3:hyperactive-modified):''
+	<<switch $tempSlave.prostate>>
+	<<case 0>> @@.yellow;No prostate@@
+	<<case 1>> @@.yellow;Prostate@@
+	<<case 2>> @@.yellow;Hyperactive prostate@@
+	<<case 3>> @@.yellow;Hyperactive modified prostate@@
+	<</switch>>
+	<br>
+	<<radiobutton "$tempSlave.prostate" 0>> No prostate
+	<<radiobutton "$tempSlave.prostate" 1>> Prostate
+	<<radiobutton "$tempSlave.prostate" 2>> Hyperactive prostate
+	<<radiobutton "$tempSlave.prostate" 3>> Hyperactive modified prostate
+	<br>
+
+	''Puberty (pre: 0 | post: 1):''
+	<<if ($tempSlave.pubertyXY == 1) || (ndef $tempSlave.pubertyXY)>>
+		@@.yellow;Post puberty@@
+		<<checkbox "$tempSlave.pubertyXY" 0 1 checked>>
+	<<else>>
+		@@.yellow;Pre puberty@@
+		<<checkbox "$tempSlave.pubertyXY" 0 1>>
+	<</if>>
+
+	<br>
+	''Puberty Age:'' @@.yellow;$tempSlave.pubertyAgeXY@@
+	<<textbox "$tempSlave.pubertyAgeXY" $tempSlave.pubertyAgeXY>>
+	<br>
+<</widget>>
+
+<<widget SkillsTab>>
+	<br>
+	''Oral sex (0 to 100):''
+	<<if $tempSlave.skill.oral <= 10>>
+		@@.yellow;Unskilled@@.
+	<<elseif $tempSlave.skill.oral <= 30>>
+		@@.cyan;Basic.@@
+	<<elseif $tempSlave.skill.oral <= 60>>
+		@@.cyan;Skilled.@@
+	<<elseif $tempSlave.skill.oral < 100>>
+		@@.cyan;Expert.@@
+	<<else>>
+		@@.cyan;Masterful.@@
+	<</if>>
+	<<textbox "$tempSlave.skill.oral" $tempSlave.skill.oral>>
+	<br>
+	<<radiobutton "$tempSlave.skill.oral" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.oral" 15>> Basic
+	<<radiobutton "$tempSlave.skill.oral" 35>> Skilled
+	<<radiobutton "$tempSlave.skill.oral" 65>> Expert
+	<<radiobutton "$tempSlave.skill.oral" 100>> Masterful
+
+	<<if $tempSlave.vagina > -1>>
+	<br>
+
+	''Vaginal sex (0 to 100):''
+	<<if $tempSlave.skill.vaginal <= 10>>
+		@@.yellow;Unskilled@@.
+	<<elseif $tempSlave.skill.vaginal <= 30>>
+		@@.cyan;Basic.@@
+	<<elseif $tempSlave.skill.vaginal <= 60>>
+		@@.cyan;Skilled.@@
+	<<elseif $tempSlave.skill.vaginal < 100>>
+		@@.cyan;Expert.@@
+	<<else>>
+		@@.cyan;Masterful.@@
+	<</if>>
+	<<textbox "$tempSlave.skill.vaginal" $tempSlave.skill.vaginal>>
+	<br>
+	<<radiobutton "$tempSlave.skill.vaginal" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.vaginal" 15>> Basic
+	<<radiobutton "$tempSlave.skill.vaginal" 35>> Skilled
+	<<radiobutton "$tempSlave.skill.vaginal" 65>> Expert
+	<<radiobutton "$tempSlave.skill.vaginal" 100>> Masterful
+	<</if>>
+
+	<br>
+
+	''Anal sex (0 to 100):''
+	<<if $tempSlave.skill.anal <= 10>>
+		@@.yellow;Unskilled@@.
+	<<elseif $tempSlave.skill.anal <= 30>>
+		@@.cyan;Basic.@@
+	<<elseif $tempSlave.skill.anal <= 60>>
+		@@.cyan;Skilled.@@
+	<<elseif $tempSlave.skill.anal < 100>>
+		@@.cyan;Expert.@@
+	<<else>>
+		@@.cyan;Masterful.@@
+	<</if>>
+	<<textbox "$tempSlave.skill.anal" $tempSlave.skill.anal>>
+	<br>
+	<<radiobutton "$tempSlave.skill.anal" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.anal" 15>> Basic
+	<<radiobutton "$tempSlave.skill.anal" 35>> Skilled
+	<<radiobutton "$tempSlave.skill.anal" 65>> Expert
+	<<radiobutton "$tempSlave.skill.anal" 100>> Masterful
+	<br>
+	''Prostitution (0 to 100):''
+	<<if $tempSlave.skill.whoring <= 10>>
+		@@.yellow;Unskilled@@.
+	<<elseif $tempSlave.skill.whoring <= 30>>
+		@@.cyan;Basic.@@
+	<<elseif $tempSlave.skill.whoring <= 60>>
+		@@.cyan;Skilled.@@
+	<<elseif $tempSlave.skill.whoring < 100>>
+		@@.cyan;Expert.@@
+	<<else>>
+		@@.cyan;Masterful.@@
+	<</if>>
+	<<textbox "$tempSlave.skill.whoring" $tempSlave.skill.whoring>>
+	<br>
+	<<radiobutton "$tempSlave.skill.whoring" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.whoring" 15>> Basic
+	<<radiobutton "$tempSlave.skill.whoring" 35>> Skilled
+	<<radiobutton "$tempSlave.skill.whoring" 65>> Expert
+	<<radiobutton "$tempSlave.skill.whoring" 100>> Masterful
+
+	<br>
+
+	''Entertainment (0 to 100):''
+	<<if $tempSlave.skill.entertainment <= 10>>
+		@@.yellow;Unskilled@@.
+	<<elseif $tempSlave.skill.entertainment <= 30>>
+		@@.cyan;Basic.@@
+	<<elseif $tempSlave.skill.entertainment <= 60>>
+		@@.cyan;Skilled.@@
+	<<elseif $tempSlave.skill.entertainment < 100>>
+		@@.cyan;Expert.@@
+	<<else>>
+		@@.cyan;Masterful.@@
+	<</if>>
+	<<textbox "$tempSlave.skill.entertainment" $tempSlave.skill.entertainment>>
+	<br>
+	<<radiobutton "$tempSlave.skill.entertainment" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.entertainment" 15>> Basic
+	<<radiobutton "$tempSlave.skill.entertainment" 35>> Skilled
+	<<radiobutton "$tempSlave.skill.entertainment" 65>> Expert
+	<<radiobutton "$tempSlave.skill.entertainment" 100>> Masterful
+
+	<br>
+
+	''Combat (0,1):''
+	<<if $tempSlave.skill.combat == 0>>
+		@@.yellow;Unskilled@@.
+	<<else>>
+		@@.cyan;Skilled.@@
+	<</if>>
+	<<radiobutton "$tempSlave.skill.combat" 0>> Unskilled
+	<<radiobutton "$tempSlave.skill.combat" 1>> Skilled
+	<br>
+<</widget>>
+
+<<widget InteliTab>>
+	<br>
+	''Intelligence (-100 to 100):''
+	<<if $tempSlave.intelligence > 95>>
+		@@.deepskyblue;Brilliant.@@
+	<<elseif $tempSlave.intelligence > 50>>
+		@@.deepskyblue;Very Smart.@@
+	<<elseif $tempSlave.intelligence > 15>>
+		@@.deepskyblue;Smart.@@
+	<<elseif $tempSlave.intelligence >= -15>>
+		@@.yellow;Average@@.
+	<<elseif $tempSlave.intelligence >= -50>>
+		@@.orangered;Stupid.@@
+	<<elseif $tempSlave.intelligence >= -95>>
+		@@.orangered;Very Stupid.@@
+	<<else>>
+		@@.orangered;Moronic.@@
+	<</if>>
+	<<textbox "$tempSlave.intelligence" $tempSlave.intelligence>>
+	<br>
+	<<radiobutton "$tempSlave.intelligence" -100>> Moronic
+	<<radiobutton "$tempSlave.intelligence" -60>> Very Stupid
+	<<radiobutton "$tempSlave.intelligence" -30>> Stupid
+	<<radiobutton "$tempSlave.intelligence" 0>> Average
+	<<radiobutton "$tempSlave.intelligence" 30>> Smart
+	<<radiobutton "$tempSlave.intelligence" 60>> Very Smart
+	<<radiobutton "$tempSlave.intelligence" 100>> Brilliant
+	<br>
+	''Education (0 to 30):''
+	<<if $tempSlave.intelligenceImplant >= 30>>
+		@@.deepskyblue;Well Educated.@@
+	<<elseif $tempSlave.intelligenceImplant >= 15>>
+		@@.deepskyblue;Educated.@@
+	<<else>>
+		@@.yellow;Uneducated@@.
+	<</if>>
+	<<radiobutton "$tempSlave.intelligenceImplant" 0>> Uneducated
+	<<radiobutton "$tempSlave.intelligenceImplant" 15>> Educated
+	<<radiobutton "$tempSlave.intelligenceImplant" 30>> Well Educated
+	<br>
+<</widget>>
+
+<<widget FetSexTab>>
+	<br>
+	''Fetish Known: ''
+	<<if $tempSlave.fetishKnown == 0>>
+		@@.yellow;Unknown@@
+		<<checkbox "$tempSlave.fetishKnown" 0 1>>
+	<<else>>
+		@@.yellow;Known@@
+		<<checkbox "$tempSlave.fetishKnown" 0 1 checked>>
+	<</if>>
+
+	<br>
+
+	<<if $tempSlave.fetish == "none">>
+		''Fetish:'' @@.pink;$tempSlave.fetish.@@
+	<<else>>
+		''Fetish:'' @@.lightcoral;$tempSlave.fetish.@@
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.fetish" "none">> None
+	<<radiobutton "$tempSlave.fetish" "submissive">> Submissive
+	<<radiobutton "$tempSlave.fetish" "dom">> Dom
+	<<radiobutton "$tempSlave.fetish" "cumslut">> Cumslut
+	<<radiobutton "$tempSlave.fetish" "humiliation">> Humiliation
+	<<radiobutton "$tempSlave.fetish" "buttslut">> Buttslut
+	<<radiobutton "$tempSlave.fetish" "boobs">> Boobs
+	<<radiobutton "$tempSlave.fetish" "pregnancy">> Pregnancy
+	<<radiobutton "$tempSlave.fetish" "sadist">> Sadist
+	<<radiobutton "$tempSlave.fetish" "masochist">> Masochist
+
+	<br>
+
+	''Fetish strength (0 to 100):''
+	<<if $tempSlave.fetishStrength > 95>>
+		@@.lightcoral;High.@@
+	<<elseif $tempSlave.fetishStrength <= 60>>
+		@@.pink;Low.@@
+	<<else>>
+		@@.hotpink;Normal.@@
+	<</if>>
+	<<textbox "$tempSlave.fetishStrength" $tempSlave.fetishStrength>>
+	<br>
+	<<radiobutton "$tempSlave.fetishStrength" 0>> Low
+	<<radiobutton "$tempSlave.fetishStrength" 70>> Normal
+	<<radiobutton "$tempSlave.fetishStrength" 100>> High
+	<br><br>
+	''Sexuality (unknown:0 | known:1): ''
+	<<if $tempSlave.attrKnown == 0>>
+		@@.yellow;Unknown@@
+		<<checkbox "$tempSlave.attrKnown" 0 1>>
+	<<else>>
+		@@.yellow;Known@@
+		<<checkbox "$tempSlave.attrKnown" 0 1 checked>>
+	<</if>>
+
+	<br>
+	''Male Attraction (0 - 100):''
+	<<if $tempSlave.attrXY <= 5>>
+		@@.red;Disgusted by guys,@@
+	<<elseif $tempSlave.attrXY <= 15>>
+		@@.red;Turned off by guys,@@
+	<<elseif $tempSlave.attrXY <= 35>>
+		@@.red;Not attracted to guys,@@
+	<<elseif $tempSlave.attrXY <= 65>>
+		Indifferent to guys,
+	<<elseif $tempSlave.attrXY <= 85>>
+		@@.green;Attracted to guys,@@
+	<<elseif $tempSlave.attrXY <= 95>>
+		@@.green;Aroused by guys,@@
+	<<else>>
+		@@.green;Passionate about guys,@@
+	<</if>>
+	<<textbox "$tempSlave.attrXY" $tempSlave.attrXY>>
+	<br>
+	<<radiobutton "$tempSlave.attrXY" 0>> Disgusted by guys
+	<<radiobutton "$tempSlave.attrXY" 10>> Turned off by guys
+	<<radiobutton "$tempSlave.attrXY" 20>> Not attracted to guys
+	<<radiobutton "$tempSlave.attrXY" 50>> Indifferent to guys
+	<<radiobutton "$tempSlave.attrXY" 80>> Attracted to guys
+	<<radiobutton "$tempSlave.attrXY" 90>> Aroused by guys
+	<<radiobutton "$tempSlave.attrXY" 100>> Passionate about guys
+
+	<br>
+	''Female Attraction (0 - 100):''
+	<<if $tempSlave.attrXX <= 5>>
+		@@.red;disgusted by girls.@@
+	<<elseif $tempSlave.attrXX <= 15>>
+		@@.red;turned off by girls.@@
+	<<elseif $tempSlave.attrXX <= 35>>
+		@@.red;not attracted to girls.@@
+	<<elseif $tempSlave.attrXX <= 65>>
+		indifferent to girls.
+	<<elseif $tempSlave.attrXX <= 85>>
+		@@.green;attracted to girls.@@
+	<<elseif $tempSlave.attrXX <= 95>>
+		@@.green;aroused by girls.@@
+	<<else>>
+		@@.green;passionate about girls.@@
+	<</if>>
+	<<textbox "$tempSlave.attrXX" $tempSlave.attrXX>>
+	<br>
+	<<radiobutton "$tempSlave.attrXX" 0>> Disgusted by girls
+	<<radiobutton "$tempSlave.attrXX" 10>> Turned off by girls
+	<<radiobutton "$tempSlave.attrXX" 20>> Not attracted to girls
+	<<radiobutton "$tempSlave.attrXX" 50>> Indifferent to girls
+	<<radiobutton "$tempSlave.attrXX" 80>> Attracted to girls
+	<<radiobutton "$tempSlave.attrXX" 90>> Aroused by girls
+	<<radiobutton "$tempSlave.attrXX" 100>> Passionate about girls
+
+	<br>
+	''Sex drive (0 - 100):''
+	<<if $tempSlave.energy == 100>>
+		@@.green;Nympho!@@
+	<<elseif $tempSlave.energy > 80>>
+		@@.green;Sex addict.@@
+	<<elseif $tempSlave.energy > 60>>
+		@@.green;Powerful.@@
+	<<elseif $tempSlave.energy > 40>>
+		@@.yellow;Average.@@
+	<<elseif $tempSlave.energy > 20>>
+		@@.red;Poor.@@
+	<<else>>
+		@@.red;Frigid.@@
+	<</if>>
+	<<textbox "$tempSlave.energy" $tempSlave.energy>>
+	<br>
+<</widget>>
+
+<<widget StatisticTab>>
+	<br>
+	''Penetrative Sex: ''@@.yellow;$tempSlave.counter.penetrative@@ |
+	<<textbox "$tempSlave.counter.penetrative" $tempSlave.counter.penetrative>><br>
+	''Oral Sex: ''@@.yellow;$tempSlave.counter.oral@@ |
+	<<textbox "$tempSlave.counter.oral" $tempSlave.counter.oral>><br>
+	''Vaginal Sex: ''@@.yellow;$tempSlave.counter.vaginal@@ |
+	<<textbox "$tempSlave.counter.vaginal" $tempSlave.counter.vaginal>><br>
+	''Anal Sex: ''@@.yellow;$tempSlave.counter.anal@@ |
+	<<textbox "$tempSlave.counter.anal" $tempSlave.counter.anal>><br>
+	''Public Sex: ''@@.yellow;$tempSlave.counter.publicUse@@ |
+	<<textbox "$tempSlave.counter.publicUse" $tempSlave.counter.publicUse>><br>
+	''Titjobs: ''@@.yellow;$tempSlave.counter.mammary@@ |
+	<<textbox "$tempSlave.counter.mammary" $tempSlave.counter.mammary>><br>
+	<br>
+	''Total Births: ''@@.yellow;$tempSlave.counter.birthsTotal@@ |
+	<<textbox "$tempSlave.counter.birthsTotal" $tempSlave.counter.birthsTotal>><br>
+<</widget>>
+
+<<widget FlaQuiTab>>
+	<br>
+	''Behavioral Flaw:''
+	<<if $tempSlave.behavioralFlaw == "none">>
+		//$tempSlave.behavioralFlaw.//
+	<<else>>
+		@@.red;$tempSlave.behavioralFlaw.@@
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.behavioralFlaw" "none">> None
+	<<radiobutton "$tempSlave.behavioralFlaw" "arrogant">> Arrogant
+	<<radiobutton "$tempSlave.behavioralFlaw" "bitchy">> Bitchy
+	<<radiobutton "$tempSlave.behavioralFlaw" "odd">> Odd
+	<<radiobutton "$tempSlave.behavioralFlaw" "hates men">> Men
+	<<radiobutton "$tempSlave.behavioralFlaw" "hates women">> Women
+	<<radiobutton "$tempSlave.behavioralFlaw" "anorexic">> Anorexic
+	<<radiobutton "$tempSlave.behavioralFlaw" "gluttonous">> Gluttonous
+	<<radiobutton "$tempSlave.behavioralFlaw" "devout">> Devout
+	<<radiobutton "$tempSlave.behavioralFlaw" "liberated">> Liberated
+
+	<br><br>
+
+	''Behavioral Quirk:''
+	<<if $tempSlave.behavioralQuirk == "none">>
+		//$tempSlave.behavioralQuirk.//
+	<<else>>
+		@@.green;$tempSlave.behavioralQuirk.@@
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.behavioralQuirk" "none">> None
+	<<radiobutton "$tempSlave.behavioralQuirk" "confident">> Confident
+	<<radiobutton "$tempSlave.behavioralQuirk" "cutting">> Cutting
+	<<radiobutton "$tempSlave.behavioralQuirk" "funny">> Funny
+	<<radiobutton "$tempSlave.behavioralQuirk" "adores women">> Adores Women
+	<<radiobutton "$tempSlave.behavioralQuirk" "adores men">> Adores Men
+	<<radiobutton "$tempSlave.behavioralQuirk" "insecure">> Insecure
+	<<radiobutton "$tempSlave.behavioralQuirk" "fitness">> Fitness
+	<<radiobutton "$tempSlave.behavioralQuirk" "sinful">> Sinful
+	<<radiobutton "$tempSlave.behavioralQuirk" "advocate">> Advocate
+	<<if $tempSlave.behavioralQuirk != "none">>
+		<<set $tempSlave.behavioralFlaw = "none">>
+	<</if>>
+
+	<br><br>
+
+	''Sexual Flaw / Paraphilias:''
+	<<if $tempSlave.sexualFlaw == "none">>
+		//$tempSlave.sexualFlaw.//
+	<<else>>
+		@@.red;$tempSlave.sexualFlaw.@@
+	<</if>>
+	<br>
+	Flaws:
+	<<radiobutton "$tempSlave.sexualFlaw" "none">> None
+	<<radiobutton "$tempSlave.sexualFlaw" "hates oral">> Hates Oral
+	<<radiobutton "$tempSlave.sexualFlaw" "hates anal">> Hates Anal
+	<<radiobutton "$tempSlave.sexualFlaw" "hates penetration">> Hates Penetration
+	<<radiobutton "$tempSlave.sexualFlaw" "repressed">> Repressed
+	<<radiobutton "$tempSlave.sexualFlaw" "shamefast">> Shamefast
+	<<radiobutton "$tempSlave.sexualFlaw" "apathetic">> Apathetic
+	<<radiobutton "$tempSlave.sexualFlaw" "idealistic">> Sexually Idealistic
+	<<radiobutton "$tempSlave.sexualFlaw" "crude">> Crude
+	<<radiobutton "$tempSlave.sexualFlaw" "judgemental">> Judgemental
+
+	<br>
+	Paraphilias:
+	<<radiobutton "$tempSlave.sexualFlaw" "cum addict">> Cum Addict
+	<<radiobutton "$tempSlave.sexualFlaw" "anal addict">> Anal Addict
+	<<radiobutton "$tempSlave.sexualFlaw" "attention whore">> Attention Whore
+	<<radiobutton "$tempSlave.sexualFlaw" "breast growth">> Breast Obsession
+	<<radiobutton "$tempSlave.sexualFlaw" "abusive">> Abusive
+	<<radiobutton "$tempSlave.sexualFlaw" "malicious">> Malicious
+	<<radiobutton "$tempSlave.sexualFlaw" "self hating">> Self Hatred
+	<<radiobutton "$tempSlave.sexualFlaw" "neglectful">> Self Neglect
+	<<radiobutton "$tempSlave.sexualFlaw" "breeder">> Breeding Obsession
+
+	<br><br>
+
+	''Sexual Quirk:''
+	<<if $tempSlave.sexualQuirk == "none">>
+		//$tempSlave.sexualQuirk.//
+	<<else>>
+		@@.green;$tempSlave.sexualQuirk.@@
+	<</if>>
+	<br>
+	<<radiobutton "$tempSlave.sexualQuirk" "none">> None
+	<<radiobutton "$tempSlave.sexualQuirk" "gagfuck queen">> Gagfuck Queen
+	<<radiobutton "$tempSlave.sexualQuirk" "painal queen">> Painal Queen
+	<<radiobutton "$tempSlave.sexualQuirk" "strugglefuck queen">> Strugglefuck Queen
+	<<radiobutton "$tempSlave.sexualQuirk" "perverted">> Perverted
+	<<radiobutton "$tempSlave.sexualQuirk" "tease">> Tease
+	<<radiobutton "$tempSlave.sexualQuirk" "caring">> Caring
+	<<radiobutton "$tempSlave.sexualQuirk" "romantic">> Romantic
+	<<radiobutton "$tempSlave.sexualQuirk" "unflinching">> Unflinching
+	<<radiobutton "$tempSlave.sexualQuirk" "size queen">> Size Queen
+	<<if $tempSlave.sexualQuirk != "none">>
+		<<if !["abusive", "anal addict", "attention whore", "breast growth", "breeder", "cum addict", "malicious", "neglectful", "self hating"].includes($tempSlave.sexualFlaw)>>
+			<<set $tempSlave.sexualFlaw = "none">>
+		<</if>>
+	<</if>>
+	<br>
+<</widget>>
+
+<<widget PrestTab>>
+	''Change $his custom tattoo:'' <<textbox "$tempSlave.custom.tattoo" $tempSlave.custom.tattoo>>
+	<br>
+	//For best results, use complete, capitalized and punctuated sentences; for example: '$He has blue stars tattooed along $his cheekbones, and a blue arrow down each arm.'//
+
+	<br>
+	''Change $his custom description:'' <<textbox "$tempSlave.custom.desc" $tempSlave.custom.desc>>
+	<br>
+	//For best results, use complete, capitalized and punctuated sentences; for example: '$He has a beauty mark above $his left nipple.'//
+
+	<br>
+	''Change $his custom label:'' <<textbox "$tempSlave.custom.label" $tempSlave.custom.label>>
+	<br>
+	//For best results, use a short phrase; for example: 'Breeder.'//
+	<br>
+
+	''Prestige:''
+	<<textbox "$tempSlave.prestige" $tempSlave.prestige>>
+	<<radiobutton "$tempSlave.prestige" 0>> 0
+	<<radiobutton "$tempSlave.prestige" 1>> 1
+	<<radiobutton "$tempSlave.prestige" 2>> 2
+	<<radiobutton "$tempSlave.prestige" 3>> 3
+
+	<br>
+	''Prestige description:''
+	<<textbox "$tempSlave.prestigeDesc" $tempSlave.prestigeDesc>>
+	<br>
+<</widget>>
+
+<<widget TattooTab>>
+	<br>
+	''Full-body Tattoos:''<br>
+	<<link "[Tribal patterns]">>
+		<<set $tempSlave.boobsTat = "tribal patterns">><<set $tempSlave.buttTat = "tribal patterns">><<set $tempSlave.vaginaTat = "tribal patterns">>
+		<<set $tempSlave.dickTat = "tribal patterns">><<set $tempSlave.lipsTat = "tribal patterns">><<set $tempSlave.anusTat = "tribal patterns">>
+		<<set $tempSlave.shouldersTat = "tribal patterns">><<set $tempSlave.backTat = "tribal patterns">><<set $tempSlave.armsTat = "tribal patterns">>
+		<<set $tempSlave.legsTat = "tribal patterns">><<set $tempSlave.stampTat = "tribal patterns">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Flowers]">>
+		<<set $tempSlave.boobsTat = "flowers">><<set $tempSlave.buttTat = "flowers">><<set $tempSlave.vaginaTat = "flowers">>
+		<<set $tempSlave.dickTat = "flowers">><<set $tempSlave.lipsTat = "flowers">><<set $tempSlave.anusTat = "flowers">>
+		<<set $tempSlave.shouldersTat = "flowers">><<set $tempSlave.backTat = "flowers">><<set $tempSlave.armsTat = "flowers">>
+		<<set $tempSlave.legsTat = "flowers">><<set $tempSlave.stampTat = "flowers">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Scenes]">>
+		<<set $tempSlave.boobsTat = "scenes">><<set $tempSlave.buttTat = "scenes">><<set $tempSlave.vaginaTat = "scenes">>
+		<<set $tempSlave.dickTat = "scenes">><<set $tempSlave.lipsTat = "permanent makeup">><<set $tempSlave.anusTat = "bleached">>
+		<<set $tempSlave.shouldersTat = "scenes">><<set $tempSlave.backTat = "scenes">><<set $tempSlave.armsTat = "scenes">>
+		<<set $tempSlave.legsTat = "scenes">><<set $tempSlave.stampTat = "scenes">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Asian art]">>
+		<<set $tempSlave.boobsTat = "Asian art">><<set $tempSlave.buttTat = "Asian art">><<set $tempSlave.vaginaTat = "Asian art">>
+		<<set $tempSlave.dickTat = "Asian art">><<set $tempSlave.lipsTat = "permanent makeup">><<set $tempSlave.anusTat = "bleached">>
+		<<set $tempSlave.shouldersTat = "Asian art">><<set $tempSlave.backTat = "Asian art">><<set $tempSlave.armsTat = "Asian art">>
+		<<set $tempSlave.legsTat = "Asian art">><<set $tempSlave.stampTat = "Asian art">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Degradation]">>
+		<<set $tempSlave.boobsTat = "degradation">><<set $tempSlave.buttTat = "degradation">><<set $tempSlave.vaginaTat = "degradation">>
+		<<set $tempSlave.dickTat = "degradation">><<set $tempSlave.lipsTat = "degradation">><<set $tempSlave.anusTat = "degradation">>
+		<<set $tempSlave.shouldersTat = "degradation">><<set $tempSlave.backTat = "degradation">><<set $tempSlave.armsTat = "degradation">>
+		<<set $tempSlave.legsTat = "degradation">><<set $tempSlave.stampTat = "degradation">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Counting]">>
+		<<set $tempSlave.boobsTat = "counting">><<set $tempSlave.buttTat = "counting">><<set $tempSlave.vaginaTat = "counting">>
+		<<set $tempSlave.dickTat = "counting">><<set $tempSlave.lipsTat = "counting">><<set $tempSlave.anusTat = "counting">>
+		<<set $tempSlave.shouldersTat = "counting">><<set $tempSlave.backTat = "counting">><<set $tempSlave.armsTat = "counting">>
+		<<set $tempSlave.legsTat = "counting">><<set $tempSlave.stampTat = "counting">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Advertisements]">>
+		<<set $tempSlave.boobsTat = "advertisements">><<set $tempSlave.buttTat = "advertisements">><<set $tempSlave.vaginaTat = "advertisements">>
+		<<set $tempSlave.dickTat = "advertisements">><<set $tempSlave.lipsTat = "advertisements">><<set $tempSlave.anusTat = "advertisements">>
+		<<set $tempSlave.shouldersTat = "advertisements">><<set $tempSlave.backTat = "advertisements">><<set $tempSlave.armsTat = "advertisements">>
+		<<set $tempSlave.legsTat = "advertisements">><<set $tempSlave.stampTat = "advertisements">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Rude Words]">>
+		<<set $tempSlave.boobsTat = "rude words">><<set $tempSlave.buttTat = "rude words">><<set $tempSlave.vaginaTat = "rude words">>
+		<<set $tempSlave.dickTat = "rude words">><<set $tempSlave.lipsTat = "rude words">><<set $tempSlave.anusTat = "rude words">>
+		<<set $tempSlave.shouldersTat = "rude words">><<set $tempSlave.backTat = "rude words">><<set $tempSlave.armsTat = "rude words">>
+		<<set $tempSlave.legsTat = "rude words">><<set $tempSlave.stampTat = "rude words">>
+	<</link>>
+	<<print " | ">>
+	<<link "[Cow Pattern]">>
+		<<set $tempSlave.boobsTat = "bovine patterns">><<set $tempSlave.buttTat = "bovine patterns">><<set $tempSlave.vaginaTat = "bovine patterns">>
+		<<set $tempSlave.dickTat = "bovine patterns">><<set $tempSlave.lipsTat = "bovine patterns">><<set $tempSlave.anusTat = "bovine patterns">>
+		<<set $tempSlave.shouldersTat = "bovine patterns">><<set $tempSlave.backTat = "bovine patterns">><<set $tempSlave.armsTat = "bovine patterns">>
+		<<set $tempSlave.legsTat = "bovine patterns">><<set $tempSlave.stampTat = "bovine patterns">>
+	<</link>>
+	<<print " | ">>
+	<<link "[No Tattoos]">>
+		<<set $tempSlave.boobsTat = 0>><<set $tempSlave.buttTat = 0>><<set $tempSlave.vaginaTat = 0>>
+		<<set $tempSlave.dickTat = 0>><<set $tempSlave.lipsTat = 0>><<set $tempSlave.anusTat = 0>>
+		<<set $tempSlave.shouldersTat = 0>><<set $tempSlave.backTat = 0>><<set $tempSlave.armsTat = 0>>
+		<<set $tempSlave.legsTat = 0>><<set $tempSlave.stampTat = 0>><<set $tempSlave.bellyTat = 0>>
+	<</link>>
+
+	<br><br>
+	''__Lips Tattoo__ (
+	<<if $tempSlave.lipsTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.lipsTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.lipsTat" 0>>None
+	<<radiobutton "$tempSlave.lipsTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.lipsTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.lipsTat" "permanent makeup">>Permanent Makeup
+	<<radiobutton "$tempSlave.lipsTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.lipsTat" "counting">>Counting
+	<<radiobutton "$tempSlave.lipsTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.lipsTat" "rude words">>Rude Words
+	<br>''Custom lips tattoo '' <<textbox "$tempSlave.lipsTat" $tempSlave.lipsTat>>
+	<br>
+	''__Shoulders Tattoo__ (
+	<<if $tempSlave.shouldersTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.shouldersTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.shouldersTat" 0>>None
+	<<radiobutton "$tempSlave.shouldersTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.shouldersTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.shouldersTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.shouldersTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.shouldersTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.shouldersTat" "counting">>Counting
+	<<radiobutton "$tempSlave.shouldersTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.shouldersTat" "rude words">>Rude Words
+	<br>''Custom shoulders tattoo '' <<textbox "$tempSlave.shouldersTat" $tempSlave.shouldersTat>>
+	<br>
+	''__Back Tattoo__ (
+	<<if $tempSlave.backTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.backTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.backTat" 0>>None
+	<<radiobutton "$tempSlave.backTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.backTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.backTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.backTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.backTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.backTat" "counting">>Counting
+	<<radiobutton "$tempSlave.backTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.backTat" "rude words">>Rude Words
+	<br>''Custom back tattoo '' <<textbox "$tempSlave.backTat" $tempSlave.backTat>>
+	<br>
+	''__Belly Tattoo__ (
+	<<if $tempSlave.bellyTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.bellyTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.bellyTat" 0>>None
+	<<radiobutton "$tempSlave.bellyTat" "a heart">>Heart
+	<<radiobutton "$tempSlave.bellyTat" "a star">>Star
+	<<radiobutton "$tempSlave.bellyTat" "a butterfly">>Butterfly
+	<br>''Custom belly tattoo '' <<textbox "$tempSlave.bellyTat" $tempSlave.bellyTat>>
+	<br>
+	''__Arms Tattoo__ (
+	<<if $tempSlave.armsTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.armsTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.armsTat" 0>>None
+	<<radiobutton "$tempSlave.armsTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.armsTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.armsTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.armsTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.armsTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.armsTat" "counting">>Counting
+	<<radiobutton "$tempSlave.armsTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.armsTat" "rude words">>Rude Words
+	<br>''Custom arms tattoo '' <<textbox "$tempSlave.armsTat" $tempSlave.armsTat>>
+	<br>
+	''__Legs Tattoo__ (
+	<<if $tempSlave.legsTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.legsTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.legsTat" 0>>None
+	<<radiobutton "$tempSlave.legsTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.legsTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.legsTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.legsTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.legsTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.legsTat" "counting">>Counting
+	<<radiobutton "$tempSlave.legsTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.legsTat" "rude words">>Rude Words
+	<br>''Custom legs tattoo '' <<textbox "$tempSlave.legsTat" $tempSlave.legsTat>>
+	<br>
+	''__Boobs Tattoo__ (
+	<<if $tempSlave.boobsTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.boobsTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.boobsTat" 0>>None
+	<<radiobutton "$tempSlave.boobsTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.boobsTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.boobsTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.boobsTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.boobsTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.boobsTat" "counting">>Counting
+	<<radiobutton "$tempSlave.boobsTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.boobsTat" "rude words">>Rude Words
+	<br>''Custom boobs tattoo '' <<textbox "$tempSlave.boobsTat" $tempSlave.boobsTat>>
+	<br>
+	''__Butt Tattoo__ (
+	<<if $tempSlave.buttTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.buttTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.buttTat" 0>>None
+	<<radiobutton "$tempSlave.buttTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.buttTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.buttTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.buttTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.buttTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.buttTat" "counting">>Counting
+	<<radiobutton "$tempSlave.buttTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.buttTat" "rude words">>Rude Words
+	<br>''Custom butt tattoo '' <<textbox "$tempSlave.buttTat" $tempSlave.buttTat>>
+	<br>
+	''__Vagina Tattoo__ (
+	<<if $tempSlave.vaginaTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.vaginaTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.vaginaTat" 0>>None
+	<<radiobutton "$tempSlave.vaginaTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.vaginaTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.vaginaTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.vaginaTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.vaginaTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.vaginaTat" "counting">>Counting
+	<<radiobutton "$tempSlave.vaginaTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.vaginaTat" "rude words">>Rude Words
+	<<radiobutton "$tempSlave.vaginaTat" "lewd crest">>Lewd Crest
+	<br>''Custom vagina tattoo '' <<textbox "$tempSlave.vaginaTat" $tempSlave.vaginaTat>>
+	<br>
+	''__Anus Tattoo__ (
+	<<if $tempSlave.anusTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.anusTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.anusTat" 0>>None
+	<<radiobutton "$tempSlave.anusTat" "bleached">>Bleached
+	<<radiobutton "$tempSlave.anusTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.anusTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.anusTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.anusTat" "counting">>Counting
+	<<radiobutton "$tempSlave.anusTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.anusTat" "rude words">>Rude Words
+	<br>''Custom anus tattoo '' <<textbox "$tempSlave.anusTat" $tempSlave.anusTat>>
+	<br>
+	''__Dick Tattoo__ (
+	<<if $tempSlave.dickTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.dickTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.dickTat" 0>>None
+	<<radiobutton "$tempSlave.dickTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.dickTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.dickTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.dickTat" "counting">>Counting
+	<<radiobutton "$tempSlave.dickTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.dickTat" "rude words">>Rude Words
+	<br>''Custom dick tattoo '' <<textbox "$tempSlave.dickTat" $tempSlave.dickTat>>
+	<br>
+	''__Tramp Stamp Tattoo__ (
+	<<if $tempSlave.stampTat == 0>>@@.yellow;None@@
+	<<else>>@@.yellow;$tempSlave.stampTat@@<</if>>
+	)''
+	<br>
+	<<radiobutton "$tempSlave.stampTat" 0>>None
+	<<radiobutton "$tempSlave.stampTat" "tribal patterns">>Tribal Patterns
+	<<radiobutton "$tempSlave.stampTat" "flowers">>Flowers
+	<<radiobutton "$tempSlave.stampTat" "scenes">>Scenes
+	<<radiobutton "$tempSlave.stampTat" "Asian art">>Asian Art
+	<<radiobutton "$tempSlave.stampTat" "degradation">>Degradation
+	<<radiobutton "$tempSlave.stampTat" "counting">>Counting
+	<<radiobutton "$tempSlave.stampTat" "advertisements">>Advertisements
+	<<radiobutton "$tempSlave.stampTat" "rude words">>Rude Words
+	<br>''Custom tramp stamp tattoo '' <<textbox "$tempSlave.stampTat" $tempSlave.stampTat>>
+	<br>
+<</widget>>
+
+<<widget BrandTab>>
+	''Branding:''
+	<p id="brand-selection"></p>
+	<script>
+		App.Medicine.Modification.Select.brand(V.tempSlave, true)
+	</script>
+<</widget>>
+
+<<widget PierceTab>>
+	<br>
+	''Lips piercings (0-2): @@.yellow;$tempSlave.lipsPiercing@@''
+	|
+	<<radiobutton "$tempSlave.lipsPiercing" 0>> None
+	<<radiobutton "$tempSlave.lipsPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.lipsPiercing" 2>> Heavy
+
+	<br>
+	''Tongue piercings (0-2): @@.yellow;$tempSlave.tonguePiercing@@''
+	|
+	<<radiobutton "$tempSlave.tonguePiercing" 0>> None
+	<<radiobutton "$tempSlave.tonguePiercing" 1>> Standard
+	<<radiobutton "$tempSlave.tonguePiercing" 2>> Heavy
+
+	<br>
+	''Ear piercings (0-2): @@.yellow;$tempSlave.earPiercing@@''
+	|
+	<<radiobutton "$tempSlave.earPiercing" 0>> None
+	<<radiobutton "$tempSlave.earPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.earPiercing" 2>> Heavy
+
+	<br>
+	''Nose piercings (0-2): @@.yellow;$tempSlave.nosePiercing@@''
+	|
+	<<radiobutton "$tempSlave.nosePiercing" 0>> None
+	<<radiobutton "$tempSlave.nosePiercing" 1>> Standard
+	<<radiobutton "$tempSlave.nosePiercing" 2>> Heavy
+
+	<br>
+	''Eyebrow piercings (0-2): @@.yellow;$tempSlave.eyebrowPiercing@@''
+	|
+	<<radiobutton "$tempSlave.eyebrowPiercing" 0>> None
+	<<radiobutton "$tempSlave.eyebrowPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.eyebrowPiercing" 2>> Heavy
+
+	<br>
+	''Navel piercings (0-2): @@.yellow;$tempSlave.navelPiercing@@''
+	|
+	<<radiobutton "$tempSlave.navelPiercing" 0>> None
+	<<radiobutton "$tempSlave.navelPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.navelPiercing" 2>> Heavy
+
+	<br>
+	''Corset piercings (0-1): @@.yellow;$tempSlave.corsetPiercing@@''
+	|
+	<<radiobutton "$tempSlave.corsetPiercing" 0>> None
+	<<radiobutton "$tempSlave.corsetPiercing" 1>> Pierced
+
+	<br>
+	''Nipples piercings (0-2): @@.yellow;$tempSlave.nipplesPiercing@@''
+	|
+	<<radiobutton "$tempSlave.nipplesPiercing" 0>> None
+	<<radiobutton "$tempSlave.nipplesPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.nipplesPiercing" 2>> Heavy
+
+	<br>
+	''Areolae piercings (0-2): @@.yellow;$tempSlave.areolaePiercing@@''
+	|
+	<<radiobutton "$tempSlave.areolaePiercing" 0>> None
+	<<radiobutton "$tempSlave.areolaePiercing" 1>> Standard
+	<<radiobutton "$tempSlave.areolaePiercing" 2>> Heavy
+
+	<br>
+	''Clit/frenulum piercing (0-3): @@.yellow;$tempSlave.clitPiercing@@''
+	|
+	<<radiobutton "$tempSlave.clitPiercing" 0>> None
+	<<radiobutton "$tempSlave.clitPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.clitPiercing" 2>> Big
+	<<radiobutton "$tempSlave.clitPiercing" 3>> Smart piercing
+
+	<br>
+	''Pussylips piercings (0-2): @@.yellow;$tempSlave.vaginaPiercing@@''
+	|
+	<<radiobutton "$tempSlave.vaginaPiercing" 0>> None
+	<<radiobutton "$tempSlave.vaginaPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.vaginaPiercing" 2>> Heavy
+
+	<br>
+	''Anus piercing (0-2): @@.yellow;$tempSlave.anusPiercing@@''
+	|
+	<<radiobutton "$tempSlave.anusPiercing" 0>> None
+	<<radiobutton "$tempSlave.anusPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.anusPiercing" 2>> Heavy
+
+	<br>
+	''Shaft piercings (0-2): @@.yellow;$tempSlave.dickPiercing@@''
+	|
+	<<radiobutton "$tempSlave.dickPiercing" 0>> None
+	<<radiobutton "$tempSlave.dickPiercing" 1>> Standard
+	<<radiobutton "$tempSlave.dickPiercing" 2>> Heavy
+	<br>
+<</widget>>
+
+''Cheat Edit Slave '' <<link "[Cancel]" "Slave Interact">><<unset $tempSlave, $customEvalCode>><</link>>
+<br>
+<br><br>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<link "__Show All__">>
+<<if (ndef _sAllR) || (_sAllR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 1>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+			<<NameTab>>
+			<<FamilyTab>>
+			<<NationalTab>>
+			<<AgeTab>>
+			<<DevoTab>>
+			<<FaceTab>>
+			<<HairTab>>
+			<<EyesTab>>
+			<<MouthTab>>
+			<<BodyTab>>
+			<<BellyTab>>
+			<<BreastsTab>>
+			<<ButtTab>>
+			<<VagTab>>
+			<<PenisTab>>
+			<<SkillsTab>>
+			<<InteliTab>>
+			<<FetSexTab>>
+			<<FlaQuiTab>>
+			<<StatisticTab>>
+			<<PrestTab>>
+			<<TattooTab>>
+			<<BrandTab>>
+			<<PierceTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _sAllR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+<br>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<link "Name & Status ">>
+<<if (ndef _nameR) || (_nameR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 1>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<NameTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _nameR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Family & Relations">>
+<<if (ndef _famR) || (_famR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 1>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<FamilyTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _famR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Nationality, Origin & Career">>
+<<if (ndef _identR) || (_identR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 1>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<NationalTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _identR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Age & Health">>
+<<if (ndef _nameR) || (_ageR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 1>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<AgeTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _ageR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Devotion & Trust">>
+<<if (ndef _devR) || (_devR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 1>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<DevoTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _devR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<br>
+<<link "Face & Skin">>
+<<if (ndef _faceR) || (_faceR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 1>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<FaceTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _faceR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Hair">>
+<<if (ndef _hairR) || (_hairR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 1>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<HairTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _hairR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Eyes">>
+<<if (ndef _eyesR) || (_eyesR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 1>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<EyesTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _eyesR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Mouth">>
+<<if (ndef _mouthR) || (_mouthR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 1>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<MouthTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _mouthR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Body">>
+<<if (ndef _bodyR) || (_bodyR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 1>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<BodyTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _bodyR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Belly">>
+<<if (ndef _bellyR) || (_bellyR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 1>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<BellyTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _bellyR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Breasts">>
+<<if (ndef _titsR) || (_titsR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 1>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<BreastsTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _titsR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Butt">>
+<<if (ndef _buttR) || (_buttR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 1>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<ButtTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _buttR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Vagina & Pregnancy">>
+<<if (ndef _vagR) || (_vagR == 0) >>
+	<<replace "#spot">><br>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 1>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<VagTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _vagR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Penis">>
+<<if (ndef _dickR) || (_dickR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 1>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<PenisTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _dickR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<br>
+<<link "Skills">>
+<<if (ndef _skillsR) || (_skillsR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 1>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<SkillsTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _skillsR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Intelligence">>
+<<if (ndef _intR) || (_intR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 1>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<InteliTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _intR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Fetish & Sexuality">>
+<<if (ndef _sexR) || (_sexR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 1>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<FetSexTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _sexR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Flaws & Quirks">>
+<<if (ndef _flawR) || (_flawR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 1>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<FlaQuiTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _flawR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Statistics">>
+<<if (ndef _useR) || (_useR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 1>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<StatisticTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _useR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<br>
+<<link "Prestige, Custom Tattoo & Description">>
+<<if (ndef _descR) || (_descR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 1>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<br>
+		<<PrestTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _descR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Tattoos">>
+<<if (ndef _tatsR) || (_tatsR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 1>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<TattooTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _tatsR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Branding">>
+<<if (ndef _brandR) || (_brandR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 0>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 1>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<BrandTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _brandR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<<print " | " >>
+<<link "Piercings">>
+<<if (ndef _pierceR) || (_pierceR == 0) >>
+	<<replace "#spot">>
+		<<set _faceR = 0>><<set _nameR = 0>><<set _famR = 0>><<set _identR = 0>><<set _ageR = 0>><<set _devR = 0>><<set _hairR = 0>>
+		<<set _descR = 0>><<set _eyesR = 0>><<set _mouthR = 0>><<set _bodyR = 0>><<set _titsR = 0>><<set _buttR = 0>><<set _vagR = 0>>
+		<<set _dickR = 0>><<set _skillsR = 0>><<set _intR = 0>><<set _sexR = 0>><<set _flawR = 0>><<set _tatsR = 0>><<set _pierceR = 1>>
+		<<set _sAllR = 0>><<set _natR = 0>><<set _carR = 0>><<set _bellyR = 0>><<set _useR = 0>><<set _brandR = 0>><<set _hcol5R = 0>><<set _hcol4R = 0>>
+		<<set _hcol3R = 0>><<set _hcol2R = 0>><<set _hcol1R = 0>><<set _ecol1R = 0>><<set _ecol2R = 0>><<set _ppilR = 0>><<set _sclrR = 0>>
+		<<PierceTab>>
+	<</replace>>
+<<else>>
+	<<replace "#spot">>
+		<<set _pierceR = 0>>
+	<</replace>>
+<</if>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<br>
+<<link "Custom Cheat">>
+	<<replace "#spot">>
+		<br><<textarea "$customEvalCode" "">>
+		<br>//Any JavaScript function will be automatically run using this slave as an argument when "Continue" is clicked. For example, entering "(slave) => slave.slaveName = 'Fancy Name' " will change your slave's name to "Fancy Name".//
+	<</replace>>
+<</link>>
+/*-------------------------------------------------------------------------------------------------------------------------------*/
+<br><<print "@@.yellow;Refresh through selecting a new or the same passage again for Changes to be seen@@" >><br>
+<span id="spot"></span><br>
+/* ------------------------------------------------------------------------- Used Variables: ------------------------------------------------------------------------------------------------*/
+/*.visualAge .ageImplant .birthWeek .health.condition .health.shortDamage .health.longDamage .health.illness .health.tired .chem .addict .devotion .oldDevotion .trust .oldTrust .face .faceShape .faceImplant .markings .bald .hLength .hStyle .hColor .origHColor*/
+/*.eyebrowHColor .pubicHColor .pubicHStyle .underArmHColor .underArmHStyle .eyeColor .origEye .eyes .hears .lips .lipsImplant .teeth .voiceImplant .voice .accent .genes .amp .fuckdoll .muscles .weight*/
+/*.waist .height .heightImplant .shoulders .shouldersImplant .hips .hipsImplant .bellyImplant .bellySag .burst .boobs .boobsImplant .boobsImplantType .lactation .boobShape .nipples .areolae*/
+/*.butt .buttImplant .anus .mpreg .vagina .vaginaLube .clit .labia .pubertyXX .pubertyAgeXX .cervixImplant .breedingMark .ovaries .preg .pregType .pregSource .dick .foreskin .balls*/

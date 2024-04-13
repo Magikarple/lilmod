@@ -1,0 +1,7 @@
+.lrgRender > div.mask, .lrgVector > div.mask {
+	background: linear-gradient(90deg, rgba(28, 29, 36, 1), rgba(28, 29, 36, 0.8) 60%, rgba(28, 29, 36, 0));
+}
+
+.clear-formatting {
+	color: var(--text-color);
+}

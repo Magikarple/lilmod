@@ -1,0 +1,25 @@
+/* change some SC2 styles */
+
+/* make the sidebar more compact by reducing the space between major parts */
+#ui-bar-body {
+	/* height: calc(100% - 2.5em); */
+	/* margin: 2.5em 0; */
+	height: calc(100% - 1.5em);
+	margin: 1.5em 0;
+}
+
+#ui-bar-body > :not(:first-child) {
+	/* margin-top: 2em; */
+	margin-top: 1.5em;
+}
+
+#story-author {
+	/* margin-top: 2em; */
+	margin-top: 0;
+}
+
+/* make cheat text boxes fit in sidebar */
+#story-caption input {
+	min-width: 0;
+	width: calc(100% - 0.8em - 2px);
+}

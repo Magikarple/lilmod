@@ -1,0 +1,4 @@
+[submodule "submodules/sugarcube-2"]
+	path = submodules/sugarcube-2
+	url = https://gitgud.io/Arkerthan/sugarcube-2.git
+	branch = fc

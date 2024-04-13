@@ -1,0 +1,164 @@
+@media only screen and (min-width: 1000px) {
+    .rule-builder {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-column-gap: 1em;
+    }
+}
+
+.rule-builder button {
+    color: var(--link-color);
+    background-color: var(--button-color);
+    border: solid 2px var(--button-border-color);
+    border-radius: 4px;
+    margin-left: 4px;
+}
+
+.rule-builder button:hover {
+    background-color: var(--button-hover-color);
+    color: var(--link-hover-color);
+}
+
+.rule-builder textarea {
+    margin-left: 0.2em;
+    min-width: 20em;
+}
+
+.rule-part-browser {
+}
+
+.rule-part {
+    display: inline-block;
+    border-radius: 8px;
+    border: 2px solid #333333;
+    background-color: #1a1a1a;
+    padding: 4px;
+    margin: 4px;
+}
+
+.validation-error::before {
+    font-family: "tme-fa-icons";
+    content: "\e80d";
+    color: red;
+    margin-right: 4px;
+}
+
+.rule-draggable {
+    cursor: grab;
+}
+
+.rule-draggable:hover{
+    background: #2c2c2c;
+}
+
+.rule-drag-element {
+    display: inline-block;
+    background-image: repeating-linear-gradient(0, #1a1a1a, transparent 0.2em, transparent 0.2em, #1a1a1a 0.4em),
+    repeating-linear-gradient(90deg, #1a1a1a, #777 0.2em, #777 0.2em, #1a1a1a 0.4em);
+    width: 1.6em;
+    height: 2em;
+    vertical-align: middle;
+}
+
+.rule-drag-element:hover{
+    background-image: repeating-linear-gradient(0, #2c2c2c, transparent 0.2em, transparent 0.2em, #2c2c2c 0.4em),
+    repeating-linear-gradient(90deg, #2c2c2c, #888 0.2em, #888 0.2em, #2c2c2c 0.4em);
+}
+
+.rule-drop-location {
+    border: #999 dashed 1px;
+    border-radius: 4px;
+    display: inline-block;
+    background-color: #555;
+    width: 5em;
+    height: 1.5em;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+
+.part-dragging .condition-viewer .rule-drop-location {
+    animation: 1.5s ease-in-out infinite rule-drop-location-blink;
+}
+
+@keyframes rule-drop-location-blink {
+    0% {
+        background: #555;
+    }
+    50% {
+        background: #638022;
+    }
+    100% {
+        background: #555;
+    }
+}
+
+.rule-builder input[type="text"] {
+    margin-left: 0.2em;
+}
+
+.rule-right-margin {
+    margin-right: 0.2em;
+}
+
+.rule-left-margin {
+    margin-left: 0.2em;
+}
+
+.rule-custom-controls {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.rule-custom-mode {
+    text-align: center;
+}
+
+.rule-trash {
+    border: #F55 1px;
+    border-radius: 4px;
+    background-color: palevioletred;
+    width: 12em;
+    height: 2em;
+    text-align: center;
+    margin: 4px;
+    color: black;
+}
+.rule-trash:first-child {
+    display: inline-block;
+    padding: 8px;
+    width: 1.9em;
+    height: 1.9em;
+}
+
+.rule-trash::before {
+    font-family: "tme-fa-icons";
+    content: "\e828";
+}
+
+.condition-custom {
+    width: 90%;
+}
+
+/* Encyclopedia help entry */
+
+.rule-help-table {
+    display: grid;
+    grid-template-columns: max-content auto auto;
+}
+
+.rule-help-table .head {
+    font-weight: bold;
+    position: sticky;
+    top: -1em;
+    background-color: #111;
+}
+
+.rule-help-table > div {
+    padding: 0 0.5em
+}
+
+.rule-help-table > :nth-child(6n+4),
+.rule-help-table > :nth-child(6n+5),
+.rule-help-table > :nth-child(6n+6) {
+    background-color: #222;
+}

@@ -1,0 +1,26 @@
+:: AC Dump
+
+<<if (ndef $activeChild) || ($activeChild == 0)>>
+
+	@@.red;ERROR:@@ AC Dump, activeChild invalid, returnTo is '$returnTo', previous passage was '<<print previous()>>'. Please report this.
+
+	<<link "Continue">><<goto $returnTo>><</link>> | [[Go Back|previous()]]
+
+<<else>>
+
+	<<set _CL = $cribs.length, _ID = $activeChild.ID>>
+
+	<<if $i >= 0 && $i < _CL && $cribs[$i].ID == _ID>> /* shortcut if $i is already pointing to this slave */
+		<<set $cribs[$i] = $activeChild>>
+	<<else>>
+		<<set $i = $cribs.findIndex(function(s) { s.ID === _ID; })>> /* find $i if exists */
+		<<if $i != -1>> /* not found, so new slave */
+			@@.red;ERROR:@@ $activeChild.slaveName not found! Please report this.
+		<<else>>
+			<<set $cribs[$i] = $activeChild>>
+		<</if>>
+	<</if>>
+
+	<<goto $returnTo>>
+
+<</if>>

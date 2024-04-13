@@ -1,0 +1,64 @@
+.customize-slave-trade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 2px;
+}
+
+.customize-slave-trade-grid.presets {
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+}
+
+.customize-slave-trade-grid div {
+    text-align: center;
+}
+
+.customize-slave-trade-grid .controls-container {
+    float: right;
+    width: 6em;
+    text-align: left;
+}
+
+.controls-container button {
+    line-height: 15px;
+    min-width: calc(2em - 4px);
+    margin: 2px;
+}
+
+
+.plus-button {
+    background: rgba(0, 139, 0, 0.2);
+    border-color: rgba(0, 139, 0, 0.3);
+}
+
+.minus-button {
+    background: rgba(184, 0, 0, 0.2);
+    border-color: rgba(184, 0, 0, 0.3);
+}
+
+.zero-button {
+    background: rgba(0, 0, 255, 0.2);
+    border-color: rgba(0, 0, 255, 0.3);
+}
+.set-button {
+    background: rgba(255, 210, 0, 0.2);
+    border-color: rgba(255, 210, 0, 0.3);
+}
+
+.plus-button:hover {
+    background: rgba(0, 139, 0, 0.4);
+    border-color: rgba(0, 139, 0, 0.3);
+}
+
+.minus-button:hover {
+    background: rgba(184, 0, 0, 0.4);
+    border-color: rgba(184, 0, 0, 0.3);
+}
+
+.zero-button:hover {
+    background: rgba(0, 0, 255, 0.4);
+    border-color: rgba(0, 0, 255, 0.3);
+}
+.set-button:hover {
+    background: rgba(255, 210, 0, 0.4);
+    border-color: rgba(255, 210, 0, 0.3);
+}

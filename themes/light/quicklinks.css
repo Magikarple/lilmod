@@ -1,0 +1,18 @@
+.quick-links .toggle {
+	background-color: var(--button-color);
+}
+
+.quick-links .toggle:hover {
+	background-color: var(--button-hover-color);
+}
+
+.quick-links div.menu-link {
+	background-color: var(--button-disabled-color);
+	border-color: var(--button-border-color);
+	box-shadow: var(--button-border-color);
+}
+
+.quick-links div.notification:not(.category)::after,
+.quick-links div.category.notification.collapsed > .toggle::after {
+	content: "\e80b";
+}

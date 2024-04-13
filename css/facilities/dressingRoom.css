@@ -1,0 +1,26 @@
+.dressing-room-block {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.dressing-room-cell {
+    overflow: hidden;
+	display: inline-block;
+	width: 20em;
+	border: 1px solid var(--button-border-color);
+    margin: 1rem;
+    border-radius: 16px;
+}
+
+.dressing-room-title {
+    margin: 0.4rem 1.4rem;
+	display: grid;
+	align-items: left;
+}
+
+.dressing-room-label {
+	margin: .1rem;
+}
+
+
+.dressing-room-cell:hover { background: var(--button-hover-color) }

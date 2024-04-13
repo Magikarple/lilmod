@@ -1,0 +1,22 @@
+div.building.basement {
+	border-top-color: #8F8F8F;
+	background-image: repeating-linear-gradient(135deg, transparent, transparent 20px, #8F8F8F 20px, #8F8F8F 30px);
+}
+
+div.building div.innerCell {
+	background-color: var(--background-color);
+}
+
+div.building div.decorative {
+	outline-color: black;
+}
+
+/* introduction special formatting */
+/* makes all links unusable */
+.intro div.building a {
+	color: var(--text-color);
+}
+
+div.building div.row div.dairy {
+	border-color: saddlebrown;
+}

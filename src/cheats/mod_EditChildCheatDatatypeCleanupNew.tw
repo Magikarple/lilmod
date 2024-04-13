@@ -1,0 +1,330 @@
+:: MOD_Edit Child Cheat Datatype Cleanup New [nobr]
+
+<<set $nextButton = "Continue", $nextLink = "Child Interact">>
+/* Cancel Option Check */
+<<if $tempSlave == "unset">>
+	<<unset $tempSlave>>
+	<<goto "Child Interact">>
+<</if>>
+
+<<if $customEvalCode>>
+	<<if $customEvalCode.charAt(0) != "(" || $nextLink == ")">> /* second condition is only there for sanityCheck */
+		<<set $customEvalCode = "(" + $customEvalCode + ")">>
+	<</if>>
+	<<if typeof eval($customEvalCode) === "function">>
+		<<run (eval($customEvalCode))($tempSlave)>>
+	<</if>>
+<</if>>
+<<unset $customEvalCode>>
+
+<<run SlaveDatatypeCleanup($tempSlave)>>
+<<set $rep = Number($rep) || 0>>
+<<set $cash = Number($cash) || 0>>
+<<set $week = Number($week) || 1>>
+<<set $tempSlave.preg = Number($tempSlave.preg) || 0>>
+<<set $tempSlave.pregType = Number($tempSlave.pregType) || 0>>
+<<if $tempSlave.broodmother == 0>>
+	<<set WombInit($tempSlave)>> /* just to make sure */
+	<<set $tempSlave.womb.length = 0>> /* simple way to delete all fetuses */
+	<<set WombImpregnate($tempSlave, $tempSlave.pregType, $tempSlave.pregSource, $tempSlave.preg)>> /* recreates fetuses */
+<<else>>
+	<<set WombNormalizePreg($tempSlave)>>
+<</if>>
+<<set $tempSlave.pregWeek = Number($tempSlave.pregWeek) || Math.max($tempSlave.preg, 0)>>
+<<if $tempSlave.preg <= 0>>
+	<<set $tempSlave.pregKnown = 0>>
+<<elseif $tempSlave.preg > 0>>
+	<<set $tempSlave.pregKnown = 1>>
+<</if>>
+
+/* Dependency Check */
+<br>
+<<if $tempSlave.indenture == -1>>
+	<<set $tempSlave.indentureRestrictions = 0>>
+<<elseif $tempSlave.indenture < -1>>
+	<<set $tempSlave.indenture = -1>>
+	<<print "Indenture was smaller than -1, reset to Fulltime Slave">><br>
+<<elseif $tempSlave.indentureRestrictions < 0>>
+	<<set $tempSlave.indentureRestrictions = 0>>
+	<<print "Indenture restriction was smaller than 0, reset to no restrictions">><br>
+<<elseif $tempSlave.indentureRestrictions > 2>>
+	<<set $tempSlave.indentureRestrictions = 2>>
+	<<print "Indenture restrictions was larger than 2, reset to full restrictions">><br>
+<</if>>
+<<if $tempSlave.weekAcquired < 0>>
+	<<set $tempSlave.weekAcquired = 0>>
+	<<print "Week Acquired was negative reset to 0">><br>
+<</if>>
+<<if ($tempSlave.relationshipTarget == $tempSlave.ID) && ($tempSlave.relationship > 0)>>
+	<<set $tempSlave.relationshipTarget = 0>>
+	<<set $tempSlave.relationship = -1>>
+	<<print "The Slave was in a relation with $himself, reset to emotional Slut">><br>
+<</if>>
+<<if ($tempSlave.rivalryTarget == $tempSlave.ID) && ($tempSlave.rivalry > 0)>>
+	<<set $tempSlave.rivalryTarget = 0>>
+	<<set $tempSlave.rivalry = 0>>
+	<<print "Slave was $his own rival, reset to no rivalry">><br>
+<</if>>
+<<if $tempSlave.actualAge < 0>>
+	<<print "Slave's actual age is set too low, reset to existing actual age">><br>
+	<<set $tempSlave.actualAge = $activeSlave.actualAge>>
+<</if>>
+<<if $tempSlave.physicalAge < 0>>
+	<<print "Slave's physical Age is set too low, reset to existing physical age">><br>
+	<<set $tempSlave.physicalAge = $activeSlave.actualAge>>
+<</if>>
+<<if $tempSlave.visualAge < 0>>
+	<<print "Slave's visual age is set too low, reset to existing visual age">><br>
+	<<set $tempSlave.visualAge = $activeSlave.actualAge>>
+<</if>>
+<<if $tempSlave.ovaryAge < 0>>
+	<<print "Slave's ovary age is set too low, reset to match physical age">><br>
+	<<set $tempSlave.ovaryAge = $tempSlave.physicalAge>>
+<</if>>
+<<if $tempSlave.chem < 0>>
+	<<print "Slave's DNA error is set too low, reset to 0">><br>
+	<<set $tempSlave.chem = 0>>
+<</if>>
+<<if $tempSlave.face < -100>>
+	<<print "Face Beauty was set too low, reset to -100">><br>
+	<<set $tempSlave.face = -100>>
+<<elseif $tempSlave.face > 100>>
+	<<print "Face Beauty was set too high, reset to 100">><br>
+	<<set $tempSlave.face = 100>>
+<</if>>
+<<if $tempSlave.hLength < 0>>
+	<<print "Slaves Hair length was set too low, reset to 0">><br>
+	<<set $tempSlave.hLength = 0>>
+<</if>>
+<<if $tempSlave.lips < 0>>
+	<<print "Lips size too small, reset to 0">><br>
+	<<set $tempSlave.lips = 0>>
+<<elseif $tempSlave.lips > 100>>
+	<<print "Lips size too high, reset to 100">><br>
+	<<set $tempSlave.lips = 100>>
+<</if>>
+<<if $tempSlave.muscles < -100>>
+	<<print "Muscle Value too low, reset to -100 (Frail)">><br>
+	<<set $tempSlave.muscles = 0>>
+<<elseif $tempSlave.muscles > 100>>
+	<<print "Muscle Value too high, reset to 100 (Hugely Muscular)">><br>
+	<<set $tempSlave.muscles = 100>>
+<</if>>
+<<if $tempSlave.weight < -100>>
+	<<print "Weight Value too low, reset to -100 (Emaciated)">><br>
+	<<set $tempSlave.weight = -100>>
+<<elseif $tempSlave.weight > 200 >>
+	<<print "Weight Value too high, reset to 200 (Extremely Obese)">><br>
+	<<set $tempSlave.weight = 200>>
+<</if>>
+<<if $tempSlave.waist < -100>>
+	<<print "Waist Value too low, reset to -100 (Absurd)">><br>
+	<<set $tempSlave.waist = -100>>
+<<elseif $tempSlave.waist > 100>>
+	<<print "Waist Value too high, reset to 100 (Masculine)">><br>
+	<<set $tempSlave.waist = 100>>
+<</if>>
+<<if $tempSlave.height < 1>>
+	<<print "Height Value too low, reset to 140 (Seriously its still a Human Being)">><br>
+	<<set $tempSlave.height = 140>>
+<</if>>
+<<if $tempSlave.bellySag < 0>>
+	<<print "Bellysag Value too low, reset 0">><br>
+	<<set $tempSlave.bellySag = 0>>
+<</if>>
+<<if $tempSlave.boobs < 0>>
+	<<print "Breasts Value too low, reset to 200">><br>
+	<<set $tempSlave.boobs = 200>>
+<</if>>
+<<if $tempSlave.boobsImplant < 0>>
+	<<print "Breast Implant Value too low, reset to 0">><br>
+	<<set $tempSlave.boobsImplant = 0>>
+<</if>>
+<<if $tempSlave.butt < 0>>
+	<<print "Butt Value too low, reset to 0">><br>
+	<<set $tempSlave.butt = 0>>
+<</if>>
+<<if (ndef $tempSlave.pubertyAgeXX) || ($tempSlave.pubertyAgeXX < 0)>>
+	<<print "Puberty Age was not set or set too low, reset to Arcology fertility age">><br>
+	<<set $tempSlave.pubertyAgeXX = $fertilityAge>>
+<</if>>
+<<if (ndef $tempSlave.pubertyXX) && ($tempSlave.physicalAge >= $tempSlave.pubertyAgeXX)>>
+	<<set $tempSlave.pubertyXX = 1>>
+<<elseif (ndef $tempSlave.pubertyXX) && ($tempSlave.physicalAge < $tempSlave.pubertyAgeXX)>>
+	<<set $tempSlave.pubertyXX = 0>>
+<</if>>
+<<if $tempSlave.dick < 0>>
+	<<print "Slave dick value set too low, reset to 0 (no dick)" >><br>
+	<<set $tempSlave.dick = 0>>
+<</if>>
+<<if $tempSlave.dick == 0>>
+	<<set $tempSlave.dickTat = 0>>
+<</if>>
+<<if ($tempSlave.vagina == -1) >>
+	<<set $tempSlave.labia = 0>>
+	<<set $tempSlave.clit = 0>>
+	<<set $tempSlave.cervixImplant = 0>>
+	<<set $tempSlave.ovaries = 0>>
+<</if>>
+<<if ($tempSlave.clit > 0) && ($tempSlave.dick > 0 )>>
+	<<print "No giant clit when dick is present, reset clit to 0 (normal)" >><br>
+	<<set $tempSlave.clit = 0>>
+<</if>>
+<<if ($tempSlave.ovaries == 0) && ($tempSlave.mpreg == 0) && ($tempSlave.preg > 0)>>
+	<<print "Slave has no Ovaries and no Analwomb, Pregnancy reset to 0">><br>
+	<<run WombFlush($tempSlave)>>
+<</if>>
+<<if ($tempSlave.pubertyXX != 1) && ($tempSlave.physicalAge >= $tempSlave.pubertyAgeXX)>>
+	<<print "Slaves physical Age is equal or higher than female Puberty Age, Puberty set to 1 (Post Puberty)" >><br>
+	<<set $tempSlave.pubertyXX = 1>>
+<</if>>
+<<if ($tempSlave.ovaries == 1) && ($tempSlave.mpreg == 1)>>
+	<<print "Slave has a working Vagina, Analwomb got removed" >><br>
+	<<set $tempSlave.mpreg = 0>>
+<</if>>
+<<if ($tempSlave.pubertyXX == 0) && ($tempSlave.preg > 0)>>
+	<<print "Slave is not fertile (Pre-Puberty) and has no Anal Womb, pregnancy aborted!">><br>
+	<<run WombFlush($tempSlave)>>
+<</if>>
+<<if $tempSlave.balls < 0>>
+	<<print "Slave Balls Value set too low, reset to 0 (No Balls)">><br>
+	<<set $tempSlave.balls = 0>>
+<</if>>
+<<if $tempSlave.foreskin < 0>>
+	<<print "Slave Foreskin Value set too low, reset to 0 (None)">><br>
+	<<set $tempSlave.foreskin = 0>>
+<</if>>
+<<if $tempSlave.scrotum < 0>>
+	<<print "Slave Scrotum Value set too low, reset to 0 (No Scrotum)">><br>
+	<<set $tempSlave.scrotum = 0>>
+<</if>>
+<<if (ndef $tempSlave.pubertyAgeXY) || ($tempSlave.pubertyAgeXY < 0)>>
+	<<print "XY Puberty Age was not set or set too low, reset to Arcology Puberty Age">><br>
+	<<set $tempSlave.pubertyAgeXY = $potencyAge>>
+<</if>>
+<<if (ndef $tempSlave.pubertyXY) && ($tempSlave.physicalAge >= $tempSlave.pubertyAgeXY)>>
+	<<set $tempSlave.pubertyXY = 1>>
+<<elseif (ndef $tempSlave.pubertyXY) && ($tempSlave.physicalAge < $tempSlave.pubertyAgeXY)>>
+	<<set $tempSlave.pubertyXY = 0>>
+<</if>>
+<<if ($tempSlave.physicalAge >= $tempSlave.pubertyAgeXY) && ($tempSlave.pubertyXY != 1)>>
+	<<print "Slaves physical Age is equal or higher than male Puberty Age, Puberty set to 1 (Post Puberty)" >><br>
+	<<set $tempSlave.pubertyXY = 1>>
+<</if>>
+<<if $tempSlave.skill.oral < 0>>
+	<<print "Oral Skill Value set too low, reset to 0">><br>
+	<<set $tempSlave.skill.oral = 0>>
+<<elseif $tempSlave.skill.oral > 100>>
+	<<print "Oral Skill Value set too high, reset to 100">><br>
+	<<set $tempSlave.skill.oral = 100>>
+<</if>>
+<<if $tempSlave.skill.vaginal < 0>>
+	<<print "Vaginal Skill Value too low, reset to 0">><br>
+	<<set $tempSlave.skill.vaginal = 0>>
+<<elseif $tempSlave.skill.vaginal > 100>>
+	<<print "Vaginal Skill Value too high, reset to 100">><br>
+	<<set $tempSlave.skill.vaginal = 100>>
+<</if>>
+<<if $tempSlave.skill.anal < 0>>
+	<<print "Anal Skill Value set too low, reset to 0">><br>
+	<<set $tempSlave.skill.anal = 0>>
+<<elseif $tempSlave.skill.anal > 100>>
+	<<print "Anal Skill Value set too high, reset to 100">><br>
+	<<set $tempSlave.skill.anal = 100>>
+<</if>>
+<<if $tempSlave.skill.whoring < 0>>
+	<<print "Whoring Skill Value set too low, reset to 0">><br>
+	<<set $tempSlave.skill.whoring = 0>>
+<<elseif $tempSlave.skill.whoring > 100>>
+	<<print "Whoring Skill Value set too high, reset to 100">><br>
+	<<set $tempSlave.skill.whoring = 100>>
+<</if>>
+<<if $tempSlave.skill.entertainment < 0>>
+	<<print "Entertainment Skill Value set too low, reset to 0">><br>
+	<<set $tempSlave.skill.entertainment = 0>>
+<<elseif $tempSlave.skill.entertainment > 100>>
+	<<print "Entertainment Skill Value set too high, reset to 100">><br>
+	<<set $tempSlave.skill.entertainment = 100>>
+<</if>>
+<<if $tempSlave.intelligence < -100>>
+	<<print "Slave Intelligence Value set too low, reset to -100">><br>
+	<<set $tempSlave.intelligence = -100>>
+<<elseif $tempSlave.intelligence > 100>>
+	<<print "Slave Intelligence Value set too high, reset to 100">><br>
+	<<set $tempSlave.intelligence = 100>>
+<</if>>
+<<if $tempSlave.intelligenceImplant < 0>>
+	<<print "Slave intelligenceImplant Value set too low, reset to 0">><br>
+	<<set $tempSlave.intelligenceImplant = 0>>
+<<elseif $tempSlave.intelligenceImplant > 30>>
+	<<print "Slave intelligenceImplant Value set too high, reset to 30">><br>
+	<<set $tempSlave.intelligenceImplant = 30>>
+<</if>>
+<<if $tempSlave.fetishStrength < 0>>
+	<<print "Fetish Strength set too low, reset to 0">><br>
+	<<set $tempSlave.fetishStrength = 0>>
+<<elseif $tempSlave.fetishStrength > 100>>
+	<<print "Fetish Strength set too high, reset to 100">><br>
+	<<set $tempSlave.fetishStrength = 100>>
+<</if>>
+<<if $tempSlave.energy < 0>>
+	<<print "Sex Drive was set too low, reset to 0">><br>
+	<<set $tempSlave.energy = 0>>
+<<elseif $tempSlave.energy > 100>>
+	<<print "Sex Drive was set too high, reset to 100">><br>
+	<<set $tempSlave.energy = 100>>
+<</if>>
+<<if $tempSlave.counter.penetrative < 0>>
+	<<print "Penetrative sex Count was set too low, reset to 0">><br>
+	<<set $tempSlave.counter.penetrative = 0>>
+<</if>>
+<<if $tempSlave.counter.oral < 0>>
+	<<print "Oral sex Count set too low, reset to 0">><br>
+	<<set $tempSlave.counter.oral = 0>>
+<</if>>
+<<if $tempSlave.counter.vaginal < 0>>
+	<<print "Vaginal sex Count set too low, reset to 0">><br>
+	<<set $tempSlave.counter.vaginal = 0>>
+<</if>>
+<<if $tempSlave.counter.anal < 0>>
+	<<print "Anal sex Count set too low, reset to 0">><br>
+	<<set $tempSlave.counter.anal = 0>>
+<</if>>
+<<if $tempSlave.counter.publicUse < 0>>
+	<<print "Public sex Count set too low, reset 0">><br>
+	<<set $tempSlave.counter.publicUse = 0>>
+<</if>>
+<<if $tempSlave.counter.mammary < 0>>
+	<<print "Titjobs Count set too low, reset to 0">><br>
+	<<set $tempSlave.counter.mammary = 0>>
+<</if>>
+<<if $tempSlave.counter.birthsTotal < 0>>
+	<<print "Total birth Count set too low, reset to 0">><br>
+	<<set $tempSlave.counter.birthsTotal = 0>>
+<</if>>
+<<if $tempSlave.prestige < 0>>
+	<<print "Prestige set too low, reset to 0">><br>
+	<<set $tempSlave.prestige = 0>>
+<<elseif $tempSlave.prestige > 3>>
+	<<print "Prestige set too high, reset to 3">><br>
+	<<set $tempSlave.prestige = 3>>
+<</if>>
+<<if $tempSlave.lactation > 0 && $tempSlave.lactationDuration == 0>>
+	<<set $tempSlave.lactationDuration = 2>>
+<<elseif $tempSlave.lactation == 0 && $tempSlave.lactationDuration > 0>>
+	<<set $tempSlave.lactationDuration = 0>>
+<</if>>
+<<run SetBellySize($tempSlave)>>
+
+<br>
+You perform the dark rituals, pray to the dark gods, and sell your soul for the power to change and mold slaves to your will.
+
+<br><br>This slave has been changed forever and you have lost a bit of your soul, YOU CHEATER!
+
+<<set $activeSlave = clone($tempSlave)>>
+<<unset $tempSlave>>
+<<set _escn = $cribs.findIndex(function(s) { s.ID === $activeSlave.ID; })>>
+<<if def _escn>>
+	<<set $cribs[_escn] = clone($activeSlave)>>
+<</if>>
+<<run ibc.recalculate_coeff_id($activeSlave.ID)>>

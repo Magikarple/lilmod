@@ -1,0 +1,7 @@
+.export-field {
+	width: 100vw;
+	max-width: 100%;
+	word-break: break-all;
+	white-space: normal;
+	height: 80vh;
+}

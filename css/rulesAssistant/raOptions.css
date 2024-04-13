@@ -1,0 +1,105 @@
+.ra-onoffswitch {
+	display: inline-block;
+	position: relative; width: 4em;
+	vertical-align: middle;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+
+.ra-onoffswitch-checkbox {
+	display: none;
+}
+
+.ra-onoffswitch-label {
+	display: block; overflow: hidden; cursor: pointer;
+	border: 2px solid #999999; border-radius: 2px;
+}
+
+.ra-onoffswitch-inner {
+	display: block; width: 200%; margin-left: -100%;
+	transition: margin 0.3s ease-in 0s;
+}
+
+.ra-onoffswitch-inner:before, .ra-onoffswitch-inner:after {
+	display: block; float: left; width: 50%; height: 3.5ex; padding: 0; line-height: 3.5ex;
+	font-size: x-small; color: white; font-family: FreeSans, sans-serif; font-weight: bold;
+	box-sizing: border-box;
+}
+
+.ra-onoffswitch-inner:before {
+	content: "ON";
+	padding-left: 7px;
+	background-color: #111111; color: #FFFFFF;
+}
+
+.ra-onoffswitch-inner:after {
+	content: "OFF";
+	padding-right: 7px;
+	background-color: #111111; color: #D9D9D9;
+	text-align: right;
+}
+
+.ra-onoffswitch-switch {
+	display: block; width: 1.5em; margin: 1px;
+	background: #8A8A8A;
+	position: absolute; top: 0; bottom: 0;
+	right: 2.1em;
+	border: 2px solid #414141; border-radius: 2px;
+	transition: all 0.3s ease-in 0s;
+}
+
+.ra-onoffswitch-checkbox:checked + .ra-onoffswitch-label .ra-onoffswitch-inner {
+	margin-left: 0;
+}
+
+.ra-onoffswitch-checkbox:checked + .ra-onoffswitch-label .ra-onoffswitch-switch {
+	right: 0;
+	background-color: #2D80E0;
+}
+
+.ra-radio-label {
+	margin: 0.5em;
+}
+
+.ra-container {
+	display: grid;
+	grid-template-columns: minmax(100px, max-content) auto;
+	grid-row-gap: 0.5ex;
+}
+
+.ra-label {
+	grid-column: 1;
+}
+
+.ra-label::after {
+	content: ":";
+	margin-right: 0.5em;
+}
+
+.ra-sub-label {
+	font-style: italic;
+	margin-left: 2.5em;
+}
+
+.ra-sub-label::after {
+	content: ":";
+	margin-right: 0.5em;
+}
+
+.ra-inline-label {
+	margin-right: 0.5em;
+}
+
+.ra-inline-label::after {
+	content: ":";
+}
+
+.ra-setters {
+	margin-top: 3ex;
+}
+
+
+.ra-comment {
+	color: gray;
+	font-style: italic;
+	margin-left: 10px;
+}

@@ -1,0 +1,56 @@
+:where(.rajs-list-item) {
+	display: inline-block;
+	color: var(--link-color);
+	margin-right: 1em;
+}
+
+.rajs-list-item.selected {
+	color: gray;
+	text-decoration: none;
+}
+
+.rajs-list-item:last-of-type {
+	margin-right: 0;
+}
+
+.rajs-list-item:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.rajs-list-item.selected:hover {
+	cursor: default;
+	text-decoration: none;
+}
+
+.rajs-list strong:first-of-type, .rajs-list input {
+	margin-right: 2em;
+}
+
+.rajs-list-item input {
+	margin: 0.25em;
+}
+
+.rajs-rules {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 0.5em;
+	align-items: start;
+}
+.rajs-rules .rajs-list-item {
+	line-height: 1.5;
+	overflow-wrap: anywhere;
+}
+
+.rajs-options {
+	margin-top: 2em;
+}
+
+.rajs-section h1 {
+	border-bottom: 1px solid white;
+	cursor: pointer;
+}
+
+.rajs-section h1:hover {
+	text-decoration: underline;
+}

@@ -1,0 +1,68 @@
+/* --- base functionality --- */
+
+.accordion-content.hidden {
+	display: none;
+}
+
+/* --- no button case --- */
+
+:not(button).accordion {
+	cursor: pointer;
+}
+
+/* --- button/div case --- */
+
+/* style button */
+button.accordion {
+	width: 100%;
+	margin: 5px 0;
+	border: 2px solid var(--button-border-color);
+	padding: 10px;
+	padding-left: 2.2em;
+	background-color: var(--button-selected-color);
+	/* to position the open/close symbol */
+	position: relative;
+}
+
+button.accordion.closed {
+	background-color: var(--button-color);
+}
+
+button.accordion.empty {
+	background-color: var(--button-disabled-color);
+	cursor: default;
+}
+
+button.accordion:hover:not(.empty) {
+	background-color: var(--button-hover-color);
+}
+
+/* open/close symbol */
+button.accordion::before {
+	font-family: "tme-fa-icons";
+	position: absolute;
+	left: 10px;
+	content: "\e81c";
+}
+
+button.accordion.closed::before {
+	content: "\e81e";
+}
+
+button.accordion.empty::before {
+	content: none;
+}
+
+/* hide content */
+div.accordion-content {
+	margin: 0 15px;
+}
+
+/* modifiers for the toggle button */
+button.accordion span.title {
+	float: left;
+}
+
+button.accordion span.info {
+	float: right;
+}

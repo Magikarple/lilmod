@@ -1,0 +1,63 @@
+personality (Init, 0-1):
+
+Does the assistant attempt to simulate personality.
+0 - no
+1 - yes
+
+name:
+
+What the assistant is called. Accepts a string.
+
+power:
+
+The assistant's power level.
+0-3
+
+appearance:
+
+The assistant's appearance, is a string.
+
+Extra1:
+
+First additional set of appearance choices.
+If defined the choices are available.
+
+Extra2:
+
+Second additional set of appearance choices.
+
+announcedName:
+
+The assistant has announced that it would like a name.
+
+bodyDesire:
+
+The assistant has announced that it would like a body.
+
+options:
+
+The assistant has additional options unlocked.
+
+fsOptions:
+
+The assistant has FS options unlocked. Set week 11 or greater.
+
+fsAppearance:
+
+The assistant has FS related appearance choices enabled.
+
+market (object):
+
+set when undefined and assistant.power > 1.
+
+relationship:
+
+Relationship status between the assistant and the market assistant, is a string.
+
+limit:
+
+The amount of credits the market assistant is allowed to use. 10,000,000 maximum.
+
+aggressiveness:
+
+How aggressive the market assistant is buying and selling menial slaves.

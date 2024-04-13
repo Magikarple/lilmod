@@ -1,0 +1,9 @@
+.favorite, .favorite:hover {
+	color: yellow;
+	text-decoration: none;
+}
+
+.not-favorite, .not-favorite:hover {
+	color: grey;
+	text-decoration: none;
+}

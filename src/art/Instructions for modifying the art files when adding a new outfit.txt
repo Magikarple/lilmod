@@ -1,0 +1,12 @@
+Are you adding a new outfit to the game, but don't have SVG art for it? If so, you MUST modify the following functions in VectorArtJS.js.
+
+1. ArtVectorBalls()
+2. ArtVectorBelly()
+3. ArtVectorBoob()
+4. ArtVectorBoobAddons() (in two different places)
+5. ArtVectorChastityBelt()
+6. ArtVectorFeet()
+7. ArtVectorPussyPiercings()
+8. ArtVectorTorsoOutfit()
+
+Still don't know where to add your edits? Just search the file for the string "no clothing". Anywhere you see this string you must add your new clothing.

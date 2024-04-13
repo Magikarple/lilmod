@@ -1,0 +1,37 @@
+{
+	"dirs": {
+		"intermediate": "build",
+		"output": "bin",
+		"modOutput": "bin/mods"
+	},
+	"output": "FC_pregmod[extras].html",
+	"gitVersionFile": "src/002-config/fc-version.js.commitHash.js",
+	"sources": {
+		"module": {
+			"js": ["js/**/*.js"],
+			"css": ["css/**/*.css"]
+		},
+		"story": {
+			"js": ["src/**/*.js"],
+			"css": ["src/**/*.css"],
+			"twee": ["src/**/*.tw"],
+			"media": [
+				"src/art/vector/layers/",
+				"src/art/vector_revamp/layers/"
+			]
+		},
+		"mods": "mods/dev",
+		"themes": "themes",
+		"head": "resources/raster/favicon/arcologyVector.html"
+	},
+	"options": {
+		"css": {
+			"autoprefix": true
+		},
+		"twee": {
+			"environment": {
+				"TWEEGO_PATH": "devTools/tweeGo/storyFormats"
+			}
+		}
+	}
+}

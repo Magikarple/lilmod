@@ -1,0 +1,749 @@
+artist notes
+-------------
+TO USE: SELECT VECTOR ART BY NOX/DEEPMURK
+
+CREDITS
+-------------
+Nov_X/NoX (Original Artist, whose work I built off of)
+skinAnon (For doing the color hexes on hundreds of skin/nipple tones.)
+@prndev (For dynamic belly scaling magic)
+@klorpa (For fixing many of my mistakes/spaghetti art code)
+@kopareigns (For fixing many of my mistakes/spaghetti art code)
+@pregmodder (Fixes and more art)
+
+FOR MANUAL USE
+-------------
+1. Split source_vector_ndmain.svg and source_vector_ndextras.svg into src/art/vector/layer.
+Note#1 source_vector.svg is a legacy version (before the art was changed) and is not used for anything.
+Note#2 vector_revamp_source.svg not related and belongs to the other artist.
+
+TO PLAY WITHOUT FACES
+-------------
+1. Go to pregmod/src/art/vector
+2. Open head.tw in notepad/notepad++
+3. Delete everything from Line 30 to Line 979... you'll see it says faceShape, eyebrowFullness, etc-- all of those are related to faces and can be deleted. (AKA just delete everything between the lines that says /* FACIAL APPEARANCE */ and /* END FACIAL APPEARANCE */)
+4. Compile and play game.
+
+known issues
+-------------
+	-minor clipping issue leg/ass outfits due to their outfit transparency effects
+	-not all outfit art works with amputees
+	-minor hair clipping on some outfits
+	-heavy lip piercings look wonky on open mouth art
+	-heavy/light piercings on face seem to override each other
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+pending requests/suggestions
+-------------
+	-loli/shota bodies
+
+pending outfit requests
+-------------
+	-opaque stockings with ribbons
+
+planned additions
+-------------
+	-more hair styles
+	-facepaint
+	-alternate makeup options
+	-rework all AI avatars
+	-dick piercings (stalled due to planned code change)
+	-more outfits, see current queue ( https://gitgud.io/deepmurk/fc-pregmod/issues/1 )
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+v1.7 (12/22/2018)
+-------------
+	-added muscle definition (heavy)
+	-added colorable sclera
+	-added colorable eyebrows
+	-added purple hair color
+	-added dark orchid hair color
+	-added sea green hair color
+	-added green-yellow hair color
+	-added dark blue hair color
+	-added missing AI avatars
+	-fixed faces & skintones not showing on custom ethnicities
+	-added jet black hair color
+	-changed black hair color
+	-changed auburn hair color
+	-alphabetized some options in the salon
+	-miscellaneous tweaks to some other colors
+
+v1.6 (11/18/2018)
+-------------
+	-misc art fixes
+	-added muscle definition (low)
+	-added muscle definition (medium)
+	-shibari rope outfit is now red for better contrast on some skins
+	-fixed hair showing when ability to grow hair was surgically removed
+	-fixed muscles showing on amputated slave limbs
+	-fixed faces showing on Fuckdolls
+	-fixed "mixed race" skin tone/face issues
+	-fixed some issues related to belly outfits
+
+v1.5 (10/21/2018)
+-------------
+	-removed penis head piercing light flaccid (art only)
+	-removed penis head piercing light erect (art only)
+	-removed penis head piercing heavy flaccid (art only)
+	-removed penis head piecing heavy erect (art only)
+	-corrected ku klux klan robe description grammar
+	-added burkini outfit
+	-added hijab and blouse outfit
+	-changed the code that affects art layer names due to conflicts with new outfits
+	-changed art layer name of cutoffs to cutoffsandatshirt
+	-changed art layer name of niqab to niqabandabaya
+	-changed art layer name of hijab to hijabandabaya
+	-changed art layer name of spats to spatsandatanktop
+	-changed art layer name of stretchpants to stretchpantsandacroptop
+	-changed art layer name of blouse to hijabandblouse
+	-changed blouse and hijab outfit string name to hijab and blouse
+	-changed shimapan panties outfit string name to striped panties
+	-added bra outfit
+	-added button-up shirt outfit
+	-added button-up shirt and panties outfit
+	-added gothic lolita dress outfit
+	-added hanbok outfit
+		-added nice pony outfit (no art yet)
+	-added one-piece swimsuit outfit
+	-added police uniform outfit
+	-added skimpy loincloth outfit
+	-added slutty klan robe outfit
+		-added slutty pony outfit (no art yet)
+	-added sports bra outfit
+	-added striped bra outfit
+	-added sweater outfit
+	-added sweater and cutoffs outfit
+	-added sweater and panties outfit
+	-added t-shirt outfit
+	-added t-shirt and jeans outfit
+	-added t-shirt and panties outfit
+	-added t-shirt and thong outfit
+	-added tank-top outfit
+	-added tank-top and panties outfit
+	-added thong outfit
+	-added tube top outfit
+	-added tube top and thong outfit
+	-added oversized t-shirt outfit
+	-added oversized t-shirt and boyshorts outfit
+	-added boyshorts outfit
+	-added cutoffs outfit
+	-added jeans outfit
+	-added leather pants outfit
+	-added leather pants and a tube top outfit
+	-added leather pants and pasties outfit
+	-added panties outfit
+	-added panties and pasties outfit
+	-added sport shorts outfit
+	-added sport shorts and a sports bra outfit
+	-added sport shorts and a t-shirt outfit
+	-added striped underwear outfit
+	-increased size of armpit hair art
+	-changed minidress outfit to black color (per request)
+	-misc art fixes
+	-added kitty lingerie outfit
+
+v1.4 (09/29/2018)
+-------------
+	-fixed facial markings showing on restrictive latex
+	-fixed error on certain clothes when slave is an amputee
+	-added ku klux klan outfit
+	-added burqa outfit
+	-added hijab and abaya outfit
+	-changed niqab and abaya outfit
+	-added shimapan panty outfit
+	-fixed malay race not having faces
+	-added penis head piercing light flaccid (art only)
+	-added penis head piercing light erect (art only)
+	-added penis head piercing heavy flaccid (art only)
+	-added penis head piecing heavy erect (art only)
+	-added nose piercing light
+	-added nose piercing heavy
+	-added lip piercing light
+	-added lip piercing heavy
+	-added eyebrow piercing light
+	-added eyebrow piercing heavy
+	-fixed some eyebrow types not coloring correctly when dyeing
+	-fixed chastity belt showing incorrectly on some bodies (chubby, fat, obese)
+	-fixed hijab head outfit showing incorrectly on faces
+	-added cybernetic feet basic
+	-added cybernetic leg narrow basic
+	-added cybernetic leg normal basic
+	-added cybernetic leg wide basic
+	-added cybernetic leg thick basic
+	-added cybernetic butt 0 basic
+	-added cybernetic butt 1 basic
+	-added cybernetic butt 2 basic
+	-added cybernetic butt 3 basic
+	-added cybernetic butt 4 basic
+	-added cybernetic butt 5 basic
+	-added cybernetic butt 6 basic
+	-added cybernetic arm left thumb down basic
+	-added cybernetic arm left rebel basic
+	-added cybernetic arm left high basic
+	-added cybernetic arm left mid basic
+	-added cybernetic arm left low basic
+	-added cybernetic arm right high basic
+	-added cybernetic arm right mid basic
+	-added cybernetic arm right low basic
+	-added cybernetic feet sexy
+	-added cybernetic leg narrow sexy
+	-added cybernetic leg normal sexy
+	-added cybernetic leg wide sexy
+	-added cybernetic leg thick sexy
+	-added cybernetic butt 0 sexy
+	-added cybernetic butt 1 sexy
+	-added cybernetic butt 2 sexy
+	-added cybernetic butt 3 sexy
+	-added cybernetic butt 4 sexy
+	-added cybernetic butt 5 sexy
+	-added cybernetic butt 6 sexy
+	-added cybernetic arm left thumb down sexy
+	-added cybernetic arm left rebel sexy
+	-added cybernetic arm left high sexy
+	-added cybernetic arm left mid sexy
+	-added cybernetic arm left low sexy
+	-added cybernetic arm right high sexy
+	-added cybernetic arm right mid sexy
+	-added cybernetic arm right low sexy
+	-added cybernetic feet beauty
+	-added cybernetic leg narrow beauty
+	-added cybernetic leg normal beauty
+	-added cybernetic leg wide beauty
+	-added cybernetic leg thick beauty
+	-added cybernetic butt 0 beauty
+	-added cybernetic butt 1 beauty
+	-added cybernetic butt 2 beauty
+	-added cybernetic butt 3 beauty
+	-added cybernetic butt 4 beauty
+	-added cybernetic butt 5 beauty
+	-added cybernetic butt 6 beauty
+	-added cybernetic arm left thumb down beauty
+	-added cybernetic arm left rebel beauty
+	-added cybernetic arm left high beauty
+	-added cybernetic arm left mid beauty
+	-added cybernetic arm left low beauty
+	-added cybernetic arm right high beauty
+	-added cybernetic arm right mid beauty
+	-added cybernetic arm right low beauty
+	-added cybernetic feet combat
+	-added cybernetic leg narrow combat
+	-added cybernetic leg normal combat
+	-added cybernetic leg wide combat
+	-added cybernetic leg thick combat
+	-added cybernetic butt 0 combat
+	-added cybernetic butt 1 combat
+	-added cybernetic butt 2 combat
+	-added cybernetic butt 3 combat
+	-added cybernetic butt 4 combat
+	-added cybernetic butt 5 combat
+	-added cybernetic butt 6 combat
+	-added cybernetic arm left thumb down combat
+	-added cybernetic arm left rebel combat
+	-added cybernetic arm left high combat
+	-added cybernetic arm left mid combat
+	-added cybernetic arm left low combat
+	-added cybernetic arm right high combat
+	-added cybernetic arm right mid combat
+	-added cybernetic arm right low combat
+	-added cybernetic feet swiss
+	-added cybernetic leg narrow swiss
+	-added cybernetic leg normal swiss
+	-added cybernetic leg wide swiss
+	-added cybernetic leg thick swiss
+	-added cybernetic butt 0 swiss
+	-added cybernetic butt 1 swiss
+	-added cybernetic butt 2 swiss
+	-added cybernetic butt 3 swiss
+	-added cybernetic butt 4 swiss
+	-added cybernetic butt 5 swiss
+	-added cybernetic butt 6 swiss
+	-added cybernetic arm left thumb down swiss
+	-added cybernetic arm left rebel swiss
+	-added cybernetic arm left high swiss
+	-added cybernetic arm left mid swiss
+	-added cybernetic arm left low swiss
+	-added cybernetic arm right high swiss
+	-added cybernetic arm right mid swiss
+	-added cybernetic arm right low swiss
+	-added penis flaccid circumcised 0
+	-added penis flaccid circumcised 1
+	-added penis flaccid circumcised 2
+	-added penis flaccid circumcised 3
+	-added penis flaccid circumcised 4
+	-added penis flaccid circumcised 5
+	-added penis flaccid circumcised 6
+	-added penis flaccid circumcised 7
+	-added penis flaccid circumcised 8
+	-added penis flaccid circumcised 9
+	-added penis flaccid circumcised 10
+	-added penis erect circumcised 0
+	-added penis erect circumcised 1
+	-added penis erect circumcised 2
+	-added penis erect circumcised 3
+	-added penis erect circumcised 4
+	-added penis erect circumcised 5
+	-added penis erect circumcised 6
+	-added penis erect circumcised 7
+	-added penis erect circumcised 8
+	-added penis erect circumcised 9
+	-added penis erect circumcised 10
+
+v1.3 (09/22/2018)
+-------------
+	-fixed shaved sides hairstyle showing incorrectly
+	-fixed faces showing on restrictive latex
+	-fixed restrictive latex not showing on bodies (chubby, fat, obese)
+	-fixed accent band not showing on kimono belly outfits
+	-fixed facial markings showing incorrectly on faces (birthmark,etc)
+	-added eye coloring (irises only)
+	-fixed lips showing only one color
+	-added fox ears and tail
+	-added cat ears and tail
+	-fixed nipples not showing on attractive lingerie for a pregnant woman outfit
+	-fixed black colored nipples showing on latex and bodysuits
+	-fixed head accessory alignment to new faces (ball gag, dildo gag, etc)
+	-changed art on porcelain mask
+	-added eyes type-d
+	-added mouth type-d
+	-added nose type-d
+	-added eyebrows type-d pencilthin
+	-added eyebrows type-d thin
+	-added eyebrows type-d threaded
+	-added eyebrows type-d natural
+	-added eyebrows type-d tapered
+	-added eyebrows type-d thick
+	-added eyebrows type-d bushy
+	-added eyes type-e
+	-added mouth type-e
+	-added nose type-e
+	-added eyebrows type-e pencilthin
+	-added eyebrows type-e thin
+	-added eyebrows type-e threaded
+	-added eyebrows type-e natural
+	-added eyebrows type-e tapered
+	-added eyebrows type-e thick
+	-added eyebrows type-e bushy
+	-added eyes type-f
+	-added mouth type-f
+	-added nose type-f
+	-added eyebrows type-f pencilthin
+	-added eyebrows type-f thin
+	-added eyebrows type-f threaded
+	-added eyebrows type-f natural
+	-added eyebrows type-f tapered
+	-added eyebrows type-f thick
+	-added eyebrows type-f bushy
+	-separated faces by race/head shape (eg: white/exotic is different from asian/exotic)
+	-made some eye types smaller
+	-fixed stockings not covering thick thighs properly
+
+v1.2 (09/16/2018)
+-------------
+	-added naked apron outfit (chubby, fat, obese)
+	-added attractive lingerie (chubby, fat, obese)
+	-added ballgown outfit (chubby, fat, obese)
+	-added battlearmor outfit (chubby, fat, obese)
+	-added battledress outfit (chubby, fat, obese)
+	-added biyelgee costume (chubby, fat, obese)
+	-added body oil outfit (chubby, fat, obese)
+	-added bunny outfit (chubby, fat, obese)
+	-added chains outfit (chubby, fat, obese)
+	-added chattel habit outfit (chubby, fat, obese)
+	-added cheerleader outfit (chubby, fat, obese)
+	-added clubslut outfit (chubby, fat, obese)
+	-added comfortable bodysuit outfit (chubby, fat, obese)
+	-added conservative outfit (chubby, fat, obese)
+	-added cutoffs and tshirt outfit (chubby, fat, obese)
+	-added dirndl outfit (chubby, fat, obese)
+	-added fallennun habit outfit (chubby, fat, obese)
+	-added haltertop dress outfit (chubby, fat, obese)
+	-added harem gauze outfit (chubby, fat, obese)
+	-added hijab and abaya outfit (chubby, fat, obese)
+	-added huipil outfit (chubby, fat, obese)
+	-added kimono outfit (chubby, fat, obese)
+	-added latex outfit (chubby, fat, obese)
+	-added attractive lingerie for pregnant woman outfit (chubby, fat, obese)
+	-added leotard outfit (chubby, fat, obese)
+	-added lederhosen outfit (chubby, fat, obese)
+	-added long qipao outfit (chubby, fat, obese)
+	-added maternity dress outfit (chubby, fat, obese)
+	-added military uniform outfit (chubby, fat, obese)
+	-added minidress outfit (chubby, fat, obese)
+	-added monikini outfit (chubby, fat, obese)
+	-added mounty outfit (chubby, fat, obese)
+	-added nice business attire outfit (chubby, fat, obese)
+	-added nice maid outfit (chubby, fat, obese)
+	-added nice nurse outfit (chubby, fat, obese)
+	-added penitent nuns habit outfit (chubby, fat, obese)
+	-added red army uniform outfit (chubby, fat, obese)
+	-added scalemail bikini outfit (chubby, fat, obese)
+	-added schoolgirl outfit (chubby, fat, obese)
+	-added schutzstaffel uniform outfit (chubby, fat, obese)
+	-added schutzstaffel uniform slutty outfit (chubby, fat, obese)
+	-added shine outfit [Only applies to latex] (chubby, fat, obese)
+	-added shibari rope outfit (chubby, fat, obese)
+	-added slutty outfit (chubby, fat, obese)
+	-reworked slutty outfit (changed to pasties)
+	-added slave gown outfit (chubby, fat, obese)
+	-added slutty business attire outfit (chubby, fat, obese)
+	-added slutty jewelry outfit (chubby, fat, obese)
+	-added slutty maid outfit (chubby, fat, obese)
+	-added slutty nurse outfit (chubby, fat, obese)
+	-updated slutty nurse outfit (now with 100% more hat)
+	-added slutty qipao outfit (chubby, fat, obese)
+	-added spats outfit (chubby, fat, obese)
+	-added stretch pants outfit (chubby, fat, obese)
+	-added string bikini outfit (chubby, fat, obese)
+	-added succubus outfit (chubby, fat, obese)
+	-added toga outfit (chubby, fat, obese)
+	-added uncomfortable strap outfit (chubby, fat, obese)
+	-added western outfit (chubby, fat, obese)
+	-added eyes type-a
+	-added mouth type-a
+	-added nose type-a
+	-added eyebrows type-a pencilthin
+	-added eyebrows type-a thin
+	-added eyebrows type-a threaded
+	-added eyebrows type-a natural
+	-added eyebrows type-a tapered
+	-added eyebrows type-a thick
+	-added eyebrows type-a bushy
+	-added eyes type-b
+	-added mouth type-b
+	-added nose type-b
+	-added eyebrows type-b pencilthin
+	-added eyebrows type-b thin
+	-added eyebrows type-b threaded
+	-added eyebrows type-b natural
+	-added eyebrows type-b tapered
+	-added eyebrows type-b thick
+	-added eyebrows type-b bushy
+	-added eyes type-c
+	-added mouth type-c
+	-added nose type-c
+	-added eyebrows type-c pencilthin
+	-added eyebrows type-c thin
+	-added eyebrows type-c threaded
+	-added eyebrows type-c natural
+	-added eyebrows type-c tapered
+	-added eyebrows type-c thick
+	-added eyebrows type-c bushy
+
+v1.1 (07-11-2018)
+-------------
+	-added torso chubby
+	-added torso fat
+	-added torso obese
+	-added butt enormous
+	-added butt gigantic
+	-added butt massive
+	-added legs thick
+	-added butt outfits enormous (x56)
+	-added butt outfits gigantic (x56)
+	-added butt outfits massive (x56)
+	-fixed crotch coloring for dicks on dirndl
+	-fixed crotch coloring for dicks on lederhosen
+	-fixed crotch coloring for dicks on battlearmor
+	-fixed crotch coloring for dicks on mounty outfit
+	-fixed crotch coloring for dicks on long qipao
+	-fixed crotch coloring for dicks on biyelgee costume
+	-added leg outfits thick (x56)
+
+v1.0 (07-03-2018)
+-------------
+	-added long qipao outfit
+	-added battlearmor outfit
+	-added mounty outfit
+	-added dirndl outfit
+	-added lederhosen outfit
+	-added biyelgee costume outfit
+	-added tiny nipple art
+	-added cute nipple art
+	-added puffy nipple art
+	-added inverted nipple art
+	-added huge nipple art
+	-added fuckable nipple art
+	-added partially inverted nipple art
+
+v0.9 (05-05-2018)
+-------------
+	-added dynamic belly scaling (courtesy of @prndev)
+	-added belly button art
+	-fixed belly piercings not showing
+	-updated belly piercing art
+	-added belly outfit apron
+	-added belly outfit bodysuit
+	-added belly outfit cheerleader
+	-added belly outfit clubslut
+	-added belly outfit cutoffs (base only)
+	-added belly outfit cybersuit
+	-added belly outfit fallen nun (base only)
+	-added belly outfit haltertop dress
+	-added belly outfit hijab and ayaba
+	-added belly outfit latex catsuit
+	-added belly outfit leotard
+	-added belly outfit nice maid
+	-added belly outfit slutty maid
+	-added belly outfit military (base only)
+	-added belly outfit minidress
+	-added belly outfit monokini (base only)
+	-added belly outfit nice nurse
+	-added belly outfit slutty nurse (base only)
+	-added belly outfit red army uniform (base only)
+	-added belly outfit schoolgirl (base only)
+	-added belly outfit schutzstaffel (base only)
+	-added belly outfit silken ballgown
+	-added belly outfit skimpy battldress (base only)
+	-added belly outfit slave gown
+	-added belly outfit spats and a tank top (base only)
+	-added belly outfit succubus (base only)
+	-added belly outfit suit nice (base only)
+	-added belly outfit suit slutty (base only)
+	-added belly outfit bunny outfit
+	-added belly outfit chattel habit (base only)
+	-added belly outfit conservative clothing (base only)
+	-added belly outfit harem gauze (base only)
+	-added belly outfit huipil
+	-added belly outfit kimono (base only)
+	-added belly outfit maternity dress
+	-added belly outfit slutty qipao
+	-added belly outfit toga
+	-added belly outfit western clothing
+	-added belly outfit penitent nun (base only)
+	-added belly outfit restrictive latex
+	-added freckles as misc facial feature
+	-added heavy freckles as misc facial feature
+	-added beauty mark as misc facial feature
+	-added birthmark as misc facial feature
+	-minor outfit polishing on some outfits
+	-polished outlines on torso art (normal, narrow, absurd)
+	-reworked naked apron outfit
+	-updated bangles outfit
+	-fixed problems when surgically altering a slave's race
+	-reworked clubslut netting outfit
+	-updated cheerleader outfit
+	-added AI personal assistant art
+	-added blue-violet hair color
+	-updated deep red hair color
+	-added shaved armpit hair
+	-added neat armpit hair
+	-added bushy armpit hair
+	-fixed male genitalia showing over large bellies
+	-added porcelain mask accessory
+	-added ability to custom color porcelain mask
+	-added ability to custom color glasses
+	-added slutty schutzstaffel uniform
+
+v0.8 (04-21-2018)
+-------------
+	-added wispy pubic hair
+	-added areola normal art
+	-added areola large art
+	-added areola wide art
+	-added areola huge art
+	-added areola star-shaped art
+	-added areola heart-shaped art
+	-converted stockings to a leg accessory
+	-fixed issue that allowed stockings to be shown/selected on amputees
+	-added visor hat to military outfit (per request)
+	-fixed tilted neat pubic hair
+	-fixed bellies/corsets showing at the same time if present/selected
+	-major overhaul of skin tones
+	-tweaked leg/hipsize/weight art distribution
+	-fixed vaginal piercings not showing
+	-updated vaginal piercing art
+	-created porcelain mask accessory art
+	-added cybersuit outfit
+	-added skin/nipple tones for every race (courtesy of skinAnon)
+	-added naked apron outfit
+	-added schutzstaffel uniform
+	-added red army uniform
+	-darkened stocking art slightly (per request)
+
+v0.7 (04-14-2018)
+-------------
+	-added sleeves to hijab and abaya outfit
+	-added sleeves to cutoffs and a t-shirt outfit
+	-added sleeves to skimpy battledress outfit
+	-added sleeves to conservative outfit
+	-added sleeves to huipil outfit
+	-added sleeves to kimono outfit
+	-added sleeves to nice maid outfit
+	-added sleeves to military uniform outfit
+	-added sleeves to nice nurse outfit
+	-added sleeves to slutty nurse outfit
+	-added sleeves to slutty qipao outfit
+	-added sleeves to schoolgirl outfit
+	-added sleeves to nice suit outfit
+	-added sleeves to slutty suit outfit
+	-added sleeves to western clothing outfit
+	-removed thigh-highs/stockings on most outfits
+	-fixed nipple piercings showing incorrectly
+	-fixed boots showing incorrectly on some outfits
+	-fixed 'invisible balls' on one of the scrotum sizes (the shadow was showing as skin color, removing the outline)
+	-slutty nurse outfit now better matches the description
+	-updated thigh boot art
+	-updated extreme heel art
+	-added bare feet stocking outfits (Long/short)
+	-added additional flat shoe outfits (bare/stockings short/stockings long)
+	-added additional heel shoe outfits (bare/stockings short/stockings long)
+	-added additional pump shoe outfits (bare/stockings short/stockings long)
+
+v0.6 (04-07-2018)
+-------------
+	-fixed bodysuit outfit color issue on non-default colors
+	-fixed restrictive latex color issue on non-default colors
+	-added hairstyle 'messy bun' (long/medium/short)
+	-added hairstyle 'dreadlocks' (long/medium/short)
+	-added hairstyle 'cornrows' (long/medium/short)
+	-added hairstyle 'braided' (long/medium/short)
+	-added hairstyle 'twintails' (long/medium/short)
+	-added hairstyle 'shavedsides' (long/medium/short)
+	-added chains outfit
+	-added penitent nun outfit
+	-reworked male genitalia
+	-added bulge outfits for the appropriate outfits
+	-removed transparency on clubslut, harem, and slutty torso outfits due to multiple issues
+	-overhauled clubslut outfit to fix numerous art issues.
+	-changed extreme heels
+	-changed thigh high boots
+	-overhauled breasts
+	-reworked all breast outfits due to breast overhauled
+	-changed breast positioning relative to the overall body
+	-reworked corset lengths
+	-reworked all breast and torso outfits for new breast compatibility
+
+v0.5 (03-31-2018)
+-------------
+	-added belly scaling w/pregnancy+overfeeding
+	-minor polishing on all outfits
+	-fixed piercings not showing correctly
+	-added nipple light piercings
+	-added areola light piercings
+	-added nipple heavy piercings
+	-added areola heavy piercings
+	-added vaginal dildo accessory
+	-added vaginal long dildo accessory
+	-added vaginal large dildo accessory
+	-added vaginal long, large dildo accessory
+	-added vaginal huge dildo accessory
+	-added vaginal long, huge dildo accessory
+	-added anal long plug accessory
+	-added anal large plug accessory
+	-added anal long, large plug accessory
+	-added anal huge plug accessory
+	-added anal long, huge accessory
+	-added anal tail plug accessory (anal hook/bunny tail)
+	-added first trimester pregnancy empathy belly
+	-added second trimester pregnancy empathy belly
+	-added third trimester pregnancy empathy belly
+	-added third trimester twin pregnancy empathy belly
+	-added tight corset torso accessory
+	-added extreme corset torso accessory
+	-cleaned up changelog wording for clarity purposes
+	-added uncomfortable leather collar outfit
+	-updated dildo gag collar graphic art
+	-added massive dildo gag collar outfit
+	-added ball gag collar outfit
+	-added bit gag collar outfit
+	-added silken ribbon collar outfit
+	-added bowtie collar outfit
+	-added ancient egyptian collar outfit
+	-added hairstyle 'neat' (long/medium/short)
+	-added hairstyle 'up' (long/medium/short)
+	-added hairstyle 'ponytail' (long/medium/short)
+	-added hairstyle 'bun' (long/medium/short)
+	-added hairstyle 'curled' (long/medium/short)
+	-added hairstyle 'messy' (long/medium/short)
+	-added hairstyle 'permed' (long/medium/short)
+	-added hairstyle 'eary' (long/medium/short)
+	-added hairstyle 'luxurious' (long/medium/short)
+	-added hairstyle 'afro' (long/medium/short)
+	-fixed cowboy hat not showing on western outfit
+	-fixed baldness on generic/generated non-selectable hairstyles
+
+v0.4 (03-24-2018)
+-------------
+	-added nice lingerie outfit
+	-fixed immersion breaking art on specific flat-chested outfits (somewhat)
+	-added nurse slutty outfit
+	-added silken ballgown outfit
+	-added skimpy battledress outfit
+	-minor polishing on all outfits
+	-added slutty outfit
+	-added spats and a tank top outfit
+	-fixed graphical issues on mini dress
+	-added succubus outfit
+	-added nice suit outfit
+	-added slutty suit outfit
+	-added attractive lingerie for a pregnant woman outfit
+	-added bunny outfit
+	-added chattel habit outfit
+	-updated fallen nun outfit (headdress added)
+	-added conservative clothing outfit
+	-added harem gauze outfit
+	-added huipil outfit
+	-added kimono outfit
+	-added slave gown outfit
+	-added stretch pants and a crop top outfit
+	-updated schoolgirl outfit (sweater vest added)
+	-added slutty qipao outfit
+	-added toga outfit
+	-added western clothing outfit (no cowboy hat)
+	-fixed dick/ball clipping issues on all relevant outfits
+	-added natural color nipples to match racial skin tones
+
+v0.3 (03-17-2018)
+-------------
+	-added schoolgirl outfit
+	-added fallennun outfit
+	-added nice maid outfit
+	-added slutty maid outfit
+	-updated minidress outfit (changed color+fixes)
+	-minor polishing on some outfits
+	-added niqab and abaya outfit (niqab > hijab)
+	-changed white colors on outfits to grey for increased contrast on light skin tones.
+	-added nice nurse outfit
+	-fixed outline issues on boots/extreme heels
+	-fixed ultra black hair color issue (vanilla only)
+	-added military uniform outfit
+	-updated to latest pregmod git
+
+v0.2 (03-10-2018)
+-------------
+
+	-added string bikini outfit
+	-added scalemail bikini outfit
+	-updated male genitalia display position
+	-set default shoe colors to neutral (per request)
+	-added some natural color nipples to match racial skin tones
+
+v0.1 (03-03-2018)
+-------------
+	-updated boob graphic art
+	-updated nipple graphic art
+	-updated arm graphic art
+	-updated female genitalia graphic art
+	-updated waist graphic art
+	-updated butt graphic art
+	-added bushy pubic hair
+	-added very bushy pubic hair
+	-updated vaginal chastity belt
+	-updated anal chastity belt
+	-added uncomfortable strap outfit
+	-added shibari rope outfit
+	-updated restrictive latex outfit
+	-updated latex catsuit outfit
+	-updated extreme heel graphic art
+	-updated pump shoes graphic art (not selectable in-game yet)
+	-added bodysuit outfit
+	-added body oil outfit
+	-added haltertop dress outfit
+	-added bangles outfit
+	-added mini dress outfit
+	-added leotard outfit
+	-added t-shirt and cutoffs outfit
+	-added cheerleader outfit
+	-added clubslut netting outfit

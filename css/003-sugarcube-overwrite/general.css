@@ -1,0 +1,29 @@
+body {
+	overflow-x: hidden;
+}
+
+/* clears SugarCube's default transition */
+.passage {
+	transition: none;
+	-webkit-transition: none;
+}
+
+.passage-in {
+	opacity: 1 !important;
+}
+
+#passages {
+	/* max-width: 54em */
+	max-width: 100%;
+}
+
+/* makes HR colorflip compatible */
+hr {
+	background:#ccc;
+	border:0;
+}
+
+/* fix dialog title centering */
+#ui-dialog-title {
+	padding-left: 3.5em;
+}

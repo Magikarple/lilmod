@@ -1,0 +1,31 @@
+.has-tooltip {
+	text-decoration: underline dotted;
+	white-space: nowrap;
+}
+
+/* Fix links */
+a.has-tooltip {
+	text-decoration: none;
+}
+a.has-tooltip:hover {
+	text-decoration: underline;
+}
+
+.tippy-content {
+	text-indent: initial;
+	font-weight: initial;
+}
+
+.tippy-content ul {
+	margin: 5px;
+}
+.tippy-content ul:not(.choices-strip) {
+	padding-left: 10px;
+}
+
+.tippy-content .tip-details {
+	font-size: smaller;
+	/* if there isn't enough space vertically, add a scrollbar */
+	overflow-y: auto;
+	max-height: 95vh;
+}

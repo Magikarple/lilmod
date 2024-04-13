@@ -1,0 +1,42 @@
+div.hotkey-settings {
+	display: grid;
+	grid-template-columns: repeat(3, max-content) auto;
+}
+
+@media only screen and (min-width: 1600px) {
+	div.hotkey-settings {
+		grid-template-columns: repeat(3, max-content) auto repeat(3, max-content) auto;
+	}
+}
+
+div.hotkey-settings div.description {
+	margin-right: 10px;
+	/* center text vertically */
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+div.hotkey-settings button {
+	margin: 5px;
+	border-width: 2px;
+	background-color: var(--button-color);
+	border-color: var(--button-border-color);
+	width: 70px;
+}
+
+div.hotkey-settings button.combination {
+	min-width: 150px;
+	border-width: 0;
+}
+
+div.hotkey-settings button.inactive, div.hotkey-settings button.inactive:hover {
+	background-color: var(--button-selected-color);
+	cursor: default;
+
+}
+
+div.hotkey-settings button:hover {
+	background-color: var(--button-hover-color);
+	border-color: var(--button-border-color);
+}

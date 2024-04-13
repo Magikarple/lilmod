@@ -1,0 +1,37 @@
+.adjacent-slave {
+	font-weight: bold;
+}
+
+.interact-name {
+	margin: 0 2em;
+}
+
+.si-header {
+	font-size: 1.5em;
+}
+
+.si-slave-title {
+	color: coral;
+	font-weight: bold;
+}
+
+.si-relationship {
+	color: lightgreen;
+	font-weight: bold;
+}
+
+.si-family {
+	color: lightgreen;
+}
+
+.si-rival {
+	color: salmon;
+}
+
+/* notification */
+a.with-note::after /*notification for links with notes in tooltips */
+{
+	font-family: "tme-fa-icons";
+	content: " \e80c";
+	color: yellow;
+}

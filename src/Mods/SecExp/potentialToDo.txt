@@ -1,0 +1,27 @@
+Hexall90's last merged commit: 52dde0b3
+
+- Can other Arcologies assist with the attacks from your Arcology?
+	Like if you're being attacked by raiders they send some rapid-deployment forces and help you but when it's the Old world they wouldn't in fear of being criticize or something
+- Or sending your troops to help other arcologies to earn reputation, POW as menials and captured military assets for cash, to boost cultural exchange and economic development. Or choosing not to send troops (if rival) to lower its value and to preserve your cultural independence.
+
+	Fine, I'll Do It Myself
+	Pirates? Enemy navies? - 328279
+	Pirates could raid trade routs and such ,even could capture a high class cruise liner and you have to move retake it with an army similar to the ground battles. you could have an event where you gain a old world port to ship your goods to, and you have to defend it .		-328413
+- How to make threads - 355478
+- One thing I find to be weird/stupid is that facilities must be manned with menial slaves. I think that it instead should be an option, like with armies, to man them with free citizens instead who then do a better job but instead require a monthly wage.
+- Oni-girl soldiers.
+- Update encyclopedia entry to reflect above.
+- Add suicide units.
+- Add WarAnimal's units - Optimally Functioning Code, 254511 - 3rd Military Animal Platoon.
+- Loli unit - Unlocked from Black market, origin Wedding edition - 310602.
+- Feature Request: Potential for damage to Security Expansion Upgrades - https://gitgud.io/pregmodfan/fc-pregmod/issues/1146
+- Suggestion - Specialized Schools, Fortifications and Militia Edicts -https://gitgud.io/pregmodfan/fc-pregmod/issues/763
+- Suggestion - Arcology Conquest - https://gitgud.io/pregmodfan/fc-pregmod/issues/760
+- And if I am a master tactician, maybe I could get an estimate how effective the various tactics could be?
+- Suggestion - Gradual Battle Frequency - https://gitgud.io/pregmodfan/fc-pregmod/issues/1245#note_82504
+- Option to send slaves into military unit to gain some nice scars and experience would be nice (with retrieval).
+- So would be taking slaves from slave units as personal ones. The slave units would pretty much be menial slaves I'd imagine, not sex slaves.
+- If I think about it having a squad of personal slaves that you equip in whatever gear you want and send out to capture new slaves, raid caravans and cities and shit would be pretty sweet, I would even call it special forces but that's taken, also the combat skill is still a binary thing which makes the whole thing pointless.
+	How about to start off with option to send one or two of your combat trained slaves to assist the merc's when they are on a raid with the possibility of receiving battle wounds.
+- If there are choices, they should be along the lines of "higher risk, higher reward" (defeating the enemy with fewer casualties and damage if it goes right, but suffering higher casualties and damage if it goes wrong), or things like accepting more/less military casualties for better/worse protection of economic assets (costing money/damaging economy) and civilians (costing reputation/damaging population).
+- Support Neo-Imperial Warhounds in battles.

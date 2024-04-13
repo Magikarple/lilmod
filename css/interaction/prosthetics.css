@@ -1,0 +1,30 @@
+div.limb-selector {
+	display: grid;
+	grid-template-columns: 200px 100px 100px 100px 100px 100px;
+}
+
+div.limb-selector div.full {
+	grid-column-start: 1;
+	grid-column-end: 7;
+	text-align: center;
+}
+
+div.eyeContainer {
+	display: grid;
+	grid-template-columns: 80px 50px 70px 50px;
+}
+
+div.buy-prosthetics {
+	display: grid;
+	grid-template-columns: repeat(4, max-content);
+	grid-column-gap: 40px;
+}
+div.buy-prosthetics div.full {
+	grid-column-start: 2;
+	grid-column-end: 5;
+}
+div.buy-prosthetics div.research {
+	grid-column-start: 3;
+	grid-column-end: 5;
+	text-align: center;
+}

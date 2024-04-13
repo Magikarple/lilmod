@@ -1,0 +1,3 @@
+App.Events.jeCommon = function() {
+	return `${capFirstChar(V.assistant.name)} breaks in on your sleep with an urgent message. You push a slave off you and sit up to take it. As the owner of the arcology, you perform some functions that would traditionally be the province of a government. In this anarcho-liberal polity, it's still necessary for people making deals to have someone to appeal to when disputes arise. Part of your agreement with your tenants is that you will perform this duty on deals between two tenants. The message is about just such a disagreement; they always seem to happen in the middle of the night, and they're always urgent.`;
+};

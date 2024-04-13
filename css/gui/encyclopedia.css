@@ -1,0 +1,26 @@
+.encyclopedia.topic {
+	font-weight: bold;
+}
+
+/* mark text that is a link/button somewhere else */
+/* Click <span class="encyclopedia interaction">X</span> to do Y */
+.encyclopedia.interaction {
+	background: #203e6c;
+	border-radius: 5px;
+	border: hidden;
+	padding: 2px 4px;
+	white-space: nowrap;
+	font-size: smaller;
+}
+
+.encyclopedia-source::before {
+	content: "— ";
+}
+
+.encyclopedia-source .article {
+	font-style: italic;
+}
+
+.encyclopedia.emphasize {
+	text-decoration-line: underline
+}

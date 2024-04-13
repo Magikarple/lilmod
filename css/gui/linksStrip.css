@@ -1,0 +1,20 @@
+ul.choices-strip {
+	display: inline;
+	list-style-type: none;
+	padding: 0;
+	margin-left: 0;
+}
+
+ul.choices-strip li {
+	display: inline;
+}
+
+ul.choices-strip li + li:before {
+	content: " | ";
+}
+
+a.disabled {
+	color: white;
+	pointer-events: none;
+	cursor: default;
+}

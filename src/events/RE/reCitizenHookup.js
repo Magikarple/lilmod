@@ -64,11 +64,11 @@ App.Events.RECitizenHookup = class RECitizenHookup extends App.Events.BaseEvent 
 				break;
 			case "FSYouthPreferentialist":
 				if (V.minimumSlaveAge < 13) {
-					r.push(`an adorable little loli`);
+					r.push(`an cute little preteen girl`);
 				} else if (V.minimumSlaveAge < 18) {
 					r.push(`a pretty teenage girl`);
 				} else {
-					r.push(`a nice looking girl`);
+					r.push(`a nice young looking girl`);
 				}
 				break;
 			case "FSMaturityPreferentialist":

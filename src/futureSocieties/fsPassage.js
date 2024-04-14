@@ -825,7 +825,23 @@ App.UI.fsPassage = function() {
 							}
 						)
 					);
-					r.push(`is increased interest in girls just past their majority.`);
+					switch (true) {
+						case V.targetIdealAge < 13:
+							r.push(`is increased interest in little pre-teen girls; pedophilia.`);
+							break;
+
+						case V.targetIdealAge < 18:
+							r.push(`is increased interest in teen girls that are still shy of majority; hebephilia.`);
+							break;
+
+						case V.targetIdealAge < 20:
+							r.push(`is increased interest in girls just past their majority.`);
+							break;
+					
+						default:
+							r.push(`is increased interest in generally young girls that are (usually) unmistakeably adults.`);
+							break;
+					}
 					r.push(evaluation("FSYouthPreferentialist"));
 				} else {
 					/* <span class="note"><span style="font-weight:Bold">Youth Preferentialism:</span> increased interest in girls just past their majority.</span>*/

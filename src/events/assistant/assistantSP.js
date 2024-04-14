@@ -50,7 +50,7 @@ App.Events.assistantSP = class assistantSP extends App.Events.BaseEvent {
 			r.push(`${HisA} water breaks followed by dozens of babies as ${hisA} belly flattens.`);
 		}
 		if (V.minimumSlaveAge < 13) {
-			r.push(`${HeA} glances away shyly as ${hisA} body shrinks to a childish form. "Or maybe you'd like something a little more young and tight."`);
+			r.push(`${HeA} glances away shyly as ${hisA} body shrinks to a childish form. "Or maybe you'd like something a little more young and tight, you pedo~."`);
 			if (V.fertilityAge < 13 && V.seePreg !== 0) {
 				r.push(`${HeA} moans and rubs ${hisA} belly as it begins to expand with pregnancy. "Or maybe you like your little girls with a little bun in the oven?`);
 			}
